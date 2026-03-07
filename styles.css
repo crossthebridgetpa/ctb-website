@@ -11,8 +11,8 @@
     --accent: #f59e0b;            /* Amber - bold CTA color */
     --accent-hover: #d97706;      /* Darker amber on hover */
     --text-primary: #f9fafb;      /* Off-white for readability */
-    --text-secondary: #d1d5db;    /* Light gray for secondary text */
-    --text-muted: #9ca3af;        /* Muted gray */
+    --text-secondary: #e2e8f0;    /* Light for secondary text — bumped for WCAG AA */
+    --text-muted: #c4cad6;        /* Muted — bumped from #9ca3af to pass contrast */
     --border: #374151;            /* Subtle borders */
     --success: #10b981;           /* Green for highlights */
     --warning: #ef4444;           /* Red for emphasis */
@@ -296,6 +296,23 @@ strong {
     color: var(--text-primary);
 }
 
+/* Text-link CTA — secondary action, no visual weight competing with primary */
+.btn-link {
+    display: inline-block;
+    padding: 1rem 1.5rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+.btn-link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
 .btn-service {
     background-color: var(--secondary);
     color: var(--accent);
@@ -457,6 +474,14 @@ strong {
     margin-bottom: var(--spacing-sm);
 }
 
+.result-check {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--success);
+    line-height: 1;
+    margin-bottom: var(--spacing-sm);
+}
+
 .result-label {
     font-size: 1rem;
     color: var(--text-secondary);
@@ -528,6 +553,23 @@ strong {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+/* "Best First Step" badge — entry point card */
+.service-card--entry {
+    border-color: var(--success);
+}
+
+.service-card--entry:hover {
+    border-color: var(--success);
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3), var(--shadow-xl);
+}
+
+.badge--entry {
+    background-color: var(--success);
+    color: #fff;
+    left: var(--spacing-lg);
+    right: auto;
 }
 
 .service-icon {
@@ -632,6 +674,60 @@ strong {
 .about-content .lead {
     font-size: 1.25rem;
     color: var(--text-primary);
+}
+
+/* ========== Social Proof / Testimonials Section ========== */
+.testimonials {
+    background-color: var(--secondary);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+.testimonial-card {
+    background-color: var(--primary);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.testimonial-quote {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-style: italic;
+    margin: 0;
+}
+
+.testimonial-author {
+    border-top: 1px solid var(--border);
+    padding-top: var(--spacing-md);
+}
+
+.testimonial-name {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.testimonial-role {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ========== FAQ Section ========== */
@@ -1037,7 +1133,7 @@ summary:focus {
     font-weight: 600;
     margin-bottom: 6px;
     font-size: 0.9rem;
-    color: #e0e0e0;
+    color: var(--text-secondary);
 }
 
 .contact-form input,
@@ -1058,7 +1154,7 @@ summary:focus {
 .contact-form select:focus,
 .contact-form textarea:focus {
     outline: none;
-    border-color: #e94560;
+    border-color: var(--accent);
 }
 
 .contact-form textarea {
@@ -1100,7 +1196,7 @@ summary:focus {
 }
 
 .book-call-desc {
-    color: #666;
+    color: var(--text-secondary); /* was #666 — failed contrast on dark bg */
     margin-bottom: 24px;
     font-size: 1.05rem;
     line-height: 1.6;
@@ -1120,9 +1216,9 @@ summary:focus {
 }
 
 .btn-calendar:hover {
-    background: #e94560;
+    background: var(--accent-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
 }
 
 .contact-info-box {
@@ -1137,17 +1233,17 @@ summary:focus {
 .contact-info-box p {
     margin: 8px 0;
     font-size: 0.95rem;
-    color: #e0e0e0;
+    color: var(--text-secondary);
 }
 
 .contact-info-box a {
-    color: #7c8aff;
+    color: var(--accent);
     text-decoration: none;
     font-weight: 500;
 }
 
 .contact-info-box a:hover {
-    color: #e94560;
+    color: var(--accent-hover);
 }
 
 /* Pricing note below services */
