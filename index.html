@@ -1,365 +1,817 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cross The Bridge Consulting - We help Tampa Bay businesses find and implement the right AI tools. No custom builds, no subscriptions to us. Just results.">
-    <title>Cross The Bridge Consulting | AI That Actually Works For Your Business</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cross The Bridge — AI That Actually Works For Your Business</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:        #F7F3EC;
+      --cream-card:   #EDE8DE;
+      --cream-border: #DDD5C4;
+      --charcoal:     #1C1A16;
+      --charcoal-mid: #3A3730;
+      --muted:        #7A7060;
+      --green:        #2D4A3E;
+      --green-dark:   #1A2E28;
+      --green-light:  #3D6254;
+      --gold:         #C8A96E;
+      --gold-light:   #E2C98A;
+      --white:        #FDFAF5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(247, 243, 236, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--cream-border);
+      padding: 0 48px;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--charcoal);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--green); }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--charcoal); }
+    .btn-nav {
+      background: var(--green);
+      color: var(--cream) !important;
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-size: 0.875rem !important;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .btn-nav:hover { background: var(--green-light) !important; color: var(--cream) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding-top: 68px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 120% 80% at 50% 110%, rgba(45, 74, 62, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(200, 169, 110, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 50% at 80% 90%, rgba(45, 74, 62, 0.10) 0%, transparent 50%),
+        linear-gradient(180deg, #F2EDE3 0%, #F7F3EC 40%, #EEE8DA 100%);
+    }
+    /* Subtle water ripple lines */
+    .hero::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 180px;
+      background: repeating-linear-gradient(
+        180deg,
+        transparent 0px,
+        transparent 18px,
+        rgba(45, 74, 62, 0.04) 18px,
+        rgba(45, 74, 62, 0.04) 19px
+      );
+      mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.3) 100%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 780px; padding: 0 24px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 24px;
+      padding: 6px 14px;
+      background: rgba(45, 74, 62, 0.08);
+      border-radius: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green);
+    }
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 44px;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--green);
+      color: var(--cream);
+      padding: 16px 36px;
+      border-radius: 7px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--charcoal);
+      padding: 16px 36px;
+      border-radius: 7px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1.5px solid var(--cream-border);
+      transition: border-color 0.2s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--charcoal-mid); }
+    .hero-trust {
+      margin-top: 64px;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ── SOCIAL PROOF STRIP ── */
+    .proof-strip {
+      background: var(--green-dark);
+      padding: 22px 48px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 48px; flex-wrap: wrap;
+    }
+    .proof-item {
+      display: flex; align-items: center; gap: 12px;
+      color: rgba(247, 243, 236, 0.7);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .proof-item strong {
+      color: var(--gold-light);
+      font-size: 1.2rem;
+      font-family: 'Playfair Display', serif;
+    }
+    .proof-divider {
+      width: 1px; height: 28px;
+      background: rgba(247, 243, 236, 0.15);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 96px 48px; }
+    .section-inner { max-width: 1080px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 16px;
+      display: block;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+    }
+    .lead {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.75;
+    }
+
+    /* ── PROBLEM ── */
+    .problem { background: var(--cream); }
+    .problem-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .problem-visual {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .problem-card {
+      background: var(--cream-card);
+      border-radius: 10px;
+      padding: 20px 24px;
+      box-shadow: 0 1px 3px rgba(28, 26, 22, 0.06);
+      font-size: 0.9rem;
+      color: var(--charcoal-mid);
+      position: relative;
+      padding-left: 44px;
+    }
+    .problem-card::before {
+      content: '✗';
+      position: absolute; left: 16px; top: 20px;
+      color: #B05A3A;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    /* ── HOW IT WORKS (dark section) ── */
+    .how-it-works {
+      background: var(--green-dark);
+      color: var(--cream);
+    }
+    .how-it-works .section-label { color: var(--gold); }
+    .how-it-works h2 { color: var(--white); }
+    .how-it-works .lead { color: rgba(247, 243, 236, 0.65); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 64px;
+    }
+    .step {
+      position: relative;
+      padding-top: 16px;
+    }
+    .step-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: rgba(200, 169, 110, 0.25);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .step-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .step-desc {
+      font-size: 0.9rem;
+      color: rgba(247, 243, 236, 0.6);
+      line-height: 1.65;
+    }
+    .step-connector {
+      position: absolute; top: 36px; right: -20px;
+      color: rgba(200, 169, 110, 0.3);
+      font-size: 1.2rem;
+    }
+
+    /* ── WHO IT'S FOR ── */
+    .who { background: var(--cream); }
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .who-card {
+      background: var(--cream-card);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 2px 8px rgba(28, 26, 22, 0.06), 0 0 0 1px rgba(28, 26, 22, 0.04);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .who-card:hover {
+      box-shadow: 0 8px 24px rgba(28, 26, 22, 0.1);
+      transform: translateY(-2px);
+    }
+    .who-icon {
+      width: 44px; height: 44px;
+      background: rgba(45, 74, 62, 0.1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 18px;
+    }
+    .who-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--charcoal);
+    }
+    .who-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── RESULTS ── */
+    .results {
+      background: var(--cream-card);
+      text-align: center;
+    }
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      margin-top: 64px;
+    }
+    .result-stat {}
+    .result-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .result-label {
+      font-size: 0.875rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ── OFFER / PRICING ── */
+    .offer { background: var(--cream); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 28px;
+      max-width: 1020px;
+      margin: 56px auto 0;
+    }
+    .pricing-card {
+      background: var(--cream-card);
+      border-radius: 14px;
+      padding: 40px 36px;
+      box-shadow: 0 2px 8px rgba(28, 26, 22, 0.06), 0 0 0 1px rgba(28, 26, 22, 0.04);
+    }
+    .pricing-card.featured {
+      background: var(--green);
+      color: var(--cream);
+      box-shadow: 0 12px 40px rgba(45, 74, 62, 0.3);
+    }
+    .pricing-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .pricing-card.featured .pricing-tag { color: var(--gold); }
+    .pricing-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+    }
+    .pricing-card.featured h3 { color: var(--white); }
+    .pricing-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin: 20px 0 4px;
+      letter-spacing: -0.02em;
+    }
+    .pricing-card.featured .pricing-price { color: var(--gold-light); }
+    .pricing-period {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .pricing-card.featured .pricing-period { color: rgba(247,243,236,0.6); }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+    .pricing-features li {
+      font-size: 0.875rem;
+      color: var(--charcoal-mid);
+      padding: 7px 0;
+      border-bottom: 1px solid var(--cream-border);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .pricing-card.featured .pricing-features li {
+      color: rgba(247,243,236,0.8);
+      border-bottom-color: rgba(247,243,236,0.1);
+    }
+    .pricing-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .pricing-card.featured .pricing-features li::before { color: var(--gold); }
+    .btn-pricing {
+      display: block; text-align: center;
+      padding: 14px;
+      border-radius: 7px;
+      font-size: 0.925rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-pricing-outline {
+      border: 1.5px solid var(--cream-border);
+      color: var(--charcoal);
+    }
+    .btn-pricing-outline:hover { border-color: var(--green); color: var(--green); }
+    .btn-pricing-solid {
+      background: var(--gold);
+      color: var(--charcoal);
+    }
+    .btn-pricing-solid:hover { background: var(--gold-light); }
+
+    /* ── FOUNDER ── */
+    .founder { background: var(--cream); }
+    .founder-layout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .founder-avatar {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0;
+      border: 3px solid var(--gold);
+    }
+    .founder-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+    .founder-title {
+      font-size: 0.875rem;
+      color: var(--green);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+    .founder-bio {
+      font-size: 1rem;
+      color: var(--charcoal-mid);
+      line-height: 1.8;
+      max-width: 620px;
+    }
+    .founder-bio p + p { margin-top: 16px; }
+    .founder-social {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .founder-social a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid var(--cream-border);
+      color: var(--charcoal-mid);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .founder-social a:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: rgba(45,74,62,0.05);
+    }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      background: var(--green-dark);
+      text-align: center;
+      padding: 112px 48px;
+    }
+    .final-cta h2 { color: var(--white); margin-bottom: 16px; }
+    .final-cta .lead { color: rgba(247,243,236,0.6); margin: 0 auto 44px; }
+    .final-cta .section-label { color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      color: rgba(247, 243, 236, 0.5);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      color: rgba(247, 243, 236, 0.8);
+      font-size: 1rem;
+      text-decoration: none;
+    }
+    footer a {
+      color: rgba(247, 243, 236, 0.5);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    footer a:hover { color: rgba(247, 243, 236, 0.9); }
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+
+    /* ── BRIDGE DECORATION ── */
+    .bridge-divider {
+      text-align: center;
+      padding: 0;
+      overflow: hidden;
+      height: 60px;
+      background: var(--green-dark);
+      position: relative;
+    }
+    .bridge-divider svg {
+      width: 100%; height: 100%;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      .proof-strip { padding: 20px 24px; gap: 24px; }
+      .proof-divider { display: none; }
+      .problem-layout,
+      .who-grid,
+      .pricing-grid,
+      .founder-layout { grid-template-columns: 1fr; gap: 32px; }
+      .steps { grid-template-columns: 1fr; gap: 32px; }
+      .results-grid { grid-template-columns: 1fr; gap: 40px; }
+      .step-connector { display: none; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-content">
-                <div class="logo">
-                    <span class="logo-text">Cross The Bridge</span>
-                    <span class="logo-sub">Consulting</span>
-                </div>
-                <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"></button>
-                <div class="nav-links">
-                    <a href="#how">How It Works</a>
-                    <a href="#services">Services</a>
-                    <a href="#founder">About</a>
-                    <a href="#faq">FAQ</a>
-                    <a href="#contact" class="btn-nav">Get Started</a>
-                </div>
-            </div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Cross <span>The Bridge</span></a>
+  <div class="nav-links">
+    <a href="#how">How It Works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#founder">About</a>
+    <a href="#contact" class="btn-nav">Book a Call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">Tampa Bay's AI Implementation Partner</span>
+    <h1>AI That <em>Finally</em> Works<br>For Your Business</h1>
+    <p class="hero-sub">We build, train, and maintain AI agents for Tampa Bay businesses and beyond. You get more time, more revenue, and zero tech headaches. We handle everything else.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a Free Discovery Call</a>
+      <a href="#how" class="btn-secondary">See How It Works</a>
+    </div>
+    <p class="hero-trust">Trusted by Tampa Bay businesses · No long-term contracts</p>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF STRIP -->
+<div class="proof-strip">
+  <div class="proof-item"><strong>3</strong> Tampa Bay businesses transformed</div>
+  <div class="proof-divider"></div>
+  <div class="proof-item"><strong>200+</strong> hours reclaimed per month</div>
+  <div class="proof-divider"></div>
+  <div class="proof-item"><strong>24/7</strong> AI coverage, zero extra staff</div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="section-inner">
+    <div class="problem-layout">
+      <div>
+        <span class="section-label">The Problem</span>
+        <h2>Every AI tool promises to save you time</h2>
+        <p class="lead">Most just add more complexity. The real issue isn't finding the right software - it's having someone who actually knows your business set it up correctly.</p>
+        <p class="lead" style="margin-top: 20px;">You've tried the tools. You've watched the YouTube tutorials. You've paid for subscriptions you barely use. There's a better way.</p>
+      </div>
+      <div class="problem-visual">
+        <div class="problem-card">ChatGPT gave me a generic answer that doesn't apply to my business</div>
+        <div class="problem-card">I spent 3 weeks "setting up" an AI tool that still doesn't work right</div>
+        <div class="problem-card">My team learned a new tool but we're somehow more busy now</div>
+        <div class="problem-card">I paid $500/mo for a "done-for-you" service that needed constant babysitting</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS (dark section) -->
+<section class="how-it-works" id="how">
+  <div class="section-inner">
+    <span class="section-label">The Process</span>
+    <h2>Simple. Transparent. Results-driven.</h2>
+    <p class="lead">Three phases. No jargon. No 6-month implementation timelines. Most clients are operational within 30 days.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-title">Discovery & Audit</div>
+        <p class="step-desc">We map your current workflows, identify the highest-leverage automation opportunities, and build a custom implementation plan. No generic templates.</p>
+        <span class="step-connector">→</span>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-title">We Build & Train</div>
+        <p class="step-desc">We build your AI agent, train it on your business - your services, your voice, your pricing, your customers. Then we test everything until it works perfectly.</p>
+        <span class="step-connector">→</span>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-title">You Make More Money</div>
+        <p class="step-desc">Your agent handles the repetitive work. You focus on growth. We monitor, optimize, and improve your system every month. You see the results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="who">
+  <div class="section-inner">
+    <span class="section-label">Who We Work With</span>
+    <h2>Built for Tampa Bay businesses<br>that are serious about growth</h2>
+    <p class="lead">We work best with owner-operated businesses who are ready to reclaim their time - not chase the latest tech trend.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <h3>Home Services & Contractors</h3>
+        <p>Roofing, HVAC, plumbing, landscaping. We handle missed calls, estimate follow-ups, review requests, and appointment scheduling - automatically.</p>
+      </div>
+      <div class="who-card">
+        
+        <h3>Legal & Professional Services</h3>
+        <p>Law firms, accountants, consultants. Intake automation, client communication, document prep, and scheduling - without adding staff.</p>
+      </div>
+      <div class="who-card">
+       
+        <h3>Real Estate & Property</h3>
+        <p>Agents, property managers, investors. Lead follow-up, showing coordination, tenant communication, and market research on autopilot.</p>
+      </div>
+      <div class="who-card">
+        
+        <h3>Retail & Local Business</h3>
+        <p>Restaurants, boutiques, wellness. Customer inquiries, loyalty programs, content creation, and inventory management - simplified.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results">
+  <div class="section-inner">
+    <span class="section-label">Real Results</span>
+    <h2>What happens when AI is done right</h2>
+    <p class="lead" style="margin: 0 auto;">Examples from actual Cross The Bridge clients in Tampa Bay.</p>
+    <div class="results-grid">
+      <div class="result-stat">
+        <div class="result-number">70%</div>
+        <div class="result-label">Reduction in time spent on<br>Reporting, quotes, and estimations</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-number">20 hours</div>
+        <div class="result-label">Average owner reclaimed<br>time per month</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-number">14</div>
+        <div class="result-label">Days to fully operational<br>from first discovery call</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="offer" id="pricing">
+  <div class="section-inner" style="text-align:center;">
+    <span class="section-label">Investment</span>
+    <h2>Transparent pricing.<br>No surprises.</h2>
+    <p class="lead" style="margin: 0 auto;">Three ways to work together. From audit through full implementation, training, and ongoing support.</p>
+    <div class="pricing-grid">
+    <div class="pricing-card featured">
+        <span class="pricing-tag">First Steps</span>
+        <h3>Discovery & AI Audit</h3>
+        <div class="pricing-price">$499</div>
+        <div class="pricing-period">Applies to future setup costs</div>
+        <ul class="pricing-features">
+          <li>Map your top time sinks and workflows</li>
+          <li>3-5 specific tool recommendations with pricing</li>
+          <li>Prioritized implementation roadmap</li>
+          <li>Estimated time savings per recommendation</li>
+        </ul>
+        <a href="#contact" class="btn-pricing btn-pricing-solid">Start Here</a>
+      </div>      
+    <div class="pricing-card">
+        <span class="pricing-tag">Foundation</span>
+        <h3>Starter AI</h3>
+        <div class="pricing-price">$1,500</div>
+        <div class="pricing-period">setup + $250/mo retainer</div>
+        <ul class="pricing-features">
+          <li>1 core AI workflow automated</li>
+          <li>Custom training on your business</li>
+          <li>30-day implementation window</li>
+          <li>Monthly optimization calls</li>
+          <li>Email support</li>
+          <li>Weekly AI update newsletter</li>
+        </ul>
+        
+        <a href="#contact" class="btn-pricing btn-pricing-outline">Start Here</a>
+      </div>
+      <div class="pricing-card featured">
+        <span class="pricing-tag">Most Popular</span>
+        <h3>Full Implementation</h3>
+        <div class="pricing-price">$3,000</div>
+        <div class="pricing-period">setup + $500/mo retainer</div>
+        <ul class="pricing-features">
+          <li>3–5 automated workflows</li>
+          <li>Full business knowledge training</li>
+          <li>Priority 30-day implementation</li>
+          <li>Bi-Weekly strategy calls</li>
+          <li>24/7 monitoring & support</li>
+          <li>Quarterly growth reviews</li>
+        </ul>
+        <a href="#contact" class="btn-pricing btn-pricing-solid">Book a Discovery Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder" id="founder">
+  <div class="section-inner">
+    <div class="founder-layout">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+        <img class="founder-avatar" src="wesley-headshot.jpg" alt="Wesley Schlemmer">
+        <div class="founder-social">
+          <a href="https://www.linkedin.com/in/twesleytpa/" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    AI That Actually Works For Your Business
-                </h1>
-                <p class="hero-subtitle">
-                    We find the right AI tools, set them up for your specific workflows, and train your team — so you can focus on the work that actually makes money.
-                </p>
-                <div class="hero-cta">
-                    <a href="#contact" class="btn-primary btn-pulse">Start with a $499 Discovery</a>
-                    <a href="#how" class="btn-link">See How It Works</a>
-                </div>
-            </div>
+      </div>
+      <div>
+        <div class="founder-name">Wesley Schlemmer</div>
+        <div class="founder-title">Founder, Cross The Bridge · Tampa Bay, FL</div>
+        <div class="founder-bio">
+          <p>I started Cross The Bridge because I watched too many good people get trapped in legacy systems. Increasing costs, lock in, degrading quality all piling up.</p>
+          <p>My background is in building sovereign systems that actually work. I've spent the past 8 years working in the Bitcoin and open source space helping people take control of their money and hardware. Now I'm doing the same with AI.</p>
+          <p>Every client gets my direct attention. We don't run 50 clients at once. We run a few, and we make sure every single one gets results.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Problem Section -->
-    <section class="section problem">
-        <div class="container">
-            <h2 class="section-title">The Problem Isn't AI. It's Finding the Right Fit.</h2>
-            <div class="problem-content">
-                <p class="lead">There are thousands of AI tools. Most businesses either:</p>
-                <ul class="problem-list">
-                    <li>Buy the wrong tool and waste months trying to make it work</li>
-                    <li>Buy the right tool but configure it wrong, so nobody uses it</li>
-                    <li>Get paralyzed by options and do nothing</li>
-                    <li>Hire a developer to build something custom when an off-the-shelf tool would've worked</li>
-                </ul>
-                <p class="callout">You don't need custom AI. You need the right AI, set up right.</p>
-            </div>
-        </div>
-    </section>
+<!-- FINAL CTA -->
+<section class="final-cta" id="contact">
+  <div class="section-inner">
+    <span class="section-label">Ready to Cross?</span>
+    <h2>Let's talk about your business</h2>
+    <p class="lead">Free 15-minute discovery call. We'll map your highest-leverage AI opportunities and tell you exactly what's possible - no pitch, no pressure.</p>
+    <a href="https://app.usemotion.com/meet/crossthebridge/intro?d=15" class="btn-primary" style="font-size:1.05rem; padding: 18px 44px;" target="_blank" rel="noopener">Book Your Free Discovery Call</a>
 
-    <!-- How It Works Section -->
-    <section id="how" class="section solution">
-        <div class="container">
-            <h2 class="section-title">How It Works</h2>
-            <div class="solution-grid">
-                <div class="solution-card">
-                    <h3>1. We Learn Your Work</h3>
-                    <p>We dig into your actual daily workflows, not theoretical ones. Where does time go? What gets repeated? What falls through cracks?</p>
-                </div>
-                <div class="solution-card">
-                    <h3>2. We Find What Fits</h3>
-                    <p>We research and evaluate AI tools that match your specific problems, budget, and technical comfort level. No one-size-fits-all recommendations.</p>
-                </div>
-                <div class="solution-card">
-                    <h3>3. We Set It Up</h3>
-                    <p>We don't just hand you a list. We purchase, configure, load your content, integrate with your systems, and train your team.</p>
-                </div>
-                <div class="solution-card">
-                    <h3>4. We Make Sure It Sticks</h3>
-                    <p>30 days after implementation, we check in. What's working? What needs tuning? Are people actually using it?</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Who It's For Section -->
-    <section class="section results">
-        <div class="container">
-            <h2 class="section-title">Is This For You?</h2>
-            <div class="results-grid">
-                <div class="result-card">
-                    <div class="result-check">✓</div>
-                    <div class="result-label">Drowning in email and repetitive questions</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-check">✓</div>
-                    <div class="result-label">Spending hours on docs, reports, and templates</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-check">✓</div>
-                    <div class="result-label">Team can't find answers in your own systems</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-check">✓</div>
-                    <div class="result-label">Know AI could help but don't have time to figure it out</div>
-                </div>
-            </div>
-            <p class="results-note">We work with professional services, training companies, real estate, legal, and operations-heavy businesses in Tampa Bay.</p>
-        </div>
-    </section>
+  </div>
+</section>
 
-    <!-- Services Section -->
-    <section id="services" class="section services">
-        <div class="container">
-            <h2 class="section-title">What We Offer</h2>
-            <div class="services-grid">
-                <!-- Discovery -->
-                <div class="service-card service-card--entry">
-                    <div class="badge badge--entry">Best First Step</div>
-                    <h3 class="service-title">Discovery & AI Audit</h3>
-                    <div class="service-price">$499</div>
-                    <p class="service-desc">Find out exactly where AI saves you the most time.</p>
-                    <div class="guarantee-badge">5+ hours/week savings identified, or you don't pay</div>
-                    <ul class="service-features">
-                        <li>Map your top time sinks and workflows</li>
-                        <li>3-5 specific tool recommendations with pricing</li>
-                        <li>Prioritized implementation roadmap</li>
-                        <li>Estimated time savings per recommendation</li>
-                    </ul>
-                    <a href="#contact" class="btn-service">Start Here</a>
-                </div>
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Cross The Bridge</a>
+  <div class="footer-links">
+    <a href="#how">How It Works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#founder">About Wesley</a>
+    <a href="mailto:wesley@crossthebridge.io">wesley@crossthebridge.io</a>
+  </div>
+  <span style="font-size:0.8rem;">© 2026 Cross The Bridge · Tampa Bay, FL</span>
+</footer>
 
-                <!-- Implementation -->
-                <div class="service-card featured">
-                    <div class="badge">Best Value</div>
-                    <h3 class="service-title">Implementation Support</h3>
-                    <div class="service-price">$1,500–$2,500</div>
-                    <p class="service-desc">We set it up. You use it. That simple.</p>
-                    <ul class="service-features">
-                        <li>Configure and deploy recommended tools</li>
-                        <li>Load your content and integrate with your systems</li>
-                        <li>Hands-on team training (recorded)</li>
-                        <li>Full documentation - you're self-sufficient after</li>
-                    </ul>
-                    <a href="#contact" class="btn-service">Let's Build</a>
-                </div>
-
-                <!-- Check-In -->
-                <div class="service-card">
-                    <h3 class="service-title">30-Day Check-In</h3>
-                    <div class="service-price">$250</div>
-                    <p class="service-desc">Make sure it's actually working.</p>
-                    <ul class="service-features">
-                        <li>Review adoption and usage patterns</li>
-                        <li>Tune configurations based on real use</li>
-                        <li>Answer questions from the first month</li>
-                        <li>Recommend next steps to optimize</li>
-                    </ul>
-                    <a href="#contact" class="btn-service">Add This</a>
-                </div>
-            </div>
-            <div class="pricing-note">
-                <p><strong>Typical total: $499 audit + implementation support + $250 check-in.</strong> The implementation range depends on how many tools and how much content. We'll know the exact number after Discovery.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Us Section -->
-    <section class="section why">
-        <div class="container">
-            <h2 class="section-title">Why Cross The Bridge?</h2>
-            <div class="why-grid">
-                <div class="why-card">
-                    <h3>We Use This Stuff Daily</h3>
-                    <p>We're not consultants who read about AI. We run our own businesses on it. We know what works because we've tested it, and we know what's a waste of money.</p>
-                </div>
-                <div class="why-card">
-                    <h3>You Own Everything</h3>
-                    <p>Every account, every configuration, every piece of data. When we're done, you don't need us. That's the point.</p>
-                </div>
-                <div class="why-card">
-                    <h3>No Jargon, No Hype</h3>
-                    <p>We explain things in plain English. We recommend tools based on your budget and needs, not commissions or partnerships.</p>
-                </div>
-                <div class="why-card">
-                    <h3>Tampa Bay Local</h3>
-                    <p>We're here. Same timezone, same city, available for in-person if you want it. Not an agency in another state.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Founder Section -->
-    <section id="founder" class="section founder">
-        <div class="container">
-            <h2 class="section-title">About the Founder</h2>
-            <div class="founder-content">
-                <div class="founder-photo">
-                    <img src="https://personalpage-rouge.vercel.app/lovable-uploads/fade0be7-e1dd-4328-b0e9-4dfbeeb26071.png" alt="Wesley Schlemmer" loading="lazy">
-                </div>
-                <div class="founder-bio">
-                    <h3 class="founder-name">Wesley Schlemmer</h3>
-                    <p>Wesley Schlemmer is a Chemical Engineer turned community builder and AI consultant based in Tampa, Florida. He serves as President of the Bitcoin Bay Foundation, where he works to make Florida the best place in the world to be a Bitcoiner, and as Executive Director of the Florida Blockchain and Business Association (FBBA), leading blockchain innovation and adoption initiatives throughout the state.</p>
-                    <p>With over 10 years of interdisciplinary experience in building and leading organizations, Wesley founded Cross The Bridge to help local businesses access the same AI tools used by larger companies — without the complexity, the jargon, or the six-figure consulting bills.</p>
-                    <p>When he's not helping Tampa businesses save time, you'll find him organizing community events and building bridges between technology and the people who can benefit from it most.</p>
-                    <div class="founder-social">
-                        <a href="https://x.com/bitcoinbaytpa" target="_blank" rel="noopener" class="social-link">X / Twitter</a>
-                        <a href="https://linkedin.com/in/twesleytpa" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="section faq">
-        <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-list">
-                <details class="faq-item">
-                    <summary>Do you build custom AI software?</summary>
-                    <p>No. There are great tools that already exist for most business problems. We find the right ones, set them up for your specific workflows, and train your team. No custom code means no maintenance headaches for you.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Can't I just figure this out myself?</summary>
-                    <p>You could. Most people who try spend 2-3 months evaluating tools, pick the wrong one, and end up frustrated. We compress that into a week because we've already tested dozens of options. Your time is worth more than the cost of Discovery.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>What if AI can't actually help my business?</summary>
-                    <p>That's what Discovery is for. If we can't identify at least 5 hours/week of time savings, you don't pay. The guarantee is real.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Will I need to pay monthly subscriptions for the tools?</summary>
-                    <p>Most likely yes, the tools we recommend typically have monthly costs ($20-100/mo range depending on the tool). But you'll be paying the tool providers directly, not us. Our job is to make sure you're paying for the right ones and getting full value.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>What kinds of businesses do you work with?</summary>
-                    <p>Professional services, training companies, operations teams, real estate, legal, anyone whose team spends significant time on email, documentation, scheduling, or searching for information. If knowledge work is your bottleneck, we can help.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>What happens after the engagement?</summary>
-                    <p>You're self-sufficient. We document everything, train your team, and hand over the keys. If you want ongoing support later, we're a phone call away, but you won't need us for day-to-day operations.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>How is this different from hiring an IT consultant?</summary>
-                    <p>IT consultants manage infrastructure. We focus specifically on AI tools for business workflows: email triage, knowledge management, document generation, scheduling, client communication. It's a niche, and we know it cold.</p>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact/CTA Section -->
-    <section id="contact" class="section cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">Let's Find Your Quick Wins</h2>
-                <p class="cta-subtitle">Start with Discovery — $499</p>
-                <p>One week. A clear picture of where AI saves you the most time. Specific tool recommendations. No commitment beyond that.</p>
-                <p class="guarantee-text"><strong>Guarantee:</strong> If we can't identify at least 5 hours/week in time savings, you don't pay.</p>
-
-                <div class="contact-grid">
-                    <!-- Contact Form -->
-                    <div class="contact-form-wrapper">
-                        <h3>Send Us a Message</h3>
-                        <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
-                            <div class="form-group">
-                                <label for="name">Name *</label>
-                                <input type="text" id="name" name="name" required placeholder="Your name">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required placeholder="you@company.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="company">Company</label>
-                                <input type="text" id="company" name="company" placeholder="Your company name">
-                            </div>
-                            <div class="form-group">
-                                <label for="service">Interested In</label>
-                                <select id="service" name="service">
-                                    <option value="discovery">Discovery & AI Audit ($499)</option>
-                                    <option value="full">Full Engagement - Discovery + Implementation</option>
-                                    <option value="other">Just Exploring</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">What's Eating Up Your Team's Time? *</label>
-                                <textarea id="message" name="message" rows="4" required placeholder="What repetitive tasks or workflows would you love to hand off to AI?"></textarea>
-                            </div>
-                            <button type="submit" class="btn-primary btn-pulse">Send Message</button>
-                            <div id="formStatus" class="form-status"></div>
-                        </form>
-                    </div>
-
-                    <!-- Book a Call -->
-                    <div class="book-call-wrapper">
-                        <h3>Or Just Talk to Us</h3>
-                        <p class="book-call-desc">15 minutes. No pitch. Tell us what's frustrating you and we'll tell you honestly if we can help.</p>
-                        <a href="https://app.usemotion.com/meet/crossthebridge/intro?d=15" target="_blank" class="btn-calendar">
-                             Book a Quick Call
-                        </a>
-                        <div class="contact-info-box">
-                            <p><strong>Email:</strong> <a href="mailto:hello@crossthebridge.io">hello@crossthebridge.io</a></p>
-                            <p><strong>Phone:</strong> <a href="tel:+18137086855">(813) 708-6855</a></p>
-                            <p><strong>Location:</strong> Tampa, Florida</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <span class="logo-text">Cross The Bridge</span>
-                        <span class="logo-sub">Consulting</span>
-                    </div>
-                    <p>AI enablement for Tampa Bay businesses</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-col">
-                        <h4>Services</h4>
-                        <ul>
-                            <li><a href="#services">Discovery</a></li>
-                            <li><a href="#services">Implementation</a></li>
-                            <li><a href="#services">Check-In</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="#founder">About</a></li>
-                            <li><a href="#how">How It Works</a></li>
-                            <li><a href="#faq">FAQ</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Connect</h4>
-                        <ul>
-                            <li><a href="mailto:hello@crossthebridge.io">hello@crossthebridge.io</a></li>
-                            <li><a href="tel:+18137086855">(813) 708-6855</a></li>
-                            <li><a href="https://linkedin.com/in/twesleytpa" target="_blank" rel="noopener">LinkedIn</a></li>
-                            <li><a href="https://x.com/bitcoinbaytpa" target="_blank" rel="noopener">X / Twitter</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Cross The Bridge Consulting. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
