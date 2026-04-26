@@ -1,0 +1,78 @@
+---
+/**
+ * Hero.astro — homepage hero section. Zero props: copy and CTA target are
+ * LOCKED verbatim per CONTEXT.md D-01 and UI-SPEC §4.
+ *
+ * Constraints (load-bearing — DO NOT MUTATE):
+ *   - No eyebrow line above the H1 (D-02 — legacy regional eyebrow removed).
+ *   - No hero portrait (D-09 — homepage stays text-forward).
+ *   - Single CTA targeting /contact (IDENT-03).
+ *   - Three locked strings (H1 question, lede, manifesto).
+ */
+import CtaButton from './CtaButton.astro';
+---
+<section class="hero">
+  <div class="hero__inner">
+    <h1 class="hero__title">What does it look like to opt out — without going off-grid?</h1>
+    <p class="hero__lede">Cross The Bridge is the answer I'm building.</p>
+    <p class="hero__manifesto">Bitcoin instead of banks. Self-hosted compute instead of surveillance Cloud. AI you own, not AI that owns you.</p>
+    <div class="hero__cta">
+      <CtaButton href="/contact">Get in touch</CtaButton>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 68px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-2xl);
+    background:
+      radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--color-green) 12%, transparent) 0%, transparent 60%),
+      radial-gradient(ellipse at 100% 100%, color-mix(in srgb, var(--color-gold) 10%, transparent) 0%, transparent 50%),
+      linear-gradient(180deg, color-mix(in srgb, var(--color-cream) 95%, var(--color-cream-card)) 0%, var(--color-cream) 40%, color-mix(in srgb, var(--color-cream) 92%, var(--color-cream-card)) 100%);
+    overflow: hidden;
+  }
+  @media (max-width: 767px) {
+    .hero {
+      min-height: calc(100vh - 56px);
+      padding: var(--spacing-xl);
+    }
+  }
+  .hero__inner {
+    max-width: var(--measure-wide);
+    text-align: left;
+  }
+  .hero__title {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: 700;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-xl) 0;
+  }
+  .hero__lede {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 600;
+    line-height: var(--leading-body-tight);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-lg) 0;
+  }
+  .hero__manifesto {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: var(--leading-body);
+    color: var(--color-charcoal-mid);
+    margin: 0 0 var(--spacing-xl) 0;
+    max-width: var(--measure);
+  }
+  .hero__cta {
+    margin-top: var(--spacing-lg);
+  }
+</style>

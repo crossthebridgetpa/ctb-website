@@ -1,0 +1,94 @@
+---
+/**
+ * Tile.astro — single component renders both `project` and `thesis` tile
+ * variants on the homepage 4-tile grid (UI-SPEC §6). Whole tile is one
+ * anchor; the lucide:arrow-up-right icon communicates "go-to" without
+ * requiring text.
+ *
+ * Tile copy is locked per UI-SPEC line 230 — pages compose the grid by
+ * passing the literal title/body strings; the component does not generate
+ * copy from config (RESEARCH §Anti-patterns).
+ */
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  type: 'project' | 'thesis';
+  label: 'PROJECT' | 'THESIS';
+  title: string;
+  body: string;
+  href: string;
+}
+const { type, label, title, body, href } = Astro.props;
+---
+<a href={href} class={`tile tile--${type}`} data-tile-type={type}>
+  <span class="tile__label">{label}</span>
+  <h2 class="tile__title">{title}</h2>
+  <p class="tile__body">{body}<Icon name="lucide:arrow-up-right" class="tile__arrow" aria-hidden="true" /></p>
+</a>
+
+<style>
+  .tile {
+    display: block;
+    background: var(--color-cream-card);
+    border: 1px solid var(--color-cream-border);
+    border-radius: 8px;
+    padding: var(--spacing-xl);
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .tile {
+      transition: border-color 200ms ease-out, box-shadow 200ms ease-out;
+    }
+  }
+  .tile:hover {
+    border-color: var(--color-green-light);
+    box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.02);
+  }
+  .tile:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px var(--color-gold-light);
+  }
+  @media (prefers-color-scheme: dark) {
+    .tile:focus-visible {
+      box-shadow: 0 0 0 4px var(--color-gold);
+    }
+  }
+
+  .tile__label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    color: var(--color-green);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    margin-bottom: var(--spacing-md);
+  }
+  .tile__title {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--color-charcoal);
+    line-height: var(--leading-body-tight);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .tile__body {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 400;
+    color: var(--color-charcoal-mid);
+    line-height: var(--leading-body);
+    margin: 0;
+  }
+  .tile__arrow {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-left: 0.25em;
+    color: var(--color-green);
+    vertical-align: -0.15em;
+  }
+</style>

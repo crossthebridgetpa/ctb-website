@@ -1,0 +1,42 @@
+---
+/**
+ * ExternalLink.astro — anchor for outbound URLs. Always emits
+ * `target="_blank"` AND `rel="noopener noreferrer"` (T-05-02 mitigation:
+ * prevents reverse tabnabbing via window.opener) AND a lucide:external-link
+ * icon (UI-SPEC §Accessibility — color is not the sole channel).
+ */
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  href: string;
+  ariaLabel?: string;
+}
+const { href, ariaLabel } = Astro.props;
+---
+<a href={href} target="_blank" rel="noopener noreferrer" class="external-link" aria-label={ariaLabel}>
+  <slot />
+  <Icon name="lucide:external-link" class="external-link__icon" aria-hidden="true" />
+</a>
+
+<style>
+  .external-link {
+    color: var(--color-green);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.25em;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .external-link { transition: color 200ms ease-out, text-decoration-color 200ms ease-out; }
+  }
+  .external-link:hover { text-decoration: underline; }
+  .external-link:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+  .external-link__icon {
+    width: 0.85em;
+    height: 0.85em;
+    flex-shrink: 0;
+  }
+</style>
