@@ -1,1 +1,104 @@
 @import "tailwindcss";
+
+@theme {
+  /* Spacing — 4-point scale, 8 stops. Standard set {4,8,16,24,32,48,64} extended with 96 for hero/section breathing room. */
+  --spacing-xs: 0.25rem;  /* 4px */
+  --spacing-sm: 0.5rem;   /* 8px */
+  --spacing-md: 1rem;     /* 16px */
+  --spacing-lg: 1.5rem;   /* 24px */
+  --spacing-xl: 2rem;     /* 32px */
+  --spacing-2xl: 3rem;    /* 48px */
+  --spacing-3xl: 4rem;    /* 64px */
+  --spacing-4xl: 6rem;    /* 96px — justified extension for hero/section dividers */
+
+  /* Layout containers */
+  --measure: 65ch;
+  --measure-wide: 55rem;  /* 880px */
+
+  /* Typography — 4 sizes, Playfair Display + Inter, weights 400/600/700 */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Inter Variable", Inter, system-ui, -apple-system, sans-serif;
+
+  --text-display: clamp(2.25rem, 5.5vw + 1rem, 3.5rem);
+  --text-heading: 1.75rem;
+  --text-body: 1.125rem;
+  --text-meta: 0.875rem;
+
+  --leading-display: 1.10;
+  --leading-heading: 1.20;
+  --leading-body: 1.60;
+  --leading-body-tight: 1.50;
+  --leading-meta: 1.50;
+
+  --tracking-display: -0.02em;
+  --tracking-label: 0.08em;
+
+  /* Color — light mode (defaults) */
+  --color-cream: #F7F3EC;
+  --color-cream-card: #EDE8DE;
+  --color-cream-border: #DDD5C4;
+  --color-charcoal: #1C1A16;
+  --color-charcoal-mid: #3A3730;
+  --color-muted: #6A6050;          /* tightened from #7A7060 for AA */
+  --color-green: #2D4A3E;
+  --color-green-dark: #1A2E28;
+  --color-green-light: #3D6254;
+  --color-gold: #C8A96E;            /* decorative-only — never text or icons */
+  --color-gold-light: #E2C98A;      /* decorative-only */
+  --color-white: #FDFAF5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-cream: #0F1310;
+    --color-cream-card: #181D19;
+    --color-cream-border: #2A302B;
+    --color-charcoal: #EDE6D6;
+    --color-charcoal-mid: #C7BFAE;
+    --color-muted: #8C8270;
+    --color-green: #7FAA94;
+    --color-green-dark: #5C8A77;
+    --color-green-light: #9CC3AF;
+    --color-gold: #E2C98A;
+    --color-gold-light: #F0DAA0;
+    --color-white: #1F2521;
+  }
+}
+
+html { color-scheme: light dark; }
+
+body {
+  background: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Skip-to-main link — visible only on :focus, first focusable element on every page */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-100%);
+  background: var(--color-green);
+  color: var(--color-cream);
+  padding: var(--spacing-md);
+  text-decoration: none;
+  font-weight: 600;
+  z-index: 9999;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: none;
+}
+
+/* Default focus-visible across all interactive elements (UI-SPEC §Accessibility) */
+@media (prefers-reduced-motion: no-preference) {
+  a, button { transition: color 200ms ease-out, background-color 200ms ease-out, border-color 200ms ease-out; }
+}
+:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
+}
