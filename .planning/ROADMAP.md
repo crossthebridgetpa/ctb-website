@@ -40,7 +40,17 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. Pasting any page URL into Discord/Telegram/X renders a rich preview (OG title, description, image); Google Rich Results Test validates JSON-LD on home, About, and at least one project page
   5. Network audit on first paint shows ≤1 third-party domain contacted (Plausible only — no Google Fonts, no GA, no third-party iframes); Lighthouse Accessibility ≥95 on home, About, and project pages
 
-**Plans**: TBD
+**Plans**: 10 plans
+- [ ] 01-01-PLAN.md — Scaffold Astro 6 + Tailwind v4 + Vercel static + vercel.json + .env.example
+- [ ] 01-02-PLAN.md — Astro Fonts API (Playfair + Inter) + Tailwind v4 @theme block (light + dark tokens)
+- [ ] 01-03-PLAN.md — BaseSEO + JsonLd components, robots.txt, llms.txt, OG image, favicon
+- [ ] 01-04-PLAN.md — D-14 Umami hosting decision (P0 checkpoint) + decision document
+- [ ] 01-05-PLAN.md — Component primitives: Hero, CtaButton, Tile, Headshot, ObfuscatedMailto, ExternalLink + consulting-url helper
+- [ ] 01-06-PLAN.md — BaseLayout + Nav (mobile drawer, full a11y) + Footer
+- [ ] 01-07-PLAN.md — Homepage (Hero + 4-tile grid) + custom 404
+- [ ] 01-08-PLAN.md — About page (h-card, headshot, thesis + bio fused per D-08)
+- [ ] 01-09-PLAN.md — 3 project pages (BB, FBBA, AI/Petros/Hermes) + Contact + Colophon
+- [ ] 01-10-PLAN.md — CI workflow + Playwright network audit + Vercel/DNS setup + launch checklist
 
 ### Phase 2: Writing Surface
 **Goal**: On-site essays and notes are live with RSS and cross-collection linking — peer audience can subscribe in NetNewsWire/Reeder, and the homepage gains a curated "Recent writing" module pulling from the new collections
@@ -93,7 +103,7 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Personal Surface | 0/TBD | Not started | - |
+| 1. Foundation + Personal Surface | 0/10 | Not started | - |
 | 2. Writing Surface | 0/TBD | Not started | - |
 | 3. Consulting Subsection | 0/TBD | Not started | - |
 
