@@ -10,9 +10,9 @@ Requirements for the initial launch. Mapped to roadmap phases (Phases 1–3).
 ### Identity
 
 - [ ] **IDENT-01**: Homepage leads with one toned-down worldview claim (≤150 words above the fold) framing the Cross The Bridge / Freedom Tech umbrella
-- [ ] **IDENT-02**: Homepage shows 4 project cards (Bitcoin Bay, FBBA, Freedom Tech Consulting, AI/Petros/Hermes) routing to dedicated project pages
+- [ ] **IDENT-02**: Homepage shows a 4-tile grid: 3 project cards (Bitcoin Bay, FBBA, AI/Petros/Hermes) routing to dedicated project pages + 1 thesis card routing to About (per Phase 1 discussion: Freedom Tech is the thesis, not a fourth project)
 - [ ] **IDENT-03**: Homepage shows a single "get in touch" CTA — no consulting/booking CTA on the personal homepage
-- [ ] **IDENT-04**: Visitor can reach an About page sourced from the vault (`About Me.md` + Polaris distillation) telling Wesley's story, style, and goals
+- [ ] **IDENT-04**: Visitor can reach an About page that fuses Wesley's biography (sourced from `About Me.md`) with the Freedom Tech thesis (distilled from Polaris) — About is the thesis page (per Phase 1 discussion)
 - [ ] **IDENT-05**: Visitor can reach a Contact page with at least one working inbound channel (email link or form — choice resolved in design)
 - [ ] **IDENT-06**: Visitor can reach a `/colophon` page documenting the tech stack, no-tracking stance, and credits
 
@@ -20,7 +20,7 @@ Requirements for the initial launch. Mapped to roadmap phases (Phases 1–3).
 
 - [ ] **PROJ-01**: Visitor can read a Bitcoin Bay project page covering what it is, why it exists, and how to engage (event link, signup, etc.)
 - [ ] **PROJ-02**: Visitor can read an FBBA project page covering what it is, who it serves, and how to engage
-- [ ] **PROJ-03**: Visitor can read a Freedom Tech Consulting project page framing the umbrella concept (BTC, deGoogled phones, privacy, Linux, sovereign AI)
+- [ ] ~~**PROJ-03**: Freedom Tech Consulting project page~~ — **FOLDED into IDENT-04 per Phase 1 discussion.** Freedom Tech is the thesis underneath all the other projects, not a separate project page. The thesis lives on the About page (IDENT-04). The homepage thesis card (IDENT-02) routes to About.
 - [ ] **PROJ-04**: Visitor can read an AI / Petros / Hermes project page covering Hermes, AYLIP vision, and current status
 - [ ] **PROJ-05**: Each project page surfaces at least one specific way to engage (link, contact path, or follow-on resource)
 
@@ -131,7 +131,7 @@ Explicitly excluded for v1 and beyond unless reconsidered. Documented to prevent
 | IDENT-06 | Phase 1 | Pending |
 | PROJ-01 | Phase 1 | Pending |
 | PROJ-02 | Phase 1 | Pending |
-| PROJ-03 | Phase 1 | Pending |
+| PROJ-03 | Phase 1 | Folded into IDENT-04 |
 | PROJ-04 | Phase 1 | Pending |
 | PROJ-05 | Phase 1 | Pending |
 | WRITE-01 | Phase 2 | Pending |
@@ -167,10 +167,10 @@ Explicitly excluded for v1 and beyond unless reconsidered. Documented to prevent
 | INFRA-05 | Phase 3 | Pending |
 
 **Coverage:**
-- v1 requirements: 41 total
+- v1 requirements: 41 total (40 active + 1 folded: PROJ-03 → IDENT-04 per Phase 1 discussion)
 - Mapped to phases: 41
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-25*
-*Last updated: 2026-04-25 after initial definition*
+*Last updated: 2026-04-25 after Phase 1 discuss (PROJ-03 folded into IDENT-04)*
