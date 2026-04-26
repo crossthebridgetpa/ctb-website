@@ -22,6 +22,24 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  // fonts: [...] — added by PLAN-02 (Astro Fonts API + Fontsource provider).
-  // Importing `fontProviders` above so PLAN-02's diff is isolated to the array body.
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Playfair Display',
+      cssVariable: '--font-display',
+      weights: [700],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: ['Georgia', 'Times New Roman', 'serif'],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Inter',
+      cssVariable: '--font-body',
+      weights: ['400 600'],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: ['system-ui', '-apple-system', 'sans-serif'],
+    },
+  ],
 });
