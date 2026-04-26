@@ -67,10 +67,10 @@ Requirements for the initial launch. Mapped to roadmap phases (Phases 1–3).
 
 ### Infrastructure
 
-- [ ] **INFRA-01**: Site is built with Astro 6 + Tailwind v4 (via `@tailwindcss/vite`, NOT `@astrojs/tailwind`) deployed to Vercel via `@astrojs/vercel` static adapter
+- [x] **INFRA-01**: Site is built with Astro 6 + Tailwind v4 (via `@tailwindcss/vite`, NOT `@astrojs/tailwind`) deployed to Vercel via `@astrojs/vercel` static adapter
 - [ ] **INFRA-02**: Repo CI runs `astro check && astro build` on every PR; merge to `main` blocked on green
 - [ ] **INFRA-03**: Vercel preview deploys are wired for every PR (no direct-to-prod auto-deploy from `main` without preview)
-- [ ] **INFRA-04**: Repo retains current `crossthebridgetpa/ctb-website` location (no rename in v1)
+- [x] **INFRA-04**: Repo retains current `crossthebridgetpa/ctb-website` location (no rename in v1)
 - [ ] **INFRA-05**: Existing `index.html` / `script.js` / `styles.css` from the old site are removed once the Astro build is live (no orphan files)
 
 ## v2 Requirements
@@ -160,10 +160,10 @@ Explicitly excluded for v1 and beyond unless reconsidered. Documented to prevent
 | A11Y-02 | Phase 1 | Pending |
 | A11Y-03 | Phase 1 | Pending |
 | A11Y-04 | Phase 3 | Pending |
-| INFRA-01 | Phase 1 | Pending |
+| INFRA-01 | Phase 1 | Complete |
 | INFRA-02 | Phase 1 | Pending |
 | INFRA-03 | Phase 1 | Pending |
-| INFRA-04 | Phase 1 | Pending |
+| INFRA-04 | Phase 1 | Complete |
 | INFRA-05 | Phase 3 | Pending |
 
 **Coverage:**

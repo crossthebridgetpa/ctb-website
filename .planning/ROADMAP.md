@@ -41,7 +41,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. Network audit on first paint shows ≤1 third-party domain contacted (Plausible only — no Google Fonts, no GA, no third-party iframes); Lighthouse Accessibility ≥95 on home, About, and project pages
 
 **Plans**: 10 plans
-- [ ] 01-01-PLAN.md — Scaffold Astro 6 + Tailwind v4 + Vercel static + vercel.json + .env.example
+- [x] 01-01-PLAN.md — Scaffold Astro 6 + Tailwind v4 + Vercel static + vercel.json + .env.example
 - [ ] 01-02-PLAN.md — Astro Fonts API (Playfair + Inter) + Tailwind v4 @theme block (light + dark tokens)
 - [ ] 01-03-PLAN.md — BaseSEO + JsonLd components, robots.txt, llms.txt, OG image, favicon
 - [ ] 01-04-PLAN.md — D-14 Umami hosting decision (P0 checkpoint) + decision document
