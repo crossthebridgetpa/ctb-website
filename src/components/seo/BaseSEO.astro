@@ -1,0 +1,75 @@
+---
+/**
+ * BaseSEO.astro — per-page <head> fragment for SEO + OG + canonical.
+ *
+ * Consumed by BaseLayout (PLAN-06). Every page passes typed props through
+ * BaseLayout to this component. All absolute URLs are derived from
+ * `Astro.site` (env-configured by `PUBLIC_SITE_URL`) so the Phase 3 cutover
+ * to the apex domain swaps URLs without code change (Pitfall G).
+ *
+ * NOTE: `twitter:creator` is intentionally OMITTED until Wesley confirms his
+ * handle (RESEARCH Open Q #5). Defaulting to nothing is safer than shipping a
+ * wrong handle.
+ */
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noIndex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/og/default.png',
+  ogType = 'website',
+  noIndex = false,
+} = Astro.props;
+
+// Astro.site is configured from PUBLIC_SITE_URL in astro.config.mjs (PLAN-01).
+// Build fails loudly if it's undefined — better than silently emitting relative
+// URLs that break OG previews on social platforms.
+if (!Astro.site) {
+  throw new Error('Astro.site is undefined — set PUBLIC_SITE_URL in astro.config.mjs');
+}
+
+const ogImageAbs = new URL(ogImage, Astro.site).toString();
+const canonicalAbs = canonical.startsWith('http')
+  ? canonical
+  : new URL(canonical, Astro.site).toString();
+
+// Title-format heuristic: homepage gets the inverted format
+// "Cross The Bridge — Wesley Pyburn"; every other page gets
+// "{title} — Cross The Bridge". The check tolerates either a relative '/'
+// canonical or an absolute apex URL (with or without trailing slash).
+const siteApex = Astro.site.toString().replace(/\/$/, '');
+const isHome =
+  canonical === '/' ||
+  canonical === Astro.site.toString() ||
+  canonical === siteApex;
+const fullTitle = isHome
+  ? 'Cross The Bridge — Wesley Pyburn'
+  : `${title} — Cross The Bridge`;
+---
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalAbs} />
+{noIndex && <meta name="robots" content="noindex,nofollow" />}
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalAbs} />
+<meta property="og:image" content={ogImageAbs} />
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content="Cross The Bridge" />
+
+<meta name="twitter:card" content="summary_large_image" />
+{/* twitter:creator omitted until Wesley confirms handle (RESEARCH Open Q #5) */}
+
+<meta name="theme-color" content="#F7F3EC" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0F1310" media="(prefers-color-scheme: dark)" />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />

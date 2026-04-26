@@ -1,0 +1,87 @@
+---
+/**
+ * JsonLd.astro — emits a single <script type="application/ld+json"> per page.
+ *
+ * Schema selected via the `schema` prop. The `data` prop merges into the
+ * generated object so callers can supply schema-specific fields
+ * (BreadcrumbList items, WebPage description, etc.).
+ *
+ * Type-safety: `schema-dts` types catch misspelled keys and missing required
+ * fields at `astro check` time. The `as any` cast on `publisher` / `isPartOf`
+ * `@id`-only refs is the documented escape hatch when emitting an `@id`
+ * reference rather than a full embedded object (RESEARCH.md line 442).
+ *
+ * Pitfall G: ALL absolute URLs derive from `Astro.site` EXCEPT the Person `@id`,
+ * which deliberately pins to the canonical apex `https://crossthebridge.io/about#wesley`
+ * regardless of staging host (RESEARCH.md line 433/743 — graph-stable identity).
+ */
+import type { Person, WebSite, WebPage } from 'schema-dts';
+
+interface Props {
+  schema: 'website' | 'person' | 'webpage' | 'breadcrumb';
+  data?: Record<string, unknown>;
+}
+
+const { schema, data = {} } = Astro.props;
+
+if (!Astro.site) {
+  throw new Error('Astro.site is undefined — set PUBLIC_SITE_URL in astro.config.mjs');
+}
+const siteUrl = Astro.site.toString().replace(/\/$/, '');
+
+// Person @id is pinned to the canonical apex (intentional graph-stable identity
+// per RESEARCH §JSON-LD line 433). This is the ONLY hardcoded crossthebridge.io
+// reference allowed in the component (Pitfall G exception).
+const PERSON_ID = 'https://crossthebridge.io/about#wesley';
+
+const PERSON: Person = {
+  '@type': 'Person',
+  '@id': PERSON_ID,
+  name: 'Wesley Pyburn',
+  jobTitle: 'Founder, Cross The Bridge',
+  url: `${siteUrl}/about`,
+  image: `${siteUrl}/wesley-headshot.jpg`,
+  sameAs: [], // populate when Wesley supplies public profile URLs
+};
+
+const WEBSITE: WebSite = {
+  '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
+  name: 'Cross The Bridge',
+  url: `${siteUrl}/`,
+  description:
+    "Wesley Pyburn's personal site — Freedom Tech, Bitcoin, sovereign AI, and the work of opting out of legacy systems.",
+  // schema-dts wants a full Person/Organization for `publisher`; the @id-only
+  // reference form is permitted by schema.org and is the 2026 best practice
+  // for cross-linking schemas (RESEARCH.md line 918). `as any` is the
+  // documented escape hatch for this @id-only ref form.
+  publisher: { '@id': PERSON_ID } as any,
+  inLanguage: 'en',
+};
+
+let json: Record<string, unknown>;
+if (schema === 'website') {
+  json = { '@context': 'https://schema.org', ...WEBSITE };
+} else if (schema === 'person') {
+  json = { '@context': 'https://schema.org', ...PERSON };
+} else if (schema === 'breadcrumb') {
+  // Caller supplies `data.itemListElement` (the BreadcrumbList items array).
+  // Caller may also supply additional fields; we merge them into the output.
+  json = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    ...data,
+  };
+} else {
+  // schema === 'webpage'
+  const fallback: WebPage = {
+    '@type': 'WebPage',
+    url: (data.url as string) ?? siteUrl,
+    name: (data.name as string) ?? 'Cross The Bridge',
+    // @id-only ref to the WebSite — same escape-hatch pattern as `publisher` above.
+    isPartOf: { '@id': `${siteUrl}/#website` } as any,
+  };
+  json = { '@context': 'https://schema.org', ...fallback, ...data };
+}
+---
+<script is:inline type="application/ld+json" set:html={JSON.stringify(json)} />

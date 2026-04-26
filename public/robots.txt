@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Tier-1 AI crawlers — explicitly welcomed (Wesley wants AI assistants citing his work)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://staging.crossthebridge.io/sitemap-index.xml
