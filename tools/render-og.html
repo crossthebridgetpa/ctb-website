@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>OG default — render source</title>
+    <style>
+      /* No Google Fonts CDN — PRIV-01 holds even at asset-generation time.
+         The wordmark uses Georgia (system serif) as a stand-in for Playfair Display
+         since this PNG is rendered ONCE, baked into the repo, and the visual
+         signal at OG-card scale is "serif wordmark on cream" not "Playfair specifically". */
+      html, body { margin: 0; padding: 0; }
+      body {
+        width: 1200px;
+        height: 630px;
+        background: #F7F3EC; /* --color-cream */
+        position: relative;
+        overflow: hidden;
+      }
+      .gradient {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 50% 100%, rgba(45, 74, 62, 0.10) 0%, transparent 60%);
+      }
+      .center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+      }
+      .wordmark {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 96px;
+        font-weight: 700;
+        color: #1C1A16;
+        letter-spacing: -0.02em;
+        line-height: 1;
+      }
+      .wordmark .bridge {
+        color: #2D4A3E;
+      }
+      .rule {
+        width: 240px;
+        height: 2px;
+        background: #C8A96E;
+      }
+      .title {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        font-size: 36px;
+        font-weight: 600;
+        color: #3A3730;
+      }
+      .corner {
+        position: absolute;
+        bottom: 48px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        color: #6A6050;
+      }
+      .corner.left {
+        left: 48px;
+      }
+      .corner.right {
+        right: 48px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gradient"></div>
+    <div class="center">
+      <div class="wordmark">Cross The <span class="bridge">Bridge</span></div>
+      <div class="rule"></div>
+      <div class="title">crossthebridge.io</div>
+    </div>
+    <div class="corner left">by Wesley Pyburn</div>
+    <div class="corner right">crossthebridge.io</div>
+  </body>
+</html>

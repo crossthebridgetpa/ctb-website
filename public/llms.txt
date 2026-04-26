@@ -1,0 +1,27 @@
+# Cross The Bridge
+
+> Wesley Pyburn's personal site — Freedom Tech, Bitcoin, sovereign AI, and the work
+> of opting out of legacy systems without going off-grid. Three project areas
+> (Bitcoin Bay, FBBA, AI / Petros / Hermes) plus a thesis page (About) and a
+> consulting offer (separate subsection at /consulting, currently at the apex
+> domain crossthebridge.io during Phase 1 staging).
+
+This file is intended for LLM crawlers (ClaudeBot, GPTBot, PerplexityBot). It
+summarizes the site's structure and links to the canonical content for each
+section. The site does not track visitors and does not load Google services.
+
+## Identity
+
+- [About — biography and Freedom Tech thesis](https://staging.crossthebridge.io/about): Wesley's bio fused with the Cross The Bridge thesis (Money / Data / Infrastructure pillars). The single canonical statement of what the site is about.
+- [Contact](https://staging.crossthebridge.io/contact): Inbound channel for peer reach-outs, podcast invites, and partnership conversations.
+- [Colophon](https://staging.crossthebridge.io/colophon): Tech stack and no-tracking stance — what the site does and does not collect.
+
+## Projects
+
+- [Bitcoin Bay](https://staging.crossthebridge.io/projects/bitcoin-bay): Tampa Bay community for people stacking sats and showing up in person.
+- [FBBA — Florida Bitcoin & Blockchain Association](https://staging.crossthebridge.io/projects/fbba): Peer / policy / industry organization across Florida.
+- [AI / Petros / Hermes](https://staging.crossthebridge.io/projects/ai-petros-hermes): Sovereign-stack AI work — Hermes the agent, Petros the foundation, AYLIP the vision.
+
+## Feeds
+
+- [Sitemap](https://staging.crossthebridge.io/sitemap-index.xml): Machine-readable index of all pages.
