@@ -1518,47 +1518,56 @@ jobs:
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-These are decisions the contract leaves to the planner because they're implementation-mechanics, not contract choices.
+These were decisions the contract left to the planner because they're implementation-mechanics, not contract choices. All 9 are resolved in the Phase 1 plans (`01-{01..10}-PLAN.md`).
 
 1. **Umami hosting target** (D-14) — must resolve before BaseLayout's analytics script tag can be wired. Surface as P0 plan task. Recommendation: nomus if a public endpoint mechanism is solved; existing VPS otherwise.
    - What we know: D-14 picked self-hosted Umami; three candidate hosts identified.
    - What's unclear: whether nomus has a public endpoint configured.
    - Recommendation: ask Wesley directly in plan-phase Q&A before writing tasks.
+   - **RESOLVED:** Surfaced as a P0 checkpoint in `01-04-PLAN.md` (autonomous: false). Decision is deferred to execution by design — Wesley picks nomus / VPS / Vercel-separate-project at the checkpoint, then BaseLayout consumes `PUBLIC_UMAMI_HOST` + `PUBLIC_UMAMI_WEBSITE_ID` from the resulting env config.
 
 2. **`light-dark()` CSS function vs `@media (prefers-color-scheme)` override** for theme delivery (UI-SPEC §Color Implementation)
    - What we know: both yield the same contract.
    - What's unclear: baseline-browser support target.
    - Recommendation: use the `@media (prefers-color-scheme: dark)` override pattern — broader support, simpler tokens, no breakage on older Safari/Firefox.
+   - **RESOLVED:** `01-02-PLAN.md` ships the `@media (prefers-color-scheme: dark)` override pattern in the `@theme` block (broader browser support; matches A11Y-03).
 
 3. **`CONSULTING_URL` env var default and override placement**
    - What we know: D-05 + UI-SPEC §Page Templates: env-configurable, default `/consulting`, override to `https://crossthebridge.io` for Phase 1 staging.
    - What's unclear: whether this lives in Vercel project env vars or in a `.env` committed to the repo.
    - Recommendation: Vercel project env vars (per-environment overrides), with `.env.example` showing the keys. Don't commit `.env`.
+   - **RESOLVED:** `01-01-PLAN.md` commits `.env.example` with `PUBLIC_CONSULTING_URL` (and the Umami keys); per-environment values live in Vercel project env vars (`01-10-PLAN.md` operator setup task).
 
 4. **Bitcoin Bay events list URL** (D-05)
    - What we know: per CONTEXT.md `<deferred>`, ship placeholder if not ready.
    - Recommendation: planner adds a "Wesley provides URL or confirms placeholder" task with a hard placeholder value (e.g., disabled CTA + "Coming soon" copy).
+   - **RESOLVED:** `01-09-PLAN.md` ships the BB project page with a "Coming soon" placeholder + Wesley-confirms-or-replaces checkpoint task (autonomous: false).
 
 5. **`@twitter:creator` handle in BaseSEO** (UI-SPEC §Components #7)
    - What we know: placeholder `@wesleypyburn` may be wrong.
    - Recommendation: planner asks Wesley; default to omitting the meta tag rather than shipping a wrong handle.
+   - **RESOLVED:** `01-03-PLAN.md` omits the `<meta name="twitter:creator">` tag rather than ship a wrong handle; can be added later via a one-line update once Wesley confirms.
 
 6. **Default OG image author pass** — generate `public/og/default.png` per UI-SPEC §OG Image Template
    - Recommendation: render via Playwright + simple HTML template; commit PNG to repo. Detailed sub-task for executor.
+   - **RESOLVED:** `01-03-PLAN.md` task renders `public/og/default.png` via Playwright + the UI-SPEC OG template; PNG is committed to the repo.
 
 7. **Vercel preview URL discovery in CI** (Network Audit § GH Actions wiring)
    - What we know: `wait-for-vercel-preview` action is the de facto choice; alternatives exist.
    - Recommendation: planner picks one and pins the version.
+   - **RESOLVED:** `01-10-PLAN.md` pins `patrickedqvist/wait-for-vercel-preview` at a fixed SHA in `.github/workflows/ci.yml`.
 
 8. **CSP authoring strategy** (Security Domain)
    - What we know: Astro 6 CSP API is stable.
    - What's unclear: whether to ship CSP in Phase 1 (vs deferring to a follow-up plan).
    - Recommendation: ship the conservative `vercel.json` headers in Phase 1 (HSTS, X-Frame-Options, etc.), defer CSP authoring to a Phase 1 follow-up plan unless executor has bandwidth.
+   - **RESOLVED:** `01-01-PLAN.md` ships conservative `vercel.json` security headers (HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy); Astro 6 native CSP API is deferred to a Phase 1 follow-up plan (out of scope for v1 launch).
 
 9. **CI fail-fast vs report-all** in network audit
    - Recommendation: report-all (don't bail on first violation) so PRs surface ALL banned hosts in one run.
+   - **RESOLVED:** `01-10-PLAN.md` truth: "Reporter posture is report-all" — Playwright network audit collects all violations across all pages before failing the run.
 
 ---
 
