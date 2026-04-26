@@ -1,0 +1,42 @@
+---
+/**
+ * Headshot.astro — Wesley's About-page headshot, processed through Astro's
+ * Image pipeline. Zero props: alt text, widths, and lazy-loading are LOCKED
+ * per UI-SPEC §Imagery + §Accessibility.
+ *
+ * In production on Vercel, `imageService: true` on the adapter delegates
+ * resize/format conversion to the Vercel Image API at request time, so the
+ * serverless function never ships Sharp.
+ *
+ * EXIF mitigation: Sharp/Vercel re-encodes to AVIF/WebP/JPEG; the legacy
+ * EXIF block on the source JPEG does NOT survive format conversion.
+ */
+import { Image } from 'astro:assets';
+import headshot from '../../public/wesley-headshot.jpg';
+---
+<Image
+  src={headshot}
+  alt="Wesley Pyburn — founder of Cross The Bridge"
+  widths={[320, 480, 640, 800, 1200]}
+  sizes="(min-width: 768px) 280px, 100vw"
+  format="avif"
+  loading="lazy"
+  decoding="async"
+  class="headshot-frame"
+/>
+
+<style>
+  .headshot-frame {
+    max-width: 280px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 8px;
+    border: 1px solid var(--color-cream-border);
+  }
+  @media (max-width: 767px) {
+    .headshot-frame {
+      max-width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,103 @@
+---
+/**
+ * ObfuscatedMailto.astro — three-layer mailto pattern (D-13 + RESEARCH §Mailto Obfuscation).
+ *
+ * Layer 1: visible display variant (`wesley[at]crossthebridge[dot]io`) — JS-free,
+ *          screen-reader-safe, present even with JS disabled.
+ * Layer 2: JS-reconstructed mailto button using `data-u` + `data-d` (base64-encoded
+ *          domain). Click handler decodes via `atob()` and concatenates.
+ * Layer 3: <noscript> fallback wraps user/domain in <strong> tags so even text-
+ *          extracted noscript content does NOT form a contiguous email string.
+ *
+ * Invariant (load-bearing privacy claim): rendered HTML contains ZERO instances
+ * of the plaintext "wesley" + "@" + the configured domain as a contiguous string.
+ * The build-output check `! grep -r "<localpart>@<domain>" dist/` enforces this
+ * — same invariant must hold in this source file (see Task 2 verify chain).
+ *
+ * The base64 string `Y3Jvc3N0aGVicmlkZ2UuaW8=` decodes via atob() to the domain.
+ */
+interface Props {
+  ctaLabel?: string;
+}
+const { ctaLabel = 'Email Wesley' } = Astro.props;
+// Unique ID so multiple instances on a page do not collide (defensive — Phase 1
+// only renders one instance, but Footer + Contact may both mount in PLAN-06/09).
+const ctaId = `obfmail-${Math.random().toString(36).slice(2, 9)}`;
+---
+<div class="obfuscated-mailto">
+  <p class="obfuscated-mailto__display">
+    Email: <span>wesley[at]crossthebridge[dot]io</span>
+  </p>
+
+  <a id={ctaId} href="#" class="cta-primary"
+     data-u="wesley" data-d="Y3Jvc3N0aGVicmlkZ2UuaW8=">
+    {ctaLabel}
+  </a>
+
+  <noscript>
+    <p class="obfuscated-mailto__noscript">
+      To email Wesley, write to <strong>wesley</strong> at <strong>crossthebridge.io</strong>.
+    </p>
+  </noscript>
+</div>
+
+<script is:inline define:vars={{ ctaId }}>
+  const a = document.getElementById(ctaId);
+  if (a) {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = `mailto:${a.dataset.u}@${atob(a.dataset.d)}`;
+    });
+  }
+</script>
+
+<style>
+  .obfuscated-mailto__display {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    color: var(--color-charcoal-mid);
+    margin: 0 0 var(--spacing-lg) 0;
+  }
+  .cta-primary {
+    display: inline-block;
+    background: var(--color-green);
+    color: var(--color-cream);
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cta-primary { transition: background-color 200ms ease-out; }
+  }
+  .cta-primary:hover { background: var(--color-green-dark); }
+  .cta-primary:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px var(--color-gold-light);
+  }
+  @media (prefers-color-scheme: dark) {
+    .cta-primary:focus-visible {
+      box-shadow: 0 0 0 4px var(--color-gold);
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cta-primary:active { transform: translateY(1px); }
+  }
+  @media (max-width: 479px) {
+    .cta-primary {
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .obfuscated-mailto__noscript {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    color: var(--color-charcoal);
+  }
+</style>
