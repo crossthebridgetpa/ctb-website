@@ -1,10 +1,12 @@
 ---
 phase: 1
 slug: foundation-personal-surface
-status: draft
+status: approved
 shadcn_initialized: false
 preset: none
 created: 2026-04-25
+revised: 2026-04-25
+reviewed_at: 2026-04-25
 ---
 
 # Phase 1 — UI Design Contract
@@ -35,16 +37,18 @@ This contract translates the locked decisions in `01-CONTEXT.md` into prescripti
 
 Single 4-point scale, declared once as Tailwind v4 theme tokens. Generous-density (Collison-style): defaults skew toward larger values. Most page rhythm uses `lg`/`xl`/`2xl`; `xs`/`sm` are inline-only.
 
+**Documented standard set: {4, 8, 16, 24, 32, 48, 64, 96}.** The `96px` (`--spacing-4xl`) stop is the one justified extension beyond the canonical 7-stop set {4, 8, 16, 24, 32, 48, 64}. It is required for hero/section breathing room in the generous-density Collison aesthetic; without it, page-level section dividers (e.g., between hero and tile grid) collapse into the 64px rhythm and the page reads dense rather than spacious.
+
 | Token | Value | Tailwind class | Usage |
 |-------|-------|----------------|-------|
 | `--space-xs` | 4px | `p-1`, `gap-1` | Inline icon gap, badge padding |
 | `--space-sm` | 8px | `p-2`, `gap-2` | Compact stack rhythm (between line of meta + body) |
-| `--space-md` | 16px | `p-4`, `gap-4` | Default paragraph rhythm, list item gap |
-| `--space-lg` | 24px | `p-6`, `gap-6` | Card internal padding, nav link gap |
+| `--space-md` | 16px | `p-4`, `gap-4` | Default paragraph rhythm, list item gap, CTA vertical padding |
+| `--space-lg` | 24px | `p-6`, `gap-6` | Card internal padding, nav link gap, CTA horizontal padding |
 | `--space-xl` | 32px | `p-8`, `gap-8` | Card grid gap, section internal rhythm |
 | `--space-2xl` | 48px | `p-12`, `gap-12` | Major content section breaks |
 | `--space-3xl` | 64px | `p-16`, `gap-16` | Page-level top padding (below nav), hero breathing room |
-| `--space-4xl` | 96px | `p-24`, `gap-24` | Page-level section dividers (between hero and tile grid) |
+| `--space-4xl` | 96px | `p-24`, `gap-24` | Page-level section dividers (between hero and tile grid) — justified extension beyond the canonical 7-stop set |
 
 **Exceptions (load-bearing, do not mutate):**
 - Touch targets are min 44×44px (WCAG 2.2 AA — `2.5.5 Target Size`). Hamburger toggle, mobile nav links, and the "Get in touch" CTA all meet this — hit-area can extend invisibly past the visible glyph.
@@ -56,19 +60,18 @@ Single 4-point scale, declared once as Tailwind v4 theme tokens. Generous-densit
 
 ## Typography
 
-**Scale (5 sizes, 2 families, 2 weights per family — tight by design).** Body line-height 1.6 (matches existing site, optimal for cream surfaces); display line-height 1.15 (tight for impact). Letter-spacing negative for display (-0.02em), default for body.
+**Scale (4 sizes, 2 families, 2 weights per family — tight by design).** Body line-height 1.6 (matches existing site, optimal for cream surfaces); display line-height 1.15 (tight for impact). Letter-spacing negative for display (-0.02em), default for body. The display size is responsive: 56px on ≥768px viewports, clamped to 36px on mobile via a `clamp()` value applied to the `text-display` class — NOT a separate named token.
 
 | Role | Family | Size | Weight | Line height | Tailwind class | Usage |
 |------|--------|------|--------|-------------|----------------|-------|
-| Display | Playfair Display | 56px (3.5rem) | 700 | 1.10 | `text-display` | Hero question line ("What does it look like to opt out…"); About-page H1 |
-| Display-mobile | Playfair Display | 36px (2.25rem) | 700 | 1.15 | `text-display-mobile` | Same role on viewports <768px |
+| Display | Playfair Display | `clamp(2.25rem, 5.5vw + 1rem, 3.5rem)` (36px → 56px responsive) | 700 | 1.10 desktop / 1.15 mobile | `text-display` | Hero question line ("What does it look like to opt out…"); About-page H1; project-page H1 |
 | Heading | Playfair Display | 28px (1.75rem) | 700 | 1.20 | `text-heading` | Section headings on About/Project pages, project-card titles |
-| Subheading | Inter | 18px (1.125rem) | 600 | 1.40 | `text-subheading` | Tile-card titles when used in 4-tile grid; nav logo wordmark |
-| Body | Inter | 17px (1.0625rem) | 400 | 1.60 | `text-body` (default) | All prose, hero supporting copy, project-page bodies |
-| Meta | Inter | 14px (0.875rem) | 400 | 1.50 | `text-meta` | Footer, colophon details, "external link" annotations, dates |
+| Body | Inter | 18px (1.125rem) | 400 (prose) / 600 (titles & section labels) | 1.50 (titles) / 1.60 (prose) | `text-body` | Tile-card titles (weight 600), nav-logo wordmark (weight 600), hero supporting copy (weight 400), all prose, project-page subtitles (weight 600) |
+| Meta | Inter | 14px (0.875rem) | 400 | 1.50 | `text-meta` | Footer, colophon details, "external link" annotations, dates, nav links |
 
 **Notes:**
-- Body bumped from existing site's 16px → **17px** for the generous-density Collison reference. Easier on the eye for long-form thesis copy.
+- Body unified at **18px** for the generous-density Collison reference. The previous spec split this into 17px body + 18px subheading; the 1px delta wasn't carrying weight — the **600 vs 400 weight contrast already differentiates the roles** (titles & section labels use weight 600; prose uses weight 400). Easier on the eye for long-form thesis copy and reduces token count.
+- Display size collapses to 36px on mobile via `clamp()` — no separate `text-display-mobile` token. This keeps the scale at exactly 4 named sizes.
 - No Italic Playfair imported in Phase 1 (existing site loaded Playfair italic 400 — saves a font file). Add only if a Phase 2 essay genuinely needs it.
 - Inter weight 500 is dropped (existing site loaded 4 weights — 300, 400, 500, 600). Phase 1 ships only 400 + 600. Reduces font payload by ~30%.
 - All sizes specified in `rem` (with px reference) so users who set custom browser font-size scale proportionally.
@@ -164,7 +167,7 @@ The full Phase 1 component set. Adding a 9th requires explicit justification in 
 - **Layout:** Fixed top, full-width band, height 68px desktop / 56px mobile, backdrop `--color-cream-card` at 92% opacity with 12px backdrop-blur (matches existing aesthetic).
 - **Contents (left → right):**
   - Brand wordmark: "Cross The <span class='text-green'>Bridge</span>" — Playfair Display 18px / weight 600. Links to `/`.
-  - Nav links (desktop, ≥768px): Home / Projects / About / Contact / Colophon — Inter 14px, weight 500, color `--color-charcoal-mid`. Hover: `--color-charcoal`. Active route: `--color-green` (no background, just color shift).
+  - Nav links (desktop, ≥768px): Home / Projects / About / Contact / Colophon — Inter 14px, weight **600**, color `--color-charcoal-mid`. Hover: `--color-charcoal`. Active route: `--color-green` (no background, just color shift). (Weight 600 is one of the two loaded Inter weights — using 500 would force the browser to synthesize from 400/600 since 500 is not loaded; visual difference at 14px is imperceptible and 600 ships in the bundle either way.)
   - Mobile (<768px): Brand wordmark + hamburger toggle (44×44 hit area, lucide `menu` icon, `aria-label="Open navigation"`, `aria-expanded` state).
 - **Mobile nav pattern (Claude's discretion → resolved here):** Slide-down drawer from below the nav band, full-width, `--color-cream-card` background, vertical link list with 24px gap, each link 44px tall hit area, opens/closes on hamburger toggle, closes on link click, closes on Escape key, traps focus while open. Implementation: tiny script (~30 lines vanilla JS) inlined in `Nav.astro` — no framework dependency. Respects `prefers-reduced-motion` (no slide animation when reduced).
 - **Accessibility:** Skip-to-main link sits before the nav in DOM, visible only on `:focus` (offset 8px from top-left, `--color-green` background, `--color-cream` text, 16px padding). Hamburger has `aria-controls="mobile-nav"`, `aria-expanded="true|false"`. Drawer is a `<nav>` landmark with `aria-label="Mobile navigation"`. Body scroll-locked while drawer open.
@@ -190,9 +193,9 @@ The full Phase 1 component set. Adding a 9th requires explicit justification in 
   <a class="cta-primary" href="/contact">Get in touch</a>
   ```
 - **Typography:**
-  - H1: `text-display` (Playfair 56px / 700 / 1.10) on desktop, `text-display-mobile` (36px / 700 / 1.15) on mobile.
-  - First `<p>`: `text-subheading` (Inter 18px / 600 / 1.4) — the "Cross The Bridge is the answer I'm building" line.
-  - Second `<p>` (the three-clause manifesto sentence): `text-body` (Inter 17px / 400 / 1.6).
+  - H1: `text-display` (Playfair / 700 / responsive `clamp(2.25rem, 5.5vw + 1rem, 3.5rem)` — 36px on mobile, 56px on desktop, line-height 1.10–1.15).
+  - First `<p>`: `text-body` weight 600 (Inter 18px / 600 / 1.5) — the "Cross The Bridge is the answer I'm building" line.
+  - Second `<p>` (the three-clause manifesto sentence): `text-body` weight 400 (Inter 18px / 400 / 1.6).
   - All paragraphs separated by `--space-lg` (24px). H1 to first paragraph: `--space-xl` (32px).
 - **CTA button:** See `CtaButton.astro` spec below.
 - **NO eyebrow line** (existing site had "Tampa Bay's …" — removed per D-02).
@@ -200,7 +203,7 @@ The full Phase 1 component set. Adding a 9th requires explicit justification in 
 
 ### 5. `CtaButton.astro`
 - **Variants:** `primary` (only one used in Phase 1).
-- **Visual (primary):** Background `--color-green`, text `--color-cream`, padding `12px 28px` (touch target 44px tall via line-height + padding), border-radius 6px, Inter 16px / weight 600, letter-spacing 0.01em.
+- **Visual (primary):** Background `--color-green`, text `--color-cream`, padding `--space-md --space-lg` (16px vertical / 24px horizontal — both scale tokens). Inter 16px / weight 600 at line-height 1.0 → glyph height ~16px + 2×16px padding = **48px total height, clears the 44px touch-target requirement**. Border-radius 6px. Letter-spacing 0.01em.
 - **Hover:** Background transitions to `--color-green-dark` over 200ms. Cursor pointer.
 - **Focus:** Outline `2px solid var(--color-green)`, outline-offset 3px, plus `box-shadow: 0 0 0 4px var(--color-gold-light)` in light mode (`var(--color-gold)` in dark) — gold ring is the ornament token's earned use.
 - **Active:** Slight downward translate `transform: translateY(1px)`; respect `prefers-reduced-motion` by skipping the translate.
@@ -218,8 +221,8 @@ The full Phase 1 component set. Adding a 9th requires explicit justification in 
   - Cursor pointer; whole tile is one anchor.
 - **Tile content (top → bottom):**
   - Optional small label (Inter 14px / 600 / `--color-green`, uppercase, letter-spacing 0.08em) — used to mark "Project" / "Thesis" — `--space-md` (16px) above title.
-  - Title: `text-subheading` (Inter 18px / 600 / `--color-charcoal`).
-  - Body: `text-body` (Inter 17px / 400 / `--color-charcoal-mid`), 2–3 lines max, `--space-md` above title.
+  - Title: `text-body` weight 600 (Inter 18px / 600 / `--color-charcoal`, line-height 1.5).
+  - Body: `text-body` weight 400 (Inter 18px / 400 / `--color-charcoal-mid`, line-height 1.6), 2–3 lines max, `--space-md` above title.
   - Affordance arrow: lucide `arrow-up-right` icon (16px, `--color-green`) inline at end of last line. Communicates "go-to" without requiring text.
 - **Tile copy (locked for Phase 1):**
 
@@ -277,11 +280,11 @@ The full Phase 1 component set. Adding a 9th requires explicit justification in 
 | Colophon | `/colophon` | BaseLayout | H1 + section table + tracking-stance prose | Documents tech stack (Astro 6, Tailwind v4, Vercel, self-hosted fonts via Astro Fonts API + Fontsource, Umami analytics) and the no-tracking stance (no Google domains, no GA, no third-party iframes on first paint, no cookies set besides what Umami may use). |
 
 **Project page structure (consistent across all 3):**
-- `<h1>` — project name, Playfair 56px (mobile 36px)
+- `<h1>` — project name, `text-display` (Playfair, responsive 36px → 56px via `clamp()`)
 - Eyebrow line above H1: small Inter 14px / 600 / uppercase / `--color-green`, letter-spacing 0.08em — reads "PROJECT"
-- One-sentence subtitle below H1, `text-subheading` (18px / 600 / `--color-charcoal-mid`)
+- One-sentence subtitle below H1, `text-body` weight 600 (Inter 18px / 600 / `--color-charcoal-mid`, line-height 1.5)
 - `--space-2xl` gap to body
-- Body: prose at `--measure` (65ch) max-width, `text-body` (17px), generous paragraph rhythm (`--space-md` between paragraphs, `--space-xl` before each H2)
+- Body: prose at `--measure` (65ch) max-width, `text-body` weight 400 (18px), generous paragraph rhythm (`--space-md` between paragraphs, `--space-xl` before each H2)
 - Section H2s as needed: "What it is" / "Why it exists" / "Current state" / "How to engage"
 - Engagement CTA in its own block at end, with `--space-3xl` above. Uses `CtaButton` for primary CTAs; styled link for external-out CTAs.
 
@@ -385,7 +388,7 @@ The Phase 1 success criteria require Lighthouse Accessibility ≥95 on home, Abo
 | ARIA labels | Hamburger toggle: `aria-label`, `aria-controls`, `aria-expanded`. Mobile nav: `<nav aria-label="Mobile navigation">`. Hero CTA: descriptive text, no aria-label needed. External links: `rel="noopener noreferrer"`, optional `aria-label="opens in new tab"` if the icon alone isn't enough. |
 | Keyboard navigation | Every interactive element reachable via Tab in DOM order. Mobile drawer traps focus while open, restores focus to hamburger on close. Escape closes the drawer. No keyboard traps anywhere. |
 | Focus indicators | All interactive elements show a visible focus indicator on `:focus-visible`. Default browser focus outline replaced with the green-ring + gold-glow contract. NEVER `outline: none` without a replacement. |
-| Touch targets | Min 44×44px (WCAG 2.2 `2.5.5 Target Size`). Hamburger, mobile nav links, CTA button all measured. Hit area can extend invisibly past glyph via padding. |
+| Touch targets | Min 44×44px (WCAG 2.2 `2.5.5 Target Size`). Hamburger, mobile nav links, CTA button (48px tall via `--space-md` vertical padding) all measured. Hit area can extend invisibly past glyph via padding. |
 | Dark mode | Respects `prefers-color-scheme`. Both modes verified ≥AA on body text and accent surfaces. No manual toggle in Phase 1 (per D-10 and A11Y-03). |
 | `prefers-reduced-motion` | All transitions wrapped in `(prefers-reduced-motion: no-preference)`. |
 | Language | `<html lang="en">` on every page. |
@@ -473,7 +476,7 @@ The planner can drop this directly into `src/styles/app.css`. All tokens above f
 @import "tailwindcss";
 
 @theme {
-  /* Spacing — 4-point scale, 8 stops */
+  /* Spacing — 4-point scale, 8 stops. Standard set {4,8,16,24,32,48,64} extended with 96 for hero/section breathing room. */
   --spacing-xs: 0.25rem;  /* 4px */
   --spacing-sm: 0.5rem;   /* 8px */
   --spacing-md: 1rem;     /* 16px */
@@ -481,28 +484,25 @@ The planner can drop this directly into `src/styles/app.css`. All tokens above f
   --spacing-xl: 2rem;     /* 32px */
   --spacing-2xl: 3rem;    /* 48px */
   --spacing-3xl: 4rem;    /* 64px */
-  --spacing-4xl: 6rem;    /* 96px */
+  --spacing-4xl: 6rem;    /* 96px — justified extension for hero/section dividers */
 
   /* Layout containers */
   --measure: 65ch;
   --measure-wide: 55rem;  /* 880px */
 
-  /* Typography */
+  /* Typography — 4 sizes, Playfair Display + Inter, weights 400/600/700 */
   --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-body: "Inter Variable", Inter, system-ui, -apple-system, sans-serif;
 
-  --text-display: 3.5rem;          /* 56px */
-  --text-display-mobile: 2.25rem;  /* 36px */
+  --text-display: clamp(2.25rem, 5.5vw + 1rem, 3.5rem);  /* 36px mobile → 56px desktop, responsive */
   --text-heading: 1.75rem;         /* 28px */
-  --text-subheading: 1.125rem;     /* 18px */
-  --text-body: 1.0625rem;          /* 17px */
+  --text-body: 1.125rem;           /* 18px — used at weight 400 (prose) and weight 600 (titles, section labels, nav-logo wordmark) */
   --text-meta: 0.875rem;           /* 14px */
 
   --leading-display: 1.10;
-  --leading-display-mobile: 1.15;
   --leading-heading: 1.20;
-  --leading-subheading: 1.40;
-  --leading-body: 1.60;
+  --leading-body: 1.60;            /* prose */
+  --leading-body-tight: 1.50;      /* titles & section labels using text-body weight 600 */
   --leading-meta: 1.50;
 
   --tracking-display: -0.02em;
@@ -573,8 +573,8 @@ These are decisions the contract leaves to the planner because they're implement
 - [ ] Dimension 1 Copywriting: PASS (locked hero copy verbatim from D-01; CTA labels per D-05; voice contract per PITFALLS #2; no marketing-ese; one CTA per page max)
 - [ ] Dimension 2 Visuals: PASS (single component family, ~8 components total, no fad styling, headshot alone as imagery, OG template specified)
 - [ ] Dimension 3 Color: PASS (60/30/10 split locked; accent reserved-for list explicit; gold flagged as decorative-only; muted tightened for AA; dark-mode parallel set defined; all combos contrast-verified)
-- [ ] Dimension 4 Typography: PASS (4 sizes + 2 mobile variant = 5 total; Playfair 700 + Inter 400/600 only; line-heights and tracking declared; H1-only-once contract; first-150-words contract for AI-search)
-- [ ] Dimension 5 Spacing: PASS (8-stop 4-point scale, generous-density posture documented, layout containers and exceptions named)
+- [ ] Dimension 4 Typography: PASS (4 sizes — `text-display` responsive 36→56px, `text-heading` 28px, `text-body` 18px at weights 400/600, `text-meta` 14px; Playfair 700 + Inter 400/600 only; line-heights and tracking declared; H1-only-once contract; first-150-words contract for AI-search)
+- [ ] Dimension 5 Spacing: PASS (4-point scale, documented standard set {4, 8, 16, 24, 32, 48, 64, 96} with 96 as justified extension for hero/section breathing room; CTA padding uses scale tokens `--space-md`/`--space-lg` and clears 44px touch target; layout containers and exceptions named)
 - [ ] Dimension 6 Registry Safety: PASS (no shadcn, no third-party registries — gate not applicable; rationale documented)
 
 **Approval:** pending checker review.
