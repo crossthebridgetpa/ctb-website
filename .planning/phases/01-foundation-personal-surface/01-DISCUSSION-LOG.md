@@ -234,3 +234,119 @@ This invalidated PROJ-03 in REQUIREMENTS.md and forced a re-architecture questio
 ---
 
 *Discussion completed: 2026-04-25*
+
+---
+
+# Phase 1 — Discussion Log (Session 2: pivot to wesleyschlemmer.com)
+
+**Date:** 2026-04-27
+**Trigger:** Wesley wrote handwritten redesign notes on 2026-04-26 (`~/.hermes/vault/website redesign notes.pdf`, transcribed mid-session to `~/.hermes/vault/projects/ctb/website-redesign-notes-2026-04-26.md`) describing a richer CTB consulting hub with Choose-Your-Adventure Bitcoin/Privacy/AI sub-pages. /gsd-discuss-phase 01 was invoked to integrate that scope into Phase 1.
+**Areas presented:** Consulting hub domain, v1 consulting sub-page set, Third project tile identity, Sub-page body content authoring (4 areas)
+**Areas resolved before pivot:** 2 (Consulting hub domain, v1 consulting sub-page set)
+**Areas resolved after pivot:** Third project tile identity (resolved by D-20 pivot itself)
+**Areas dropped post-pivot:** Sub-page body content authoring (consulting sub-pages move OUT to future CTB brand-site project)
+
+---
+
+## Consulting hub domain
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| Subpath on `crossthebridge.io/consulting/*` | Keeps everything under one brand. Maintains D-19 lock. Single Vercel project, single sitemap. | |
+| Separate domain on `getpetros.com` | "Petros" framing surfaces in URL. Clean separation. Costs: second Vercel project, second analytics property, cross-domain link discipline. | |
+| Subpath now, `getpetros.com` later | Ship Phase 1 on subpath; migrate to `getpetros.com` when AYLIP product launches. Defers the domain decision. | ✓ |
+
+**User's choice:** Subpath now, `getpetros.com` later
+**Notes:** Decision became moot when D-20 pivot landed (consulting hub work moves out of this project entirely). Captured for the future CTB brand-site project to inherit.
+
+---
+
+## v1 consulting sub-page set
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| Hub + 3 themed sub-pages, full content | All 4 pages with full body copy, services lists, FAQs. ~4 new plans. | ✓ |
+| Hub + 3 sub-pages, minimal content | Skeleton + services lists, FAQs deferred. ~3 new plans. | |
+| Hub only, sub-pages deferred | Just `/consulting` hub with stubbed sub-page links. ~1 new plan. | |
+| Hub + 1 anchor sub-page | Hub + the single most-load-bearing sub-page. ~2 new plans. | |
+
+**User's choice:** Hub + all 3 themed sub-pages, full content
+**Notes:** Honors the 2026-04-26 redesign notes most faithfully. Decision moves to the future CTB brand-site project after D-20 pivot — captured there as the inherited scope target.
+
+---
+
+## Third project tile identity
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| Tile = "CTB Consulting", page = teaser → /consulting | Recommended pre-pivot. Cleanest funnel from tile to hub. | |
+| Tile = "CTB Consulting", no separate page | Skip the intermediate /projects page; tile deeplinks to /consulting. | |
+| Keep "AI / Petros / Hermes" tile + page, CTA → /consulting | Original D-03/D-05 framing stays. | |
+| **Other (free text):** "Title is Cross the Bridge" | Wesley wrote freeform — flagged the recursion concern (a "Cross the Bridge" tile inside a site already named Cross The Bridge). | ✓ |
+
+**User's choice:** "Cross the Bridge" — but follow-up clarification surfaced the recursion concern, which led to the D-20 pivot.
+**Notes:** This was the gateway question that triggered the larger architecture pivot. After the pivot landed, the third tile = "Cross The Bridge" makes sense (no longer recursive) on the personal hub at wesleyschlemmer.com — it's now Wesley listing CTB as one of his projects.
+
+---
+
+## D-20 — Pivot to wesleyschlemmer.com (NEW, mid-session escalation)
+
+Triggered by Wesley's question: *"Well maybe the hub should be wesleyschlemmer.com instead?"*
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| Yes — commit to the pivot. wesleyschlemmer.com = personal hub, crossthebridge.io = CTB brand site | Big move but cleanest IA. Solves recursion. CTB consulting work moves to a separate future project. | ✓ |
+| Stay on crossthebridge.io — rename third tile to dodge recursion | Keep current architecture. Third tile gets a non-recursive name. | |
+| Pause — let me think | Save checkpoint. | |
+| Spike it — sketch both architectures side by side via /gsd-sketch | Visual comparison before commit. | |
+
+**User's choice:** Yes — commit to the pivot
+**Notes:** Wesley owns both `wesleyschlemmer.com` and `getpetros.com`. The pivot solves the recursion, gives the CTB brand room to grow as its own product (potentially migrating to `getpetros.com` if AYLIP productizes), and lets the legacy `crossthebridge.io` site stay running until a separate `/gsd-new-project` initiative builds the new CTB brand site. Phase 1 of THIS project (now `wesleyschlemmer.com` personal hub) actually SIMPLIFIES — the consulting hub work moves OUT.
+
+---
+
+## Sub-page body content authoring (DROPPED post-pivot)
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| Wesley drafts each sub-page | | |
+| Claude drafts, Wesley approves at checkpoint | | |
+| Hybrid | | |
+
+**User's choice:** N/A — area dropped after D-20 pivot moved the sub-pages out of this project entirely.
+
+---
+
+## How to drive the pivot
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| I drive everything inside this discuss-phase session | Claude updates PROJECT.md, ROADMAP.md, REQUIREMENTS.md, CONTEXT.md, STATE.md as a single 'project pivot' commit, then routes to /gsd-plan-phase 01. | ✓ |
+| Pause discuss-phase, give checklist | Claude writes a concise edit list, Wesley walks through it on his own time. | |
+| Hybrid: Claude drives PROJECT.md + ROADMAP.md, Wesley finalizes CONTEXT.md | | |
+| Stop and let Wesley think — commit nothing | | |
+
+**User's choice:** I drive everything inside this discuss-phase session
+**Notes:** Wesley wants to keep moving; trusts Claude to drive the artifact updates with a sanity-check before commit.
+
+---
+
+## Pre-existing inputs Wesley provided this session (not gray-area choices, just info captured)
+
+- **FBBA URL:** `https://fbba.io` (replaces earlier `fbba.org` placeholder)
+- **Bitcoin Bay URL:** `https://bitcoinbay.foundation` (replaces earlier "Coming soon" placeholder)
+- **Domains owned:** `wesleyschlemmer.com`, `getpetros.com` (in addition to `crossthebridge.io`)
+- **Cross The Bridge tile copy seed:** From the 2026-04-26 redesign notes — sovereignty as a service, fourth-turning, old-to-new framing, "the world you grew up in no longer exists", "the rules have changed", Petros + AYLIP product mention
+
+---
+
+## Deferred Ideas (this session)
+
+- All consulting hub work (Choose-Your-Adventure pattern, themed sub-pages, FAQ depth, theming approach) → moves to the future CTB brand-site project. Seed input: redesign notes file in vault.
+- `getpetros.com` migration target → reserved domain, deferred to AYLIP productization milestone within the future CTB brand-site project.
+- `umami.wesleyschlemmer.com` subdomain isolation (vs current `umami.crossthebridge.io`) → optional follow-up if domain-isolation between personal and brand surfaces is preferred.
+- Hero copy revisit post-pivot → D-01 still works (visitor on wesleyschlemmer.com reads "I, Wesley, am building Cross The Bridge"), but worth re-reading after the pivot to confirm it lands.
+
+---
+
+*Session 2 (pivot) completed: 2026-04-27*

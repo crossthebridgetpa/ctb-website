@@ -2,73 +2,70 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: replan-required
-stopped_at: "Phase 01 wave 4 partial + scope shift triggered by 2026-04-26 redesign notes — replan needed before resuming 01-09/01-10"
-last_updated: "2026-04-27T10:48:00.000Z"
-last_activity: 2026-04-27 -- redesign notes transcribed, scope-shift decision captured (Option 3: add consulting hub)
+status: replan-pending
+stopped_at: "Phase 01 CONTEXT.md repointed for wesleyschlemmer.com pivot (D-20); /gsd-plan-phase 01 next to author 01-11 domain-constants follow-on plan + reframe 01-09"
+last_updated: "2026-04-27T11:30:00.000Z"
+last_activity: 2026-04-27 -- D-20 pivot landed (wesleyschlemmer.com personal hub, crossthebridge.io = future CTB brand-site project)
 progress:
-  total_phases: 3
+  total_phases: 2
   completed_phases: 0
-  total_plans: 10
+  total_plans: 11
   completed_plans: 7
-  percent: 70
+  percent: 64
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-25)
+See: .planning/PROJECT.md (repointed 2026-04-27 for wesleyschlemmer.com pivot)
 
 **Core value:** Inbound opportunities — the right people find Wesley, understand the work, and reach out
-**Current focus:** Phase 01 — foundation-personal-surface
+**Current focus:** Phase 01 — foundation-personal-surface (now wesleyschlemmer.com personal hub)
 
 ## Current Position
 
-Phase: 01 (foundation-personal-surface) — REPLAN-REQUIRED (wave 4 partial + scope shift)
-Plan: 8 of 10 done; new plans needed for consulting hub
-Status: 2026-04-26 redesign notes triggered scope expansion — Wesley chose Option 3 (add /consulting hub + /consulting/{bitcoin,privacy,ai} sub-pages with per-page themes)
-Last activity: 2026-04-27 -- redesign notes transcribed, scope-shift decision captured
+Phase: 01 (foundation-personal-surface) — REPLAN-PENDING (wave 4 partial; pivot landed)
+Plan: 7 of 11 done (01-01..07); 01-08 draft pending review; 01-09 reframe pending; 01-10 + 01-11 to author
+Status: D-20 pivot landed — context updated, ready for /gsd-plan-phase 01 to revise 01-09 + author 01-11 (domain-constants follow-on)
+Last activity: 2026-04-27 -- pivot edits committed across PROJECT.md, ROADMAP.md, REQUIREMENTS.md, 01-CONTEXT.md, 01-DISCUSSION-LOG.md
 
-Progress: [███████░░░] 70% (of original scope — new plans will reset denominator)
+Progress: [██████░░░░] 64% (7/11 plans, accounting for new 01-11 follow-on)
 
-## ⚠ Replan trigger
+## ⚠ Pivot landed (2026-04-27) — D-20
 
-**Source:** `~/.hermes/vault/projects/ctb/website-redesign-notes-2026-04-26.md` (transcribed from handwritten PDF on 2026-04-27)
+**Decision:** wesleyschlemmer.com = THIS project (personal hub). crossthebridge.io = future CTB brand-site project (legacy site stays untouched until that future project replaces it).
 
-**Wesley's decision (2026-04-27):** Option 3 — replan Phase 1 to add consulting hub now (not as a future milestone).
+**Trigger:** Wesley's redesign notes on 2026-04-26 (`~/.hermes/vault/website redesign notes.pdf`, transcribed to `~/.hermes/vault/projects/ctb/website-redesign-notes-2026-04-26.md`) proposed a richer CTB consulting hub. Mid-discussion Wesley raised "maybe the hub should be wesleyschlemmer.com instead?" — surfacing the recursion concern (a "Cross The Bridge" tile inside a site already named Cross The Bridge). Pivot resolves the recursion and gives the CTB brand room to grow as its own product.
 
-**What needs to land in CONTEXT.md / new plans:**
-1. Third project tile renamed: `AI/Petros/Hermes` → `CTB Consulting`. Single project page links into the new /consulting hub instead of being a content destination itself.
-2. New `/consulting` hub page — "Choose Your Adventure" pattern with 3 buttons (Bitcoin / Privacy / AI), black + gold theme, hero "What does it mean to 'cross the bridge'".
-3. New `/consulting/bitcoin` page — black + orange theme, "money for the Sovereign Individual", 6 services + FAQ (11 Qs).
-4. New `/consulting/privacy` page — black + white theme, cypherpunk "privacy is not secrecy" framing, 6 services + FAQ.
-5. New `/consulting/ai` page — black + green theme, "Automate or be automated", 5 services. Petros + AYLIP framing belongs here.
-6. Per-page theme tokens — current Phase 1 tokens are cream/charcoal/green/gold; need supplemental token scopes (CSS variables overridden under per-page selector or per-route layout variant).
-7. Network audit (01-10) — sitemap + Playwright route list expands from 7 → 11 routes.
-8. Open question still: domain split (`getpetros.com` separate Vercel project?) — decide during replan, not deferred.
-9. Open question still: `wesleyschlemmer.com` availability check (out-of-band; not on critical path for replan).
+**What changed:**
+- THIS project's deploy target: `crossthebridge.io` → `wesleyschlemmer.com`
+- ROADMAP.md: Phase 3 (Consulting Subsection) moved OUT to a separate future project. v1 milestone now Phase 1 + Phase 2.
+- REQUIREMENTS.md: CONS-01..05, A11Y-04, INFRA-05 moved out (to future CTB brand-site project). PRIV-04 moved Phase 3 → Phase 1. PROJ-04 reframed.
+- CONTEXT.md: D-20 added; D-03, D-05, D-15, D-18, D-19 revised inline.
+- New plan needed: 01-11 — domain-constants follow-on (swap hardcoded `crossthebridge.io` references in 7 already-built plans' code to `wesleyschlemmer.com`).
+- 01-09 needs reframe: third project page becomes "Cross The Bridge" teaser linking externally to `https://crossthebridge.io`.
+- 01-10 stays similar but Vercel project + DNS now target wesleyschlemmer.com.
 
-**01-08 (About) is unaffected by the scope shift** — drafts at `01-08-DRAFT.md` (and `~/.hermes/vault/projects/ctb/01-08-about-page-draft.md` for Obsidian) still need Wesley review/approval, then 01-08 ships unchanged.
+**01-08 (About) is unaffected** — drafts at `01-08-DRAFT.md` (and `~/.hermes/vault/projects/ctb/01-08-about-page-draft.md` for Obsidian) still need Wesley review/approval, then 01-08 ships unchanged.
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 0
-- Average duration: —
-- Total execution time: —
+- Total plans completed: 7
+- Average duration: ~7-9 min/plan (worktree-isolated executor agents)
+- Total execution time: ~50 min (wave 2-4 in this session)
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 01 (in progress) | 7 of 11 done | ~50 min | ~7 min |
 
 **Recent Trend:**
 
-- Last 5 plans: —
-- Trend: —
+- Last 5 plans: 01-03, 01-04, 01-05, 01-06, 01-07 — all complete with worktree-isolated parallel execution
 
 *Updated after each plan completion*
 | Phase 01-foundation-personal-surface P01 | 12min | 2 tasks | 12 files |
@@ -78,74 +75,82 @@ Progress: [███████░░░] 70% (of original scope — new plans 
 
 ### Decisions
 
-Decisions are logged in PROJECT.md Key Decisions table.
+Decisions are logged in PROJECT.md Key Decisions table. Phase 1 specifics in `01-CONTEXT.md` (D-01 through D-20).
 
 Phase 1 pre-build gates (resolve during plan-phase, before scaffolding):
 
-- Content inventory (publishable essays/notes count → sets Phase 2 scope)
-- IA decision documented (subpath for `/consulting`)
-- Worldview copy reviewed (≤150 words, peer + non-peer test)
-- Palette decision (carry forward cream/charcoal/green/gold or commit successor)
+- ✓ Content inventory (publishable essays/notes count → sets Phase 2 scope) — resolved during execution
+- ✓ Worldview copy reviewed (≤150 words, peer + non-peer test) — D-01 locked 2026-04-25
+- ✓ Palette decision — D-10 cream/charcoal/green/gold carry-forward locked 2026-04-25
+- ✓ Domain decision — D-20 wesleyschlemmer.com landed 2026-04-27
 - [Phase ?]: Trust @astrojs/vercel@10.0.5 (current published) over RESEARCH.md's v5/static and CLAUDE.md's v8 references — both stale; v10 unifies static+SSR via output: field
 - [Phase ?]: Defer Content-Security-Policy authoring to a future plan — Astro 6 native CSP API is the safe path; hand-written CSP risks breaking PLAN-05 mailto-reveal and Nav drawer inline scripts
 - [Phase ?]: src/pages/index.astro is a 1-line 'Foundation scaffold' stub authorized by PLAN-01 acceptance criteria; PLAN-07 replaces with real Hero + 4-tile homepage
 
 ### Pending Todos
 
-**Phase 01 wave 4/5 — awaiting Wesley input:**
+**Phase 01 — awaiting Wesley input:**
 
 | ID | Item | Owner | Trigger |
 |----|------|-------|---------|
-| 01-08-REVIEW | Review About page thesis (~210 words) + bio (~255 words) drafts at `.planning/phases/01-foundation-personal-surface/01-08-DRAFT.md` — approve / edit / redraft | Wesley | Resume to unblock 01-08 → 01-10 |
+| 01-08-REVIEW | Review About page thesis (~210 words) + bio (~255 words) drafts at `~/.hermes/vault/projects/ctb/01-08-about-page-draft.md` (Obsidian) — approve / edit / redraft | Wesley | Resume to unblock 01-08 |
 | 01-09-FBBA-URL | ✓ confirmed: `https://fbba.io` | Wesley | resolved 2026-04-27 |
 | 01-09-BB-URL | ✓ confirmed: `https://bitcoinbay.foundation` | Wesley | resolved 2026-04-27 |
-| 01-09-BODY-COPY | Per-project body copy review (Bitcoin Bay tight, FBBA tight, AI/Petros/Hermes deep with AYLIP framing) — drafts will be authored at execution time, then reviewed | Wesley | After 01-08 approval |
-| 01-10-VERCEL | Vercel project setup: add `staging.crossthebridge.io` domain, set `PUBLIC_SITE_URL=https://staging.crossthebridge.io` + `PUBLIC_UMAMI_HOST=https://umami.crossthebridge.io` + `PUBLIC_CONSULTING_URL=https://crossthebridge.io` env vars; disable Web Analytics + Speed Insights + Preview Password Protection | Wesley | Before 01-10 CI runs against real preview |
-| 01-10-DNS | DNS A/CNAME for `staging.crossthebridge.io → cname.vercel-dns.com.` (provider TBD — supply at this point) + DNS A for `umami.crossthebridge.io → VPS IP` (from 01-04 decision) | Wesley | Before 01-10 launch checklist |
-| 01-04-UMAMI-STACK | Provision Umami Docker stack on VPS (Postgres + Umami container per RESEARCH.md 610-643), change default `admin/umami` credentials, add `staging.crossthebridge.io` site to dashboard, capture `data-website-id` UUID, populate `PUBLIC_UMAMI_WEBSITE_ID` in Vercel | Wesley | Before public traffic ramp |
+| 01-09-CTB-COPY | Cross The Bridge teaser-page body copy (post-pivot 3rd tile) — Claude drafts using redesign-notes seed material at execution time, Wesley reviews at checkpoint | Wesley | After 01-09 plan revised by /gsd-plan-phase |
+| 01-10-VERCEL | Vercel project setup for **wesleyschlemmer.com**: add `staging.wesleyschlemmer.com` + apex domains; set `PUBLIC_SITE_URL=https://staging.wesleyschlemmer.com` + `PUBLIC_UMAMI_HOST=https://umami.crossthebridge.io` (from D-14) + `PUBLIC_CONSULTING_URL=https://crossthebridge.io` env vars; disable Web Analytics + Speed Insights + Preview Password Protection | Wesley | Before 01-10 CI runs against real preview |
+| 01-10-DNS | DNS for wesleyschlemmer.com: CNAME `staging.wesleyschlemmer.com → cname.vercel-dns.com.` + apex A/ALIAS to Vercel; AND DNS A for `umami.crossthebridge.io → VPS IP` (from D-14 — different DNS zone, owned by Wesley too) | Wesley | Before 01-10 launch checklist |
+| 01-04-UMAMI-STACK | Provision Umami Docker stack on VPS (Postgres + Umami container), change default `admin/umami` credentials, add `staging.wesleyschlemmer.com` site to dashboard, capture `data-website-id` UUID, populate `PUBLIC_UMAMI_WEBSITE_ID` in Vercel | Wesley | Before public traffic ramp |
 | 01-04-7DAY | 7-day post-launch revisit gate: if self-hosting Umami proves heavier than expected, revisit Plausible Cloud ($9/mo, EU residency) | Wesley | 7 days post Phase 1 launch |
 
 ### Blockers/Concerns
 
-- **Apex cutover discipline**: Phase 1 must NOT take down the existing single-page consulting site at the apex. Deploy to `staging.crossthebridge.io` or `/v2` path until Phase 3 cuts over. Wired into Phase 1 success criteria #3.
+- **Domain-constants drift**: 7 already-built plans have hardcoded `crossthebridge.io` references (Person `@id` in JsonLd, robots.txt sitemap line, llms.txt H1/URLs, .env.example PUBLIC_SITE_URL, possibly astro.config.mjs site). Plan 01-11 (to be authored by /gsd-plan-phase) lands all the swaps as a single follow-on commit.
 
 ## Deferred Items
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| Discovery (v2) | Pagefind search, dynamic OG images, webmentions, newsletter, `/now`, `/uses`, `/press` | Future milestone | 2026-04-25 (roadmap creation) |
+| **Future project** | CTB brand site at `crossthebridge.io` (consulting hub + Bitcoin/Privacy/AI sub-pages, Petros/AYLIP framing) | New `/gsd-new-project` initiative; seed input is `~/.hermes/vault/projects/ctb/website-redesign-notes-2026-04-26.md` | 2026-04-27 (D-20 pivot) |
+| **Future migration** | `getpetros.com` as CTB brand-site domain target if AYLIP productizes | Reserved domain (Wesley owns); decided per future project | 2026-04-27 |
+| **Optional follow-up** | Migrate Umami host from `umami.crossthebridge.io` to `umami.wesleyschlemmer.com` for subdomain isolation | Not blocking; Wesley owns both zones | 2026-04-27 |
+| Discovery (v1.x) | Pagefind search, dynamic OG images, webmentions, newsletter, `/now`, `/uses`, `/press` | Future v1.x milestone | 2026-04-25 (roadmap creation) |
 
 ## Session Continuity
 
-Last session: 2026-04-27T10:48:00.000Z
-Stopped at: Phase 01 replan-required — scope shift triggered by 2026-04-26 redesign notes (Option 3: add consulting hub now). Wave 4 partial (01-08 draft awaiting review).
-Resume file: `~/.hermes/vault/projects/ctb/website-redesign-notes-2026-04-26.md` (canonical) + `.planning/phases/01-foundation-personal-surface/01-08-DRAFT.md`
+Last session: 2026-04-27T11:30:00.000Z
+Stopped at: D-20 pivot edits ready to commit; /gsd-discuss-phase 01 wrapping up; /gsd-plan-phase 01 next.
+Resume file: `~/.hermes/vault/projects/ctb/01-08-about-page-draft.md` (Obsidian) + `.planning/phases/01-foundation-personal-surface/01-CONTEXT.md` (canonical)
 
 **To resume — recommended single command:**
 
 ```
-/gsd-discuss-phase 01
+/gsd-plan-phase 01
 ```
 
-This will surface the scope shift and let you confirm the replan choices interactively. After CONTEXT.md updates, `/gsd-plan-phase 01` will author the new plans (consulting hub + 3 themed sub-pages, 01-09 reframe, 01-10 route expansion).
+This will read the repointed CONTEXT.md and author:
+- A new follow-on plan (01-11 — domain-constants update across 5 files in built code)
+- A revised 01-09 plan (third project page reframed to "Cross The Bridge" teaser linking externally to `https://crossthebridge.io`; FBBA + Bitcoin Bay external URLs supplied)
+- A revised 01-10 plan (Vercel project + DNS now target `wesleyschlemmer.com`; network audit allow-list still includes `umami.crossthebridge.io`)
 
 **Confirmed inputs Claude has, Wesley does not need to repeat:**
 - ✓ FBBA URL = `https://fbba.io`
 - ✓ Bitcoin Bay URL = `https://bitcoinbay.foundation`
 - ✓ Umami hosting = Option B (VPS, `https://umami.crossthebridge.io`, UUID pending stack provisioning) — captured in 01-04-UMAMI-DECISION.md
+- ✓ Domains owned: `wesleyschlemmer.com`, `crossthebridge.io`, `getpetros.com`
 - ✓ 01-08 thesis + bio drafts authored, in vault for Obsidian review
+- ✓ D-20 pivot to wesleyschlemmer.com personal hub (CTB brand site = separate future project)
 
 **Still needs Wesley's input on resume:**
-- Approve / edit / redraft 01-08 About page (`~/.hermes/vault/projects/ctb/01-08-about-page-draft.md`)
-- Confirm: ship consulting hub on `crossthebridge.io/consulting/*` OR separate domain (`getpetros.com`)?
-- Confirm: themed sub-pages share global tokens with overrides, or each gets a fully scoped theme?
-- DNS provider for `staging.crossthebridge.io` + `umami.crossthebridge.io` (for 01-10 launch checklist)
-- Vercel project setup (env vars, disable Web Analytics + Preview Password) — for 01-10
+- Approve / edit / redraft 01-08 About page drafts
+- Sanity-check the pivot artifact updates (PROJECT.md, ROADMAP.md, REQUIREMENTS.md, 01-CONTEXT.md) before /gsd-plan-phase 01 runs
+- Cross The Bridge teaser-page body copy review (after /gsd-plan-phase 01 authors 01-09 revision; copy will be drafted at execution time)
+- DNS provider for `staging.wesleyschlemmer.com` + apex `wesleyschlemmer.com` (for 01-10 launch checklist)
+- Vercel project setup for wesleyschlemmer.com (env vars + disable Web Analytics/Preview Password) — for 01-10
 - Provision Umami Docker stack on VPS, capture UUID — before public launch
 
 **Wave-by-wave status this session:**
 - Wave 1 (01-01) — DONE pre-session
 - Wave 2 (01-02 pre-session; 01-03 SEO, 01-04 Umami decision Option B, 01-05 components) — DONE this session
 - Wave 3 (01-06 BaseLayout/Nav/Footer) — DONE
-- Wave 4 (01-07 homepage+404) — DONE; (01-08 about) — DRAFT pending review; (01-09) — REFRAME PENDING (third tile rename); (01-10) — ROUTE LIST EXPANSION PENDING
-- New plans (01-11..01-1N) — TO AUTHOR via `/gsd-plan-phase 01` after `/gsd-discuss-phase 01`
+- Wave 4 (01-07 homepage+404) — DONE; (01-08 about) — DRAFT pending review; (01-09) — REFRAME PENDING (third tile = Cross The Bridge teaser); (01-10) — DOMAIN UPDATE PENDING (Vercel + DNS now wesleyschlemmer.com)
+- Wave 5 (01-10 + new 01-11 domain-constants follow-on) — TO AUTHOR via `/gsd-plan-phase 01`
