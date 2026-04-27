@@ -42,10 +42,10 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 **Plans**: 10 plans
 - [x] 01-01-PLAN.md — Scaffold Astro 6 + Tailwind v4 + Vercel static + vercel.json + .env.example
-- [ ] 01-02-PLAN.md — Astro Fonts API (Playfair + Inter) + Tailwind v4 @theme block (light + dark tokens)
-- [ ] 01-03-PLAN.md — BaseSEO + JsonLd components, robots.txt, llms.txt, OG image, favicon
-- [ ] 01-04-PLAN.md — D-14 Umami hosting decision (P0 checkpoint) + decision document
-- [ ] 01-05-PLAN.md — Component primitives: Hero, CtaButton, Tile, Headshot, ObfuscatedMailto, ExternalLink + consulting-url helper
+- [x] 01-02-PLAN.md — Astro Fonts API (Playfair + Inter) + Tailwind v4 @theme block (light + dark tokens)
+- [x] 01-03-PLAN.md — BaseSEO + JsonLd components, robots.txt, llms.txt, OG image, favicon
+- [x] 01-04-PLAN.md — D-14 Umami hosting decision (P0 checkpoint) + decision document
+- [x] 01-05-PLAN.md — Component primitives: Hero, CtaButton, Tile, Headshot, ObfuscatedMailto, ExternalLink + consulting-url helper
 - [ ] 01-06-PLAN.md — BaseLayout + Nav (mobile drawer, full a11y) + Footer
 - [ ] 01-07-PLAN.md — Homepage (Hero + 4-tile grid) + custom 404
 - [ ] 01-08-PLAN.md — About page (h-card, headshot, thesis + bio fused per D-08)
