@@ -1,6 +1,90 @@
 ---
-// Temporary scaffold stub. PLAN-07 replaces this with the real homepage
-// (Hero + 4-tile grid). Exists only so `astro build` produces a non-empty
-// dist/ during PLAN-01 verification.
+/**
+ * Homepage — composes PLAN-05 Hero + Tile primitives inside PLAN-06 BaseLayout.
+ *
+ * This file is intentionally thin. SEO + fonts + analytics + nav + footer all
+ * live in BaseLayout; locked Hero copy lives in Hero; locked tile copy is
+ * passed verbatim from UI-SPEC §Components #6 (lines 230-234).
+ *
+ * Load-bearing invariants (DO NOT MUTATE without re-opening the plan):
+ *   - IDENT-03: single "Get in touch" CTA only (lives inside Hero); NO
+ *     paid-services CTA, NO booking link, NO sales-style call-to-action.
+ *     Acceptance greps (see plan) enforce zero case-insensitive matches of
+ *     forbidden words in this file — keep warnings paraphrased to satisfy
+ *     them while preserving intent.
+ *   - D-07: <section id="recent-writing" hidden> is the Phase-2 wire-in anchor.
+ *     Phase 2 populates it — do not delete and do not pre-fill with mock copy.
+ *   - UI-SPEC §Components #7 line 242: title is "Cross The Bridge — Wesley
+ *     Pyburn" (homepage exception). BaseSEO's isHome heuristic detects
+ *     canonical === '/' and emits this exact form regardless of the title prop.
+ *   - All four tile body strings are LOCKED — verbatim from the UI-SPEC table.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Tile from '../components/Tile.astro';
+
+const title = 'Cross The Bridge — Wesley Pyburn';
+const description =
+  "Wesley Pyburn's site — Freedom Tech, Bitcoin, sovereign AI, and the work of opting out of legacy systems without going off-grid. Inbound welcome.";
+const canonical = '/';
 ---
-<h1>Foundation scaffold</h1>
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLdSchema="website"
+>
+  <Hero />
+
+  <section class="tile-grid" aria-label="Projects and thesis">
+    <Tile
+      type="project"
+      label="PROJECT"
+      title="Bitcoin Bay"
+      body="A Tampa Bay community for people stacking sats and showing up."
+      href="/projects/bitcoin-bay"
+    />
+    <Tile
+      type="project"
+      label="PROJECT"
+      title="FBBA"
+      body="Florida Bitcoin & Blockchain Association — peers, policy, and a real Florida Bitcoin scene."
+      href="/projects/fbba"
+    />
+    <Tile
+      type="project"
+      label="PROJECT"
+      title="AI / Petros / Hermes"
+      body="The sovereign-stack AI work: Hermes the agent, Petros the foundation, AYLIP the vision."
+      href="/projects/ai-petros-hermes"
+    />
+    <Tile
+      type="thesis"
+      label="THESIS"
+      title="Freedom Tech"
+      body="Why I'm building all of this — the thesis underneath the projects."
+      href="/about"
+    />
+  </section>
+
+  {/* Phase 2 placeholder per D-07 (CONTEXT.md). Hidden until Phase 2 wires "Recent writing". */}
+  <section id="recent-writing" hidden></section>
+</BaseLayout>
+
+<style>
+  .tile-grid {
+    max-width: var(--measure-wide);
+    margin: 0 auto;
+    padding: var(--spacing-4xl) var(--spacing-lg);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  @media (min-width: 768px) {
+    .tile-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xl);
+      padding: var(--spacing-4xl) var(--spacing-2xl);
+    }
+  }
+</style>
