@@ -1,0 +1,83 @@
+---
+/**
+ * Custom 404 page — composes BaseLayout (PLAN-06) with locked recovery copy
+ * from UI-SPEC §Copywriting Contract lines 307-309.
+ *
+ * Vercel auto-serves dist/404.html as the default not-found response for any
+ * static-output Astro build — no vercel.json rewrites needed.
+ *
+ * Load-bearing invariants:
+ *   - All three copy strings are LOCKED (heading, body, meta-line). Verified by
+ *     exact-string greps in plan acceptance criteria.
+ *   - noIndex={true} → BaseSEO emits <meta name="robots" content="noindex,nofollow">
+ *     so this page never pollutes search engine indexes.
+ *   - No search box (Pagefind is v2 — DISC-01); no "Did you mean…?" suggestion
+ *     engine. Three internal recovery links cover the use cases.
+ *   - Single allowed wink in voice contract: the meta-line "No 404s in inbound
+ *     essays — that's the contract." Do not add another joke.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = '404 — Not Found';
+const description = "The page you tried to reach doesn't exist on this site.";
+const canonical = '/404';
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLdSchema="webpage"
+  noIndex={true}
+>
+  <article class="not-found">
+    <h1 class="not-found__heading">This page doesn't exist — yet</h1>
+    <p class="not-found__body">
+      The link you followed leads nowhere on this site. Try the
+      <a href="/">homepage</a>, the <a href="/about">About page</a>, or
+      <a href="/contact">get in touch</a> if something used to be here.
+    </p>
+    <p class="not-found__meta">No 404s in inbound essays — that's the contract.</p>
+  </article>
+</BaseLayout>
+
+<style>
+  .not-found {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: var(--spacing-4xl) var(--spacing-lg);
+  }
+  .not-found__heading {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: 700;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-xl) 0;
+  }
+  .not-found__body {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-2xl) 0;
+  }
+  .not-found__body a {
+    color: var(--color-green);
+    text-decoration: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .not-found__body a { transition: text-decoration-color 200ms ease-out; }
+  }
+  .not-found__body a:hover { text-decoration: underline; }
+  .not-found__body a:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+  .not-found__meta {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+    margin: 0;
+  }
+</style>
