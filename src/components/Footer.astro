@@ -1,0 +1,153 @@
+---
+/**
+ * Footer.astro — site-wide footer (PLAN-06 Task 2).
+ *
+ * Three-column structure on ≥768px (single column on mobile):
+ *  - Column 1: brand wordmark + locked tagline
+ *  - Column 2: site nav links (mirror top nav, includes Colophon)
+ *  - Column 3: inbound paths — ObfuscatedMailto + RSS placeholder + Phase 3
+ *    cross-link to /consulting (commented out per D-18 layout firewall)
+ *
+ * Locked copy (UI-SPEC §Copywriting Contract lines 310-311):
+ *  - Tagline: "Worldview, projects, and writing — opting out of legacy systems."
+ *  - Copyright: "© {year} Wesley Pyburn · Built with care, not surveillance —
+ *    see [Colophon](/colophon)."
+ *
+ * Year is computed at build time via `new Date().getFullYear()`; Phase 1 ships
+ * with 2026 baked into static HTML — rebuilds on Jan 1 of each year refresh it.
+ */
+import ObfuscatedMailto from './ObfuscatedMailto.astro';
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/colophon', label: 'Colophon' },
+];
+
+const currentYear = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__col">
+      <a href="/" class="footer__brand" aria-label="Cross The Bridge — home">
+        Cross The <span class="footer__brand-accent">Bridge</span>
+      </a>
+      <p class="footer__tagline">Worldview, projects, and writing — opting out of legacy systems.</p>
+    </div>
+
+    <div class="footer__col">
+      <h2 class="footer__heading">Site</h2>
+      <ul class="footer__list">
+        {navLinks.map((link) => (
+          <li><a class="footer__link" href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h2 class="footer__heading">Inbound</h2>
+      <ObfuscatedMailto ctaLabel="Email Wesley" />
+      <p class="footer__rss-placeholder">RSS — coming with Phase 2</p>
+      {/* Phase 3: cross-link to /consulting goes here. Commented out in Phase 1 per CONTEXT.md/D-18 layout firewall. */}
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <p class="footer__copyright">
+      © {currentYear} Wesley Pyburn · Built with care, not surveillance — see <a href="/colophon" class="footer__link">Colophon</a>.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-cream-card);
+    border-top: 1px solid var(--color-cream-border);
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    margin-top: var(--spacing-4xl);
+  }
+  .footer__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+  }
+  @media (min-width: 768px) {
+    .footer__inner {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .footer__col { display: flex; flex-direction: column; gap: var(--spacing-md); }
+
+  .footer__brand {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-charcoal);
+    text-decoration: none;
+  }
+  .footer__brand-accent { color: var(--color-green); }
+
+  .footer__tagline {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .footer__heading {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    color: var(--color-charcoal);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+
+  .footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .footer__link {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    color: var(--color-charcoal-mid);
+    text-decoration: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .footer__link { transition: color 200ms ease-out; }
+  }
+  .footer__link:hover { color: var(--color-charcoal); text-decoration: underline; }
+  .footer__link:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+
+  .footer__rss-placeholder {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+    margin: var(--spacing-md) 0 0 0;
+  }
+
+  .footer__bottom {
+    max-width: 1280px;
+    margin: var(--spacing-2xl) auto 0;
+    border-top: 1px solid var(--color-cream-border);
+    padding-top: var(--spacing-lg);
+  }
+  .footer__copyright {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+    margin: 0;
+  }
+</style>

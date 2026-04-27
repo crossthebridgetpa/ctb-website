@@ -1,0 +1,105 @@
+---
+/**
+ * BaseLayout.astro — single shared layout for the personal surface (PLAN-06 Task 3).
+ *
+ * Wires together every page-level concern:
+ *  - Self-hosted fonts via Astro Fonts API (Font preload tags — PRIV-01)
+ *  - SEO meta + OG + canonical (BaseSEO from PLAN-03)
+ *  - JSON-LD structured data (JsonLd from PLAN-03)
+ *  - Conditional self-hosted Umami analytics (PRIV-02 + D-14)
+ *    Three-way guard fails safe to "no analytics" if env vars unset
+ *  - Skip-to-main link (A11Y-02 — first focusable element on every page)
+ *  - Top nav band (A11Y-01 — mobile drawer)
+ *  - Site footer
+ *  - Global @theme token import (src/styles/global.css from PLAN-02)
+ *
+ * TypeScript-strict Props ensures `astro check` fails if a consumer page omits
+ * title/description/canonical (UI-SPEC §Components #7 build-time validation).
+ *
+ * Pitfall H mitigation: env vars use the PUBLIC_* prefix so Astro inlines them
+ * into the static HTML at build. Non-PUBLIC_ vars would be `undefined` in the
+ * client bundle.
+ *
+ * Pitfall B mitigation: zero references to the Google Fonts CDN; all fonts
+ * are self-hosted via the Astro Fonts API (configured in astro.config.mjs).
+ */
+import { Font } from 'astro:assets';
+import BaseSEO from '../components/seo/BaseSEO.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  jsonLdSchema?: 'website' | 'person' | 'webpage' | 'breadcrumb';
+  jsonLdData?: Record<string, unknown>;
+  noIndex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  ogType,
+  jsonLdSchema = 'webpage',
+  jsonLdData,
+  noIndex,
+} = Astro.props;
+
+// PUBLIC_* prefix is required for client-bundled env vars (RESEARCH Pitfall H).
+// Three-way guard below renders the script ONLY when all three conditions hold:
+//   1. import.meta.env.PROD — never in dev/preview
+//   2. umamiHost truthy — host configured in Vercel project settings
+//   3. umamiId  truthy — UUID issued by Umami dashboard "Add website" step
+// Per 01-04-UMAMI-DECISION.md option B, the website ID is currently blank, so
+// the script tag is inert until Wesley populates PUBLIC_UMAMI_WEBSITE_ID in
+// Vercel. Wiring the block now makes the activation a pure env-var change.
+const umamiHost = import.meta.env.PUBLIC_UMAMI_HOST;
+const umamiId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Self-hosted fonts via Astro Fonts API (PRIV-01 invariant — PLAN-02 declared providers) -->
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-body" preload />
+
+    <!-- Per-page SEO + structured data -->
+    <BaseSEO
+      title={title}
+      description={description}
+      canonical={canonical}
+      ogImage={ogImage}
+      ogType={ogType}
+      noIndex={noIndex}
+    />
+    <JsonLd schema={jsonLdSchema} data={jsonLdData} />
+
+    <!-- Self-hosted Umami analytics (D-14) — three-way guard fails safe to "no analytics" if env vars unset (Pitfall H) -->
+    {import.meta.env.PROD && umamiHost && umamiId && (
+      <script
+        defer
+        src={`${umamiHost}/script.js`}
+        data-website-id={umamiId}
+        is:inline
+      />
+    )}
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
