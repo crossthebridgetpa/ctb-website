@@ -1,0 +1,307 @@
+---
+/**
+ * Nav.astro — top nav band + mobile drawer (PLAN-06 Task 1).
+ *
+ * Two distinct UI surfaces:
+ *  - Desktop (≥768px): brand wordmark + horizontal link list
+ *  - Mobile (<768px): brand wordmark + hamburger toggle + slide-down drawer
+ *
+ * A11y contract (UI-SPEC §Accessibility lines 380-393, RESEARCH §Pattern 4):
+ *  - Hamburger has aria-label that toggles between "Open navigation" /
+ *    "Close navigation"; aria-controls + aria-expanded mirror drawer state.
+ *  - Drawer closes on link click / Escape / hamburger re-toggle.
+ *  - Tab is trapped inside drawer focusables while open (shift+Tab wraps).
+ *  - Focus moves into drawer on open; restored to hamburger on close.
+ *  - Body scroll-locked on open; cleared synchronously on close.
+ *  - Active route gets aria-current="page" AND a 2px under-rule (UI-SPEC line
+ *    384 — color is not the sole channel).
+ *  - prefers-reduced-motion suppresses the drawer slide animation.
+ *
+ * Pitfall F mitigation (RESEARCH lines 1194-1200): the drawer-link click
+ * handler calls close() SYNCHRONOUSLY before the browser navigates, so
+ * `document.body.style.overflow` is reset before the page transition.
+ */
+import { Icon } from 'astro-icon/components';
+
+// Active route detection — used for aria-current and the under-rule.
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => {
+  if (href === '/') return currentPath === '/';
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+};
+
+// Locked link list per UI-SPEC line 304. /projects has no Phase 1 destination —
+// the four homepage tiles cover project navigation. Phase 2 may add an index.
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/colophon', label: 'Colophon' },
+];
+---
+<header class="nav-band">
+  <div class="nav-band__inner">
+    <a href="/" class="nav-band__brand" aria-label="Cross The Bridge — home">
+      Cross The <span class="nav-band__brand-accent">Bridge</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="nav-band__desktop" aria-label="Primary">
+      <ul class="nav-band__list">
+        {links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class={isActive(link.href) ? 'nav-band__link nav-band__link--active' : 'nav-band__link'}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button
+      type="button"
+      id="nav-toggle"
+      class="nav-band__hamburger"
+      aria-label="Open navigation"
+      aria-controls="mobile-nav"
+      aria-expanded="false"
+    >
+      <Icon name="lucide:menu" class="nav-band__hamburger-icon" aria-hidden="true" />
+    </button>
+  </div>
+
+  <!-- Mobile drawer -->
+  <nav id="mobile-nav" class="nav-band__drawer" aria-label="Mobile navigation" hidden>
+    <ul class="nav-band__drawer-list">
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="nav-band__drawer-link"
+            aria-current={isActive(link.href) ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script is:inline>
+  (function () {
+    const btn = document.getElementById('nav-toggle');
+    const drawer = document.getElementById('mobile-nav');
+    if (!btn || !drawer) return;
+
+    const close = () => {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open navigation');
+      drawer.hidden = true;
+      // Pitfall F: clear scroll-lock synchronously so a subsequent link
+      // navigation does not inherit a locked body.
+      document.body.style.overflow = '';
+      // Restore focus to the trigger so keyboard users return to where they were.
+      btn.focus();
+    };
+
+    const open = () => {
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Close navigation');
+      drawer.hidden = false;
+      document.body.style.overflow = 'hidden';
+      // Move focus into the drawer so keyboard users land on the first link.
+      const firstLink = drawer.querySelector('a');
+      if (firstLink) firstLink.focus();
+    };
+
+    btn.addEventListener('click', () => {
+      if (btn.getAttribute('aria-expanded') === 'true') close();
+      else open();
+    });
+
+    // Drawer link click — Pitfall F: synchronously close BEFORE the browser
+    // processes the link navigation. close() runs entirely in this tick;
+    // the default link action proceeds after the handler returns, with
+    // body.style.overflow already cleared.
+    drawer.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target && (target.tagName === 'A' || (target.closest && target.closest('a')))) {
+        close();
+      }
+    });
+
+    // Escape key closes drawer (WCAG modal-dialog pattern).
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        close();
+      }
+    });
+
+    // Focus trap — wrap Tab inside drawer focusable elements while open.
+    document.addEventListener('keydown', (e) => {
+      if (btn.getAttribute('aria-expanded') !== 'true') return;
+      if (e.key !== 'Tab') return;
+      const focusables = drawer.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+  })();
+</script>
+
+<style>
+  .nav-band {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: color-mix(in srgb, var(--color-cream-card) 92%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-cream-border);
+  }
+  .nav-band__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    padding: 0 var(--spacing-2xl);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  @media (max-width: 767px) {
+    .nav-band__inner {
+      height: 56px;
+      padding: 0 var(--spacing-lg);
+    }
+  }
+  .nav-band__brand {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-charcoal);
+    text-decoration: none;
+  }
+  .nav-band__brand-accent {
+    color: var(--color-green);
+  }
+
+  /* Desktop nav */
+  .nav-band__desktop {
+    display: block;
+  }
+  @media (max-width: 767px) {
+    .nav-band__desktop { display: none; }
+  }
+  .nav-band__list {
+    display: flex;
+    gap: var(--spacing-lg);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-band__link {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    color: var(--color-charcoal-mid);
+    text-decoration: none;
+    padding: var(--spacing-sm) 0;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .nav-band__link { transition: color 200ms ease-out; }
+  }
+  .nav-band__link:hover { color: var(--color-charcoal); }
+  .nav-band__link--active {
+    color: var(--color-green);
+    border-bottom: 2px solid var(--color-green);
+  }
+  .nav-band__link:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+
+  /* Hamburger (mobile) */
+  .nav-band__hamburger {
+    display: none;
+    background: transparent;
+    border: 0;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-charcoal);
+  }
+  @media (max-width: 767px) {
+    .nav-band__hamburger { display: flex; }
+  }
+  .nav-band__hamburger:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+  .nav-band__hamburger-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Drawer */
+  .nav-band__drawer {
+    background: var(--color-cream-card);
+    border-top: 1px solid var(--color-cream-border);
+  }
+  .nav-band__drawer[hidden] { display: none; }
+  @media (min-width: 768px) {
+    .nav-band__drawer { display: none; }
+  }
+  .nav-band__drawer-list {
+    list-style: none;
+    margin: 0;
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+  .nav-band__drawer-link {
+    display: block;
+    min-height: 44px;
+    padding: var(--spacing-md) 0;
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-charcoal);
+    text-decoration: none;
+  }
+  .nav-band__drawer-link[aria-current="page"] {
+    color: var(--color-green);
+  }
+  .nav-band__drawer-link:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+
+  /* prefers-reduced-motion: drawer slide animation suppressed */
+  @media (prefers-reduced-motion: no-preference) {
+    .nav-band__drawer:not([hidden]) {
+      animation: nav-drawer-slide 220ms ease-out;
+    }
+  }
+  @keyframes nav-drawer-slide {
+    from { transform: translateY(-8px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+</style>
