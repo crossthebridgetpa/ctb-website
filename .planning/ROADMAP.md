@@ -47,7 +47,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 01-04-PLAN.md — D-14 Umami hosting decision (P0 checkpoint) + decision document
 - [x] 01-05-PLAN.md — Component primitives: Hero, CtaButton, Tile, Headshot, ObfuscatedMailto, ExternalLink + consulting-url helper
 - [x] 01-06-PLAN.md — BaseLayout + Nav (mobile drawer, full a11y) + Footer
-- [ ] 01-07-PLAN.md — Homepage (Hero + 4-tile grid) + custom 404
+- [x] 01-07-PLAN.md — Homepage (Hero + 4-tile grid) + custom 404
 - [ ] 01-08-PLAN.md — About page (h-card, headshot, thesis + bio fused per D-08)
 - [ ] 01-09-PLAN.md — 3 project pages (BB, FBBA, AI/Petros/Hermes) + Contact + Colophon
 - [ ] 01-10-PLAN.md — CI workflow + Playwright network audit + Vercel/DNS setup + launch checklist
