@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: replan-pending
-stopped_at: "Phase 01 CONTEXT.md repointed for wesleyschlemmer.com pivot (D-20); /gsd-plan-phase 01 next to author 01-11 domain-constants follow-on plan + reframe 01-09"
-last_updated: "2026-04-27T11:30:00.000Z"
-last_activity: 2026-04-27 -- D-20 pivot landed (wesleyschlemmer.com personal hub, crossthebridge.io = future CTB brand-site project)
+status: D-20 pivot landed — context updated, ready for /gsd-plan-phase 01 to revise 01-09 + author 01-11 (domain-constants follow-on)
+stopped_at: Phase 01 context repointed for wesleyschlemmer.com pivot (D-20)
+last_updated: "2026-04-27T15:59:17.748Z"
+last_activity: 2026-04-27 -- pivot edits committed across PROJECT.md, ROADMAP.md, REQUIREMENTS.md, 01-CONTEXT.md, 01-DISCUSSION-LOG.md
 progress:
   total_phases: 2
   completed_phases: 0
-  total_plans: 11
+  total_plans: 10
   completed_plans: 7
-  percent: 64
+  percent: 70
 ---
 
 # Project State
@@ -39,6 +39,7 @@ Progress: [██████░░░░] 64% (7/11 plans, accounting for new 0
 **Trigger:** Wesley's redesign notes on 2026-04-26 (`~/.hermes/vault/website redesign notes.pdf`, transcribed to `~/.hermes/vault/projects/ctb/website-redesign-notes-2026-04-26.md`) proposed a richer CTB consulting hub. Mid-discussion Wesley raised "maybe the hub should be wesleyschlemmer.com instead?" — surfacing the recursion concern (a "Cross The Bridge" tile inside a site already named Cross The Bridge). Pivot resolves the recursion and gives the CTB brand room to grow as its own product.
 
 **What changed:**
+
 - THIS project's deploy target: `crossthebridge.io` → `wesleyschlemmer.com`
 - ROADMAP.md: Phase 3 (Consulting Subsection) moved OUT to a separate future project. v1 milestone now Phase 1 + Phase 2.
 - REQUIREMENTS.md: CONS-01..05, A11Y-04, INFRA-05 moved out (to future CTB brand-site project). PRIV-04 moved Phase 3 → Phase 1. PROJ-04 reframed.
@@ -117,9 +118,9 @@ Phase 1 pre-build gates (resolve during plan-phase, before scaffolding):
 
 ## Session Continuity
 
-Last session: 2026-04-27T11:30:00.000Z
-Stopped at: D-20 pivot edits ready to commit; /gsd-discuss-phase 01 wrapping up; /gsd-plan-phase 01 next.
-Resume file: `~/.hermes/vault/projects/ctb/01-08-about-page-draft.md` (Obsidian) + `.planning/phases/01-foundation-personal-surface/01-CONTEXT.md` (canonical)
+Last session: 2026-04-27T15:59:17.743Z
+Stopped at: Phase 01 context repointed for wesleyschlemmer.com pivot (D-20)
+Resume file: .planning/phases/01-foundation-personal-surface/01-CONTEXT.md
 
 **To resume — recommended single command:**
 
@@ -128,11 +129,13 @@ Resume file: `~/.hermes/vault/projects/ctb/01-08-about-page-draft.md` (Obsidian)
 ```
 
 This will read the repointed CONTEXT.md and author:
+
 - A new follow-on plan (01-11 — domain-constants update across 5 files in built code)
 - A revised 01-09 plan (third project page reframed to "Cross The Bridge" teaser linking externally to `https://crossthebridge.io`; FBBA + Bitcoin Bay external URLs supplied)
 - A revised 01-10 plan (Vercel project + DNS now target `wesleyschlemmer.com`; network audit allow-list still includes `umami.crossthebridge.io`)
 
 **Confirmed inputs Claude has, Wesley does not need to repeat:**
+
 - ✓ FBBA URL = `https://fbba.io`
 - ✓ Bitcoin Bay URL = `https://bitcoinbay.foundation`
 - ✓ Umami hosting = Option B (VPS, `https://umami.crossthebridge.io`, UUID pending stack provisioning) — captured in 01-04-UMAMI-DECISION.md
@@ -141,6 +144,7 @@ This will read the repointed CONTEXT.md and author:
 - ✓ D-20 pivot to wesleyschlemmer.com personal hub (CTB brand site = separate future project)
 
 **Still needs Wesley's input on resume:**
+
 - Approve / edit / redraft 01-08 About page drafts
 - Sanity-check the pivot artifact updates (PROJECT.md, ROADMAP.md, REQUIREMENTS.md, 01-CONTEXT.md) before /gsd-plan-phase 01 runs
 - Cross The Bridge teaser-page body copy review (after /gsd-plan-phase 01 authors 01-09 revision; copy will be drafted at execution time)
@@ -149,6 +153,7 @@ This will read the repointed CONTEXT.md and author:
 - Provision Umami Docker stack on VPS, capture UUID — before public launch
 
 **Wave-by-wave status this session:**
+
 - Wave 1 (01-01) — DONE pre-session
 - Wave 2 (01-02 pre-session; 01-03 SEO, 01-04 Umami decision Option B, 01-05 components) — DONE this session
 - Wave 3 (01-06 BaseLayout/Nav/Footer) — DONE
