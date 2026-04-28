@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: "Phase 01 wave 6 complete — 10/11 plans done; only 01-08 About remains (drafts pending Wesley review)"
-last_updated: "2026-04-28T01:51:00.000Z"
-last_activity: 2026-04-28 -- Phase 01 autonomous waves 4-6 shipped (01-11 + 01-09 + 01-10)
+status: phase-01-complete
+stopped_at: "Phase 01 code complete (11/11 plans, 8/8 routes); 6 UAT items + 2 content reviews pending Wesley's launch ops session"
+last_updated: "2026-04-28T15:48:44.155Z"
+last_activity: 2026-04-28 -- Phase 01 marked complete; Phase 02 (Writing Surface) ready to plan
 progress:
   total_phases: 2
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 11
-  completed_plans: 10
-  percent: 91
+  completed_plans: 11
+  percent: 100
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (repointed 2026-04-27 for wesleyschlemmer.com pivot)
 
 **Core value:** Inbound opportunities — the right people find Wesley, understand the work, and reach out
-**Current focus:** Phase 01 — foundation-personal-surface (now wesleyschlemmer.com personal hub)
+**Current focus:** Phase 01 closed (code complete); next is Phase 02 — Writing Surface OR launch checklist ops session for Wesley
 
 ## Current Position
 
-Phase: 01 (foundation-personal-surface) — IN PROGRESS (10/11 plans complete; only 01-08 About remains)
-Plan: 10 of 11 done (01-01..07, 01-09, 01-10, 01-11); 01-08 awaits Wesley's draft review
-Status: Autonomous Phase 1 work shipped. Build passes — 7 pages live (/, /404, /contact, /colophon, /projects/{bitcoin-bay, fbba, cross-the-bridge}). /about is the only missing route.
-Last activity: 2026-04-28 -- Phase 01 waves 4-6 executed autonomously (01-09 recovered post-kill; 01-10 user_setup deferred; 01-11 D-20+D-21 pivot follow-on)
+Phase: 02 (writing-surface) — ready to plan
+Previous: Phase 01 — foundation-personal-surface — ✓ CODE COMPLETE 2026-04-28 (11/11 plans, 8/8 routes built)
+Status: Phase 01 marked complete in ROADMAP/REQUIREMENTS. Site CODE is shippable. Wesley owns: launch checklist ops (Vercel + DNS + Umami stack); 6 post-deploy UAT items in 01-HUMAN-UAT.md; 2 content reviews (About + Cross The Bridge teaser drafts).
+Last activity: 2026-04-28 -- Phase 01 close; ready for /gsd-plan-phase 02 or launch ops
 
-Progress: [█████████░] 91% (10/11 plans)
+Progress: [██████████] Phase 01 100% (11/11 plans). Project: 1 of 2 phases complete.
 
 ## ⚠ Pivot landed (2026-04-27) — D-20
 
@@ -54,7 +54,7 @@ Progress: [█████████░] 91% (10/11 plans)
 
 **Velocity:**
 
-- Total plans completed: 7
+- Total plans completed: 18
 - Average duration: ~7-9 min/plan (worktree-isolated executor agents)
 - Total execution time: ~50 min (wave 2-4 in this session)
 
@@ -63,6 +63,7 @@ Progress: [█████████░] 91% (10/11 plans)
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 (in progress) | 7 of 11 done | ~50 min | ~7 min |
+| 01 | 11 | - | - |
 
 **Recent Trend:**
 

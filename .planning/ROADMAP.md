@@ -12,7 +12,7 @@ Build a personal hub for Wesley Schlemmer at `wesleyschlemmer.com` — Wesley-th
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation + Personal Surface** — Astro 6 site live at `staging.wesleyschlemmer.com` with worldview homepage, About, Contact, Colophon, 3 project pages (Bitcoin Bay, FBBA, Cross The Bridge teaser-with-external-link), SEO/privacy infrastructure baked in
+- [x] **Phase 1: Foundation + Personal Surface** — Astro 6 site live at `staging.wesleyschlemmer.com` with worldview homepage, About, Contact, Colophon, 3 project pages (Bitcoin Bay, FBBA, Cross The Bridge teaser-with-external-link), SEO/privacy infrastructure baked in *(code complete 2026-04-28; awaits launch checklist ops session for site to go live)*
 - [ ] **Phase 2: Writing Surface** — Essays + notes shipping with RSS, related-content cross-linking, topic pages; homepage gains a "Recent writing" module
 
 ## Phase Details
@@ -91,7 +91,7 @@ Phases execute in numeric order: 1 → 2
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Personal Surface | 7/11 | In progress (paused for pivot replan) | - |
+| 1. Foundation + Personal Surface | 11/11 | ✓ Code complete (UAT pending launch ops) | 2026-04-28 |
 | 2. Writing Surface | 0/TBD | Not started | - |
 
 ---
