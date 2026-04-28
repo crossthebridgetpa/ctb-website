@@ -1,0 +1,141 @@
+---
+/**
+ * Bitcoin Bay project page (PROJ-01).
+ *
+ * D-04: tight community-action page (~150-300 words). What it is / why
+ * it exists / how to engage. The actual programming, calendar, and
+ * onboarding flow live on bitcoinbay.foundation; this page positions
+ * the project for visitors arriving from the homepage tile and routes
+ * them out (PROJ-05).
+ *
+ * D-05 revised (CONTEXT.md line 81): per-project CTA = ExternalLink to
+ * https://bitcoinbay.foundation. URL confirmed by Wesley 2026-04-27.
+ *
+ * PRIV-03 invariant: zero embedded third-party frames on this page;
+ * no booking widgets; no Motion link — this is the Bitcoin Bay
+ * community page, not a consulting funnel.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExternalLink from '../../components/ExternalLink.astro';
+
+const title = 'Bitcoin Bay';
+const description =
+  "A Tampa Bay community for people stacking sats and showing up — what it is, why it exists, and where to plug in.";
+const canonical = '/projects/bitcoin-bay';
+
+const breadcrumb = {
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).toString() },
+    { '@type': 'ListItem', position: 2, name: 'Projects', item: new URL('/projects', Astro.site).toString() },
+    { '@type': 'ListItem', position: 3, name: 'Bitcoin Bay' },
+  ],
+};
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLdSchema="breadcrumb"
+  jsonLdData={breadcrumb}
+>
+  <article class="project">
+    <header class="project__header">
+      <p class="project__eyebrow">PROJECT</p>
+      <h1 class="project__h1">Bitcoin Bay</h1>
+      <p class="project__subtitle">A meatspace Bitcoin community for the Tampa Bay area.</p>
+    </header>
+
+    <div class="project__body">
+      <h2>What it is</h2>
+      <p>
+        Bitcoin Bay is a 501(c)(3) community organization based in Tampa Bay. The work
+        is local economic development — stacking sats, running nodes, helping the next
+        person take self-custody, and pulling Bitcoin into the everyday economy of the
+        bay area instead of leaving it as a screen full of charts.
+      </p>
+
+      <h2>Why it exists</h2>
+      <p>
+        Bitcoin's strongest pitch is peer-to-peer money. That pitch only lands when there
+        are actual peers — neighbors, businesses, contractors, friends — willing to
+        accept it, hold it, and use it. That work has to happen in real cities, in
+        meatspace, with people who show up. Tampa Bay is the city we picked. Education
+        and business onboarding are the long-arc levers; the meetups and the local
+        events are the short-arc ones.
+      </p>
+
+      <h2>How to engage</h2>
+      <p>
+        Visit the foundation site for the calendar, the onboarding paths for businesses,
+        and the way to plug in if you're in or near the bay area. If you're elsewhere
+        and want to start something similar where you live, the foundation site is also
+        the right place to start a conversation.
+      </p>
+    </div>
+
+    <aside class="project__cta">
+      <ExternalLink href="https://bitcoinbay.foundation">Visit Bitcoin Bay →</ExternalLink>
+    </aside>
+  </article>
+</BaseLayout>
+
+<style>
+  .project {
+    max-width: var(--measure-wide);
+    margin: 0 auto;
+    padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-4xl);
+  }
+  @media (min-width: 768px) {
+    .project { padding: var(--spacing-3xl) var(--spacing-2xl) var(--spacing-4xl); }
+  }
+  .project__header { margin-bottom: var(--spacing-2xl); }
+  .project__eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    color: var(--color-green);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .project__h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: 700;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .project__subtitle {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 600;
+    line-height: var(--leading-body-tight);
+    color: var(--color-charcoal-mid);
+    margin: 0;
+    max-width: var(--measure);
+  }
+  .project__body { max-width: var(--measure); margin-bottom: var(--spacing-3xl); }
+  .project__body h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-heading);
+    font-weight: 700;
+    line-height: var(--leading-heading);
+    color: var(--color-charcoal);
+    margin: var(--spacing-2xl) 0 var(--spacing-md) 0;
+  }
+  .project__body p {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .project__body a {
+    color: var(--color-green);
+    text-decoration: none;
+  }
+  .project__body a:hover { text-decoration: underline; }
+  .project__cta { padding-top: var(--spacing-2xl); border-top: 1px solid var(--color-cream-border); }
+</style>

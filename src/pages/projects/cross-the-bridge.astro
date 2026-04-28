@@ -1,0 +1,162 @@
+---
+/**
+ * Cross The Bridge teaser page (PROJ-04, post-D-20-pivot).
+ *
+ * D-03 revised + D-04 + D-05 revised: this page is a teaser/positioning
+ * page on the personal hub (wesleyschlemmer.com) that links OUT to the
+ * Cross The Bridge brand site at https://crossthebridge.io. Currently
+ * the brand site serves the legacy single-page consulting site;
+ * eventually it will be the new CTB brand site built by a separate
+ * future project. The teaser positioning is unchanged either way.
+ *
+ * Body copy drafted by Claude under the autonomous-bypass authorization
+ * for this plan execution (mirror of the 01-08 About-page pattern).
+ * Wesley reviews + edits in a follow-up plan post-launch.
+ * Source draft: .planning/phases/01-foundation-personal-surface/01-09-CTB-DRAFT.md
+ *
+ * Hard boundary (CONTEXT.md <deferred> line 288): AYLIP/Petros product
+ * detail does NOT appear on this page beyond an "in passing" mention.
+ * That depth lives on the future CTB brand site.
+ *
+ * PRIV-03 invariant: zero embedded third-party frames; no booking
+ * widgets; no Motion link — booking lives on the CTB brand site, off
+ * this hub. URL hardcoded (not via src/lib/consulting-url.ts) per
+ * Task 3 default — keeps the page free of env-var coupling that could
+ * drift.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExternalLink from '../../components/ExternalLink.astro';
+
+const title = 'Cross The Bridge';
+const description =
+  "The brand for Wesley's AI + freedom-tech consulting work — sovereignty as a service. The bridge from the old world to the new.";
+const canonical = '/projects/cross-the-bridge';
+
+const breadcrumb = {
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).toString() },
+    { '@type': 'ListItem', position: 2, name: 'Projects', item: new URL('/projects', Astro.site).toString() },
+    { '@type': 'ListItem', position: 3, name: 'Cross The Bridge' },
+  ],
+};
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLdSchema="breadcrumb"
+  jsonLdData={breadcrumb}
+>
+  <article class="project">
+    <header class="project__header">
+      <p class="project__eyebrow">PROJECT</p>
+      <h1 class="project__h1">Cross The Bridge</h1>
+      <p class="project__subtitle">The brand for Wesley's AI + freedom-tech consulting work — sovereignty as a service.</p>
+    </header>
+
+    <div class="project__body">
+      <h2>What it is</h2>
+      <p>
+        Cross The Bridge is the brand for the consulting work — AI implementation,
+        agent integration, privacy and self-hosted-infrastructure setup, and the
+        strategy work that ties them together. It serves people and small teams who
+        want to opt out of legacy systems without going off-grid: Bitcoin instead of
+        banks, self-hosted compute instead of surveillance Cloud, AI you own instead
+        of AI that owns you.
+      </p>
+
+      <h2>Why it exists</h2>
+      <p>
+        The world most of us grew up in is no longer the world we live in. The
+        institutions that mediated money, communication, and daily life have rebuilt
+        themselves around extracting behavioral data and steering attention. Most of
+        the tools sold as "convenience" are now the toll booths. The rules have
+        changed; the playbooks haven't caught up.
+      </p>
+      <p>
+        Cross The Bridge exists to help people make the crossing deliberately —
+        Money, Data, Infrastructure — while it's still possible to choose.
+        Sovereignty as a service: the work of getting from where the defaults
+        landed you to a stack you actually own.
+      </p>
+
+      <h2>Where the deeper work lives</h2>
+      <p>
+        The product side — Petros, the foundation under all of this; AYLIP, the
+        long-arc framework — lives at the Cross The Bridge site itself. This page
+        is the introduction. The depth, the consulting offers, the FAQ, and the
+        engagement paths all live on the brand site.
+      </p>
+      <p><em>Cross the bridge from the old world to the new.</em></p>
+    </div>
+
+    <aside class="project__cta">
+      <ExternalLink href="https://crossthebridge.io">Cross The Bridge brand site →</ExternalLink>
+    </aside>
+  </article>
+</BaseLayout>
+
+<style>
+  .project {
+    max-width: var(--measure-wide);
+    margin: 0 auto;
+    padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-4xl);
+  }
+  @media (min-width: 768px) {
+    .project { padding: var(--spacing-3xl) var(--spacing-2xl) var(--spacing-4xl); }
+  }
+  .project__header { margin-bottom: var(--spacing-2xl); }
+  .project__eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    color: var(--color-green);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .project__h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: 700;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .project__subtitle {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 600;
+    line-height: var(--leading-body-tight);
+    color: var(--color-charcoal-mid);
+    margin: 0;
+    max-width: var(--measure);
+  }
+  .project__body { max-width: var(--measure); margin-bottom: var(--spacing-3xl); }
+  .project__body h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-heading);
+    font-weight: 700;
+    line-height: var(--leading-heading);
+    color: var(--color-charcoal);
+    margin: var(--spacing-2xl) 0 var(--spacing-md) 0;
+  }
+  .project__body p {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .project__body em {
+    color: var(--color-charcoal);
+    font-style: italic;
+  }
+  .project__body a {
+    color: var(--color-green);
+    text-decoration: none;
+  }
+  .project__body a:hover { text-decoration: underline; }
+  .project__cta { padding-top: var(--spacing-2xl); border-top: 1px solid var(--color-cream-border); }
+</style>
