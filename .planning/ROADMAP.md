@@ -50,7 +50,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] 01-08-PLAN.md — About page (h-card, headshot, thesis + bio fused per D-08) — *drafts pending Wesley review*
 - [ ] 01-09-PLAN.md — 3 project pages (Bitcoin Bay, FBBA, Cross The Bridge teaser) + Contact + Colophon — *to be revised post-pivot via /gsd-plan-phase*
 - [ ] 01-10-PLAN.md — CI workflow + Playwright network audit + Vercel/DNS setup + launch checklist — *Vercel project + DNS now point to wesleyschlemmer.com per D-20*
-- [ ] **01-11-PLAN.md (NEW)** — Domain-constants follow-up: swap hardcoded `crossthebridge.io` references in built code (Person `@id`, robots.txt sitemap line, `astro.config.mjs` site, `.env.example` PUBLIC_SITE_URL, llms.txt H1+URLs) to `wesleyschlemmer.com` per D-20
+- [x] **01-11-PLAN.md (NEW)** — Domain-constants follow-up: swap hardcoded `crossthebridge.io` references in built code (Person `@id`, robots.txt sitemap line, `astro.config.mjs` site, `.env.example` PUBLIC_SITE_URL, llms.txt H1+URLs) to `wesleyschlemmer.com` per D-20
 
 ### Phase 2: Writing Surface
 **Goal**: On-site essays and notes are live with RSS and cross-collection linking — peer audience can subscribe in NetNewsWire/Reeder, and the homepage gains a curated "Recent writing" module pulling from the new collections
