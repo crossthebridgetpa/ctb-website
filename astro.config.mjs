@@ -9,7 +9,7 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.PUBLIC_SITE_URL ?? 'https://staging.crossthebridge.io',
+  site: process.env.PUBLIC_SITE_URL ?? 'https://wesleyschlemmer.com',
   output: 'static',
   trailingSlash: 'never',
 

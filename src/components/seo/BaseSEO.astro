@@ -42,7 +42,7 @@ const canonicalAbs = canonical.startsWith('http')
   : new URL(canonical, Astro.site).toString();
 
 // Title-format heuristic: homepage gets the inverted format
-// "Cross The Bridge — Wesley Pyburn"; every other page gets
+// "Cross The Bridge — Wesley Schlemmer"; every other page gets
 // "{title} — Cross The Bridge". The check tolerates either a relative '/'
 // canonical or an absolute apex URL (with or without trailing slash).
 const siteApex = Astro.site.toString().replace(/\/$/, '');
@@ -51,7 +51,7 @@ const isHome =
   canonical === Astro.site.toString() ||
   canonical === siteApex;
 const fullTitle = isHome
-  ? 'Cross The Bridge — Wesley Pyburn'
+  ? 'Cross The Bridge — Wesley Schlemmer'
   : `${title} — Cross The Bridge`;
 ---
 <title>{fullTitle}</title>

@@ -15,17 +15,18 @@
  *   - D-07: <section id="recent-writing" hidden> is the Phase-2 wire-in anchor.
  *     Phase 2 populates it — do not delete and do not pre-fill with mock copy.
  *   - UI-SPEC §Components #7 line 242: title is "Cross The Bridge — Wesley
- *     Pyburn" (homepage exception). BaseSEO's isHome heuristic detects
- *     canonical === '/' and emits this exact form regardless of the title prop.
+ *     Schlemmer" (homepage exception per D-21). BaseSEO's isHome heuristic
+ *     detects canonical === '/' and emits this exact form regardless of the
+ *     title prop.
  *   - All four tile body strings are LOCKED — verbatim from the UI-SPEC table.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import Tile from '../components/Tile.astro';
 
-const title = 'Cross The Bridge — Wesley Pyburn';
+const title = 'Cross The Bridge — Wesley Schlemmer';
 const description =
-  "Wesley Pyburn's site — Freedom Tech, Bitcoin, sovereign AI, and the work of opting out of legacy systems without going off-grid. Inbound welcome.";
+  "Wesley Schlemmer's site — Freedom Tech, Bitcoin, sovereign AI, and the work of opting out of legacy systems without going off-grid. Inbound welcome.";
 const canonical = '/';
 ---
 <BaseLayout
