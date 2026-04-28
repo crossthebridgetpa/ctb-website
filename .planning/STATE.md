@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 01 context repointed for wesleyschlemmer.com pivot (D-20)
-last_updated: "2026-04-28T00:33:04.979Z"
-last_activity: 2026-04-28 -- Phase 01 planning complete
+stopped_at: "Phase 01 wave 6 complete — 10/11 plans done; only 01-08 About remains (drafts pending Wesley review)"
+last_updated: "2026-04-28T01:51:00.000Z"
+last_activity: 2026-04-28 -- Phase 01 autonomous waves 4-6 shipped (01-11 + 01-09 + 01-10)
 progress:
   total_phases: 2
   completed_phases: 0
   total_plans: 11
-  completed_plans: 7
-  percent: 64
+  completed_plans: 10
+  percent: 91
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (repointed 2026-04-27 for wesleyschlemmer.com pivot)
 
 ## Current Position
 
-Phase: 01 (foundation-personal-surface) — REPLAN-PENDING (wave 4 partial; pivot landed)
-Plan: 7 of 11 done (01-01..07); 01-08 draft pending review; 01-09 reframe pending; 01-10 + 01-11 to author
-Status: Ready to execute
-Last activity: 2026-04-28 -- Phase 01 planning complete
+Phase: 01 (foundation-personal-surface) — IN PROGRESS (10/11 plans complete; only 01-08 About remains)
+Plan: 10 of 11 done (01-01..07, 01-09, 01-10, 01-11); 01-08 awaits Wesley's draft review
+Status: Autonomous Phase 1 work shipped. Build passes — 7 pages live (/, /404, /contact, /colophon, /projects/{bitcoin-bay, fbba, cross-the-bridge}). /about is the only missing route.
+Last activity: 2026-04-28 -- Phase 01 waves 4-6 executed autonomously (01-09 recovered post-kill; 01-10 user_setup deferred; 01-11 D-20+D-21 pivot follow-on)
 
-Progress: [██████░░░░] 64% (7/11 plans, accounting for new 01-11 follow-on)
+Progress: [█████████░] 91% (10/11 plans)
 
 ## ⚠ Pivot landed (2026-04-27) — D-20
 
