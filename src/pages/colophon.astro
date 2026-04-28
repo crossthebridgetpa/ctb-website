@@ -1,0 +1,194 @@
+---
+/**
+ * Colophon page (IDENT-06).
+ *
+ * Documents the worldview-aligned tech stack and the no-tracking
+ * stance. The Analytics row + Data Collection paragraph render
+ * Variant A copy from PLAN-04 (01-04-UMAMI-DECISION.md "Colophon
+ * copy variant for PLAN-09" section) — verbatim where the privacy
+ * claims are legally-defensible (PRIV-02 / PRIV-04 contract).
+ *
+ * Post-pivot D-14: the analytics endpoint sits at
+ * umami.crossthebridge.io while the personal hub is at
+ * wesleyschlemmer.com — Wesley owns both DNS zones, and the cross-zone
+ * placement does not change visitor privacy. The Colophon is the
+ * canonical place to document this asymmetry so an alert reader
+ * doesn't read the analytics host as a "third party."
+ *
+ * No PASTE-placeholder remnants. No <table> styling that depends on
+ * external CSS. JSON-LD name uses post-pivot identity "Wesley
+ * Schlemmer".
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Colophon';
+const description =
+  "Tech stack and no-tracking stance behind wesleyschlemmer.com — what this site is built with, and what it does not collect.";
+const canonical = '/colophon';
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLdSchema="webpage"
+  jsonLdData={{
+    name: 'Colophon — Wesley Schlemmer',
+    url: new URL('/colophon', Astro.site).toString(),
+    description,
+  }}
+>
+  <article class="colophon">
+    <h1 class="colophon__h1">Colophon</h1>
+
+    <p class="colophon__intro">
+      What the site is built with, what it loads from third parties, and what it does
+      not collect. The infrastructure choices are deliberate — they're the tech-layer
+      answer to the same worldview the homepage states.
+    </p>
+
+    <h2 class="colophon__h2">Stack</h2>
+    <table class="colophon__table">
+      <thead>
+        <tr><th>Layer</th><th>Choice</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Framework</td>
+          <td>Astro 6 (static output)</td>
+          <td>Ships zero JS by default; respects visitor bandwidth and battery.</td>
+        </tr>
+        <tr>
+          <td>Styling</td>
+          <td>Tailwind v4 via <code>@tailwindcss/vite</code></td>
+          <td>Design tokens via CSS variables; no JS-based config.</td>
+        </tr>
+        <tr>
+          <td>Hosting</td>
+          <td>Vercel (static deploy)</td>
+          <td>Edge CDN, image optimization, preview deploys.</td>
+        </tr>
+        <tr>
+          <td>Fonts</td>
+          <td>Self-hosted Playfair Display 700 + Inter Variable 400/600 via Astro Fonts API + Fontsource</td>
+          <td>No request to <code>fonts.googleapis.com</code> ever — your IP doesn't leak to Google when you read this site.</td>
+        </tr>
+        <tr>
+          <td>Analytics</td>
+          <td>Self-hosted Umami at <code>umami.crossthebridge.io</code></td>
+          <td>No cookies, no fingerprinting, no PII, IP addresses hashed at the server. Endpoint runs on a VPS Wesley operates. The host sits on the Cross The Bridge DNS zone deliberately — Wesley owns both <code>wesleyschlemmer.com</code> and <code>crossthebridge.io</code>, and analytics endpoint location does not affect visitor privacy.</td>
+        </tr>
+        <tr>
+          <td>Search</td>
+          <td>None in Phase 1; Pagefind planned at ≥10 essays/notes</td>
+          <td>Static-site, client-side; no SaaS keystroke logging.</td>
+        </tr>
+        <tr>
+          <td>RSS</td>
+          <td>Coming with Phase 2 (essays + notes)</td>
+          <td>Owned-channel for AI / Bitcoin / Freedom Tech peer audiences.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="colophon__h2">What this site does not load</h2>
+    <ul class="colophon__list">
+      <li>No Google domains (no <code>fonts.googleapis.com</code>, no <code>www.google-analytics.com</code>, no <code>googletagmanager.com</code>).</li>
+      <li>No Vercel Web Analytics or Vercel Speed Insights — both are toggled off in the project dashboard.</li>
+      <li>No third-party embeds on first paint (no embedded YouTube, no X / Twitter widgets, no Disqus, no reCAPTCHA, no booking widgets).</li>
+      <li>No tracking pixels, no fingerprinting, no cross-site identifiers.</li>
+    </ul>
+
+    <h2 class="colophon__h2">Data collection</h2>
+    <p class="colophon__data">
+      Analytics: self-hosted Umami at <code>https://umami.crossthebridge.io</code>. No cookies set
+      on visitors. No fingerprinting. No PII collected. IP addresses are hashed at the Umami
+      server and never stored. No data crosses to third parties beyond the Umami endpoint itself,
+      which Wesley operates. Verify against Umami's own privacy documentation at
+      <a href="https://umami.is/docs/">umami.is/docs/</a>.
+    </p>
+
+    <h2 class="colophon__h2">Source</h2>
+    <p class="colophon__source">
+      The site source is on GitHub at
+      <a href="https://github.com/crossthebridgetpa/ctb-website">crossthebridgetpa/ctb-website</a>.
+      The repo name kept its pre-pivot location (the deployed product domain
+      <code>wesleyschlemmer.com</code> does not have to match the repo name; INFRA-04).
+      Built with care, not surveillance.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .colophon {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-4xl);
+  }
+  @media (min-width: 768px) {
+    .colophon { padding: var(--spacing-3xl) var(--spacing-2xl) var(--spacing-4xl); }
+  }
+  .colophon__h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: 700;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-xl) 0;
+  }
+  .colophon__h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-heading);
+    font-weight: 700;
+    line-height: var(--leading-heading);
+    color: var(--color-charcoal);
+    margin: var(--spacing-2xl) 0 var(--spacing-md) 0;
+  }
+  .colophon__intro,
+  .colophon__list li,
+  .colophon__data,
+  .colophon__source {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-charcoal);
+  }
+  .colophon__list { padding-left: var(--spacing-lg); }
+  .colophon__list li { margin-bottom: var(--spacing-sm); }
+  .colophon__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-md) 0 var(--spacing-2xl) 0;
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+  }
+  .colophon__table th,
+  .colophon__table td {
+    text-align: left;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 1px solid var(--color-cream-border);
+    vertical-align: top;
+  }
+  .colophon__table th {
+    background: var(--color-cream-card);
+    color: var(--color-charcoal);
+    font-weight: 600;
+  }
+  .colophon__table td { color: var(--color-charcoal); }
+  .colophon__table code,
+  .colophon__data code,
+  .colophon__source code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.95em;
+    background: var(--color-cream-card);
+    padding: 0 0.25em;
+    border-radius: 3px;
+  }
+  .colophon__data a,
+  .colophon__source a {
+    color: var(--color-green);
+    text-decoration: none;
+  }
+  .colophon__data a:hover,
+  .colophon__source a:hover { text-decoration: underline; }
+</style>
