@@ -1,0 +1,83 @@
+---
+/**
+ * Contact page (IDENT-05).
+ *
+ * D-13 invariants: obfuscated mailto only. No form, no backend, no
+ * Vercel function, no embedded third-party frame, no captcha, no
+ * Motion booking widget. The ObfuscatedMailto component (PLAN-05)
+ * implements the three-layer pattern; the rendered HTML never
+ * contains the plaintext email as a contiguous string.
+ *
+ * The optional alternative-channels paragraph is opt-in. Default:
+ * ship without it. If Wesley ever supplies alt platforms (Nostr,
+ * Mastodon, Telegram) a future plan can fill the paragraph in;
+ * shipping a placeholder pointing nowhere is explicitly forbidden.
+ *
+ * JSON-LD name uses post-pivot identity "Wesley Schlemmer" (NOT the
+ * pre-pivot "Cross The Bridge" wording).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ObfuscatedMailto from '../components/ObfuscatedMailto.astro';
+
+const title = 'Contact';
+const description =
+  "Inbound channel for peer reach-outs, podcast invites, and partnership conversations. Email Wesley directly — no form.";
+const canonical = '/contact';
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLdSchema="webpage"
+  jsonLdData={{
+    name: 'Contact — Wesley Schlemmer',
+    url: new URL('/contact', Astro.site).toString(),
+    description,
+  }}
+>
+  <article class="contact">
+    <h1 class="contact__h1">Contact</h1>
+
+    <p class="contact__intro">
+      Reach out for peer conversations in Bitcoin / Freedom Tech / FBBA circles, podcast
+      invites, partnership ideas, or aligned consulting work. The fastest channel is
+      email — no form, no tracking, no third-party booking widget on this page.
+    </p>
+
+    <div class="contact__channel">
+      <ObfuscatedMailto ctaLabel="Email Wesley" />
+    </div>
+
+    {/* Optional alternative-channels paragraph: fill in if Wesley supplies alt
+        platforms (Nostr / Mastodon / Telegram). Default = no paragraph. Do NOT
+        ship a placeholder pointing nowhere. */}
+  </article>
+</BaseLayout>
+
+<style>
+  .contact {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-4xl);
+  }
+  @media (min-width: 768px) {
+    .contact { padding: var(--spacing-3xl) var(--spacing-2xl) var(--spacing-4xl); }
+  }
+  .contact__h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: 700;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-xl) 0;
+  }
+  .contact__intro {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-2xl) 0;
+  }
+  .contact__channel { margin-bottom: var(--spacing-2xl); }
+</style>

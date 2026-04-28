@@ -1,0 +1,140 @@
+---
+/**
+ * FBBA project page (PROJ-02).
+ *
+ * D-04: tight peer/policy/industry page (~150-300 words). What it is /
+ * who it serves / how to engage. Membership, advocacy, events, and the
+ * state-level policy work all live on fbba.io; this page positions the
+ * organization for visitors arriving from the homepage tile and routes
+ * them out (PROJ-05).
+ *
+ * D-05 revised (CONTEXT.md line 81): per-project CTA = ExternalLink to
+ * https://fbba.io. URL confirmed by Wesley 2026-04-27.
+ *
+ * PRIV-03 invariant: zero embedded third-party frames; no booking widgets.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExternalLink from '../../components/ExternalLink.astro';
+
+const title = 'FBBA — Florida Bitcoin & Blockchain Association';
+const description =
+  "Florida's peer / policy / industry organization for the Bitcoin & blockchain community — what FBBA is, who it serves, and how to engage.";
+const canonical = '/projects/fbba';
+
+const breadcrumb = {
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).toString() },
+    { '@type': 'ListItem', position: 2, name: 'Projects', item: new URL('/projects', Astro.site).toString() },
+    { '@type': 'ListItem', position: 3, name: 'FBBA' },
+  ],
+};
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLdSchema="breadcrumb"
+  jsonLdData={breadcrumb}
+>
+  <article class="project">
+    <header class="project__header">
+      <p class="project__eyebrow">PROJECT</p>
+      <h1 class="project__h1">FBBA</h1>
+      <p class="project__subtitle">A statewide peer + policy organization for Florida's Bitcoin & blockchain industry.</p>
+    </header>
+
+    <div class="project__body">
+      <h2>What it is</h2>
+      <p>
+        The Florida Bitcoin &amp; Blockchain Association is a statewide membership
+        organization. It exists at the intersection of three things: the operators and
+        builders working in the space, the policy environment that shapes whether they
+        can actually operate, and the industry-level coordination that turns isolated
+        wins into a real Florida footprint.
+      </p>
+
+      <h2>Who it serves</h2>
+      <p>
+        Members include founders, operators, engineers, attorneys, financial-services
+        professionals, and policy advocates spread across Florida — Tampa Bay, Miami,
+        Orlando, Jacksonville, the smaller hubs in between. The unifying thread is
+        people who want Florida to remain a serious place to build and run businesses
+        that touch Bitcoin or blockchain rails, and who are willing to spend time
+        engaging at the state level to keep it that way.
+      </p>
+
+      <h2>How to engage</h2>
+      <p>
+        Visit the FBBA site for membership, events, the legislative tracker, and the
+        ways to get involved with state-level advocacy. If you're operating in or
+        moving into Florida and want a peer network plus a seat at the policy table,
+        that's the door.
+      </p>
+    </div>
+
+    <aside class="project__cta">
+      <ExternalLink href="https://fbba.io">Visit the FBBA site →</ExternalLink>
+    </aside>
+  </article>
+</BaseLayout>
+
+<style>
+  .project {
+    max-width: var(--measure-wide);
+    margin: 0 auto;
+    padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-4xl);
+  }
+  @media (min-width: 768px) {
+    .project { padding: var(--spacing-3xl) var(--spacing-2xl) var(--spacing-4xl); }
+  }
+  .project__header { margin-bottom: var(--spacing-2xl); }
+  .project__eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    color: var(--color-green);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .project__h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: 700;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .project__subtitle {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 600;
+    line-height: var(--leading-body-tight);
+    color: var(--color-charcoal-mid);
+    margin: 0;
+    max-width: var(--measure);
+  }
+  .project__body { max-width: var(--measure); margin-bottom: var(--spacing-3xl); }
+  .project__body h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-heading);
+    font-weight: 700;
+    line-height: var(--leading-heading);
+    color: var(--color-charcoal);
+    margin: var(--spacing-2xl) 0 var(--spacing-md) 0;
+  }
+  .project__body p {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .project__body a {
+    color: var(--color-green);
+    text-decoration: none;
+  }
+  .project__body a:hover { text-decoration: underline; }
+  .project__cta { padding-top: var(--spacing-2xl); border-top: 1px solid var(--color-cream-border); }
+</style>
