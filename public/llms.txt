@@ -1,10 +1,10 @@
-# Cross The Bridge
+# Wesley Schlemmer
 
-> Wesley Pyburn's personal site — Freedom Tech, Bitcoin, sovereign AI, and the work
-> of opting out of legacy systems without going off-grid. Three project areas
-> (Bitcoin Bay, FBBA, AI / Petros / Hermes) plus a thesis page (About) and a
-> consulting offer (separate subsection at /consulting, currently at the apex
-> domain crossthebridge.io during Phase 1 staging).
+> Wesley Schlemmer's personal hub — Freedom Tech, Bitcoin, sovereign AI, and
+> the work of opting out of legacy systems without going off-grid. Three project
+> areas (Bitcoin Bay, FBBA, Cross The Bridge — the third tile is a teaser
+> linking out to the Cross The Bridge brand site at `crossthebridge.io`) plus
+> a thesis page (About) and a Colophon documenting the no-tracking stance.
 
 This file is intended for LLM crawlers (ClaudeBot, GPTBot, PerplexityBot). It
 summarizes the site's structure and links to the canonical content for each
@@ -12,16 +12,16 @@ section. The site does not track visitors and does not load Google services.
 
 ## Identity
 
-- [About — biography and Freedom Tech thesis](https://staging.crossthebridge.io/about): Wesley's bio fused with the Cross The Bridge thesis (Money / Data / Infrastructure pillars). The single canonical statement of what the site is about.
-- [Contact](https://staging.crossthebridge.io/contact): Inbound channel for peer reach-outs, podcast invites, and partnership conversations.
-- [Colophon](https://staging.crossthebridge.io/colophon): Tech stack and no-tracking stance — what the site does and does not collect.
+- [About — biography and Freedom Tech thesis](https://staging.wesleyschlemmer.com/about): Wesley's bio fused with the Cross The Bridge thesis (Money / Data / Infrastructure pillars). The single canonical statement of what the site is about.
+- [Contact](https://staging.wesleyschlemmer.com/contact): Inbound channel for peer reach-outs, podcast invites, and partnership conversations.
+- [Colophon](https://staging.wesleyschlemmer.com/colophon): Tech stack and no-tracking stance — what the site does and does not collect.
 
 ## Projects
 
-- [Bitcoin Bay](https://staging.crossthebridge.io/projects/bitcoin-bay): Tampa Bay community for people stacking sats and showing up in person.
-- [FBBA — Florida Bitcoin & Blockchain Association](https://staging.crossthebridge.io/projects/fbba): Peer / policy / industry organization across Florida.
-- [AI / Petros / Hermes](https://staging.crossthebridge.io/projects/ai-petros-hermes): Sovereign-stack AI work — Hermes the agent, Petros the foundation, AYLIP the vision.
+- [Bitcoin Bay](https://staging.wesleyschlemmer.com/projects/bitcoin-bay): Tampa Bay community for people stacking sats and showing up in person. External: https://bitcoinbay.foundation
+- [FBBA — Florida Bitcoin & Blockchain Association](https://staging.wesleyschlemmer.com/projects/fbba): Peer / policy / industry organization across Florida. External: https://fbba.io
+- [Cross The Bridge](https://staging.wesleyschlemmer.com/projects/cross-the-bridge): Teaser for Wesley's CTB consulting + AI agents + Petros / AYLIP work. External: https://crossthebridge.io (the Cross The Bridge brand site).
 
 ## Feeds
 
-- [Sitemap](https://staging.crossthebridge.io/sitemap-index.xml): Machine-readable index of all pages.
+- [Sitemap](https://staging.wesleyschlemmer.com/sitemap-index.xml): Machine-readable index of all pages.
