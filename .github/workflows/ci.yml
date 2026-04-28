@@ -1,0 +1,63 @@
+# .github/workflows/ci.yml
+# Source: RESEARCH.md §Code Examples Example 3 (lines 1416-1459)
+# Purpose: enforce INFRA-02 (build + check on every PR) and PRIV-03 / PRIV-04 (network audit)
+# Post D-20 pivot: deploy target is wesleyschlemmer.com (was crossthebridge.io pre-pivot).
+
+name: CI
+on: pull_request
+
+permissions:
+  contents: read
+  deployments: read
+
+jobs:
+  build:
+    name: astro check + build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Type-check (astro check)
+        run: npx astro check
+      - name: Build
+        run: npx astro build
+        env:
+          # PUBLIC_* env vars from GitHub Actions secrets so canonical URL + JSON-LD + Umami
+          # values resolve correctly in the preview build. PUBLIC_SITE_URL value lives in
+          # secrets so a build of any branch can resolve to the right canonical (production
+          # = https://wesleyschlemmer.com; staging branch = https://staging.wesleyschlemmer.com).
+          PUBLIC_SITE_URL: ${{ secrets.PUBLIC_SITE_URL }}
+          PUBLIC_UMAMI_HOST: ${{ secrets.PUBLIC_UMAMI_HOST }}
+          PUBLIC_UMAMI_WEBSITE_ID: ${{ secrets.PUBLIC_UMAMI_WEBSITE_ID }}
+          PUBLIC_CONSULTING_URL: ${{ secrets.PUBLIC_CONSULTING_URL }}
+
+  network-audit:
+    name: network audit (Playwright)
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+      - name: Wait for Vercel preview deploy
+        id: preview
+        uses: patrickedqvist/wait-for-vercel-preview@v1.3.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 600
+      - name: Run network audit against Vercel preview URL
+        env:
+          PREVIEW_URL: ${{ steps.preview.outputs.url }}
+          PUBLIC_UMAMI_HOST: ${{ secrets.PUBLIC_UMAMI_HOST }}
+        run: npx playwright test
