@@ -1,0 +1,250 @@
+---
+/**
+ * About page (IDENT-04 + PROJ-03 folded — D-08, D-03, D-21).
+ *
+ * Thesis-first, bio-second. Per D-08 the two halves are fused on one page:
+ * the WHY (Cross The Bridge doctrine — Money/Data/Infrastructure pillars,
+ * distilled from petros-polaris.md Page 1) before the WHO (Wesley's voice
+ * + style + what he's currently building, distilled from About Me.md).
+ *
+ * D-21 (locked 2026-04-27): canonical name is "Wesley Schlemmer". The H1
+ * label stays "About Wesley" (first-name only is fine for a heading);
+ * the JSON-LD Person schema emitted via BaseLayout's JsonLd component
+ * carries the full canonical name.
+ *
+ * Voice contract honored (UI-SPEC §Copywriting + RESEARCH PITFALLS #2):
+ *   - Zero doctrine words from the vault (the four banned phrases are
+ *     enumerated in 01-UI-SPEC.md §Copywriting voice contract).
+ *   - Zero product detail for the deferred AI/Petros productization —
+ *     that depth lives on the future CTB brand site, not this About
+ *     page (D-08 + CONTEXT.md <deferred>).
+ *   - Zero marketing-ese (the five banned terms enumerated in
+ *     01-UI-SPEC.md §Copywriting voice contract).
+ *   - The brand line appears exactly once, in the closing sentence of
+ *     the thesis.
+ *
+ * h-card microformats (RESEARCH §h-card lines 1133-1146; SEO-06 hedge
+ * shipped in Phase 1 even though SEO-06 is mapped to Phase 2):
+ *   - Article container: class="h-card"
+ *   - H1: class="p-name"
+ *   - Role line: class="p-job-title" containing class="u-url" → link to
+ *     https://crossthebridge.io (the CTB brand domain — D-05 revised;
+ *     intentional, NOT a stale wesleyschlemmer.com swap target)
+ *   - Headshot wrapped in div.u-photo so the Astro <Image> emits valid
+ *     u-photo markup at indiewebify.me
+ *
+ * Body copy authored by Claude under the autonomous-bypass authorization
+ * for this plan (mirror of 01-09 CTB teaser pattern). Drafts pre-existed
+ * at .planning/phases/01-foundation-personal-surface/01-08-DRAFT.md.
+ * Wesley reviews + edits in a follow-up plan post-launch.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Headshot from '../components/Headshot.astro';
+
+const title = 'About';
+const description =
+  "Wesley Schlemmer's bio fused with the Cross The Bridge thesis — Bitcoin, sovereign AI, Freedom Tech, and the work of opting out of legacy systems.";
+const canonical = '/about';
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLdSchema="person"
+>
+  <article class="about h-card" itemscope itemtype="https://schema.org/Person">
+    <header class="about__header">
+      <h1 class="about__h1 p-name" itemprop="name">About Wesley</h1>
+      <p class="about__role p-job-title">
+        <span itemprop="jobTitle">Founder</span>,
+        <a class="u-url" href="https://crossthebridge.io" itemprop="url">Cross The Bridge</a>
+      </p>
+      <hr class="about__rule" aria-hidden="true" />
+    </header>
+
+    <div class="about__layout">
+      <aside class="about__headshot">
+        {/* Astro <Image /> emits an <img>; the wrapper div carries
+            class="u-photo" so the markup validates at indiewebify.me. */}
+        <div class="u-photo">
+          <Headshot />
+        </div>
+      </aside>
+
+      <div class="about__content">
+        <section class="about__thesis">
+          <h2 class="about__h2">The Thesis: Cross The Bridge</h2>
+          <p>
+            The internet I grew up on rewarded curiosity. The one we have now treats
+            people as a behavioral surface to be measured, monetized, and steered.
+            Money flows through systems built to surveil. Data is collected, sold,
+            and weaponized. Infrastructure is centralized to a handful of vendors
+            that can revoke access at will. None of this requires a conspiracy to
+            explain — the incentives are already pointed in that direction.
+          </p>
+          <p>
+            The work I do is organized around three pillars. <strong>Money:</strong>
+            Bitcoin and Monero return monetary control to the people holding the
+            keys, not the institutions issuing the rails. <strong>Data:</strong>
+            open-source tools, encryption, and self-hosting let people retain what
+            gets recorded about them. <strong>Infrastructure:</strong> owning the
+            nodes, the compute, and the storage that mediate daily life — instead
+            of renting them — is the framework I want to leave my kids.
+          </p>
+          <p>
+            None of these are new ideas on their own. Stitched together, they're a
+            path. The point of the work: <em>Cross the bridge from the Old World to the New</em>.
+            Leave the legacy systems behind and build what comes next, deliberately,
+            while it's still possible to opt out without going off-grid.
+          </p>
+        </section>
+
+        <section class="about__bio">
+          <h2 class="about__h2">About Me</h2>
+
+          <h3>My Style</h3>
+          <p>
+            Everything, everywhere, all at once. I run multiple projects in parallel
+            and hate wasted time — engineer's habit. I'd rather double-dip than
+            focus, which means I'm at my best at the strategy level: pulling
+            threads together, spotting where two unrelated problems share a
+            solution, picking the team that can ship. The trade-off is the
+            day-to-day. Small details, scheduling, repeating myself — those are
+            where I leak time. I try to delegate or automate them; sometimes I
+            get away with it.
+          </p>
+
+          <h3>How I Work</h3>
+          <p>
+            I work in waves. There are stretches where I'm head-down on one
+            deadline well into the night, and stretches of unstructured time
+            where I'm reading, writing, or talking to people in the same orbit.
+            I'm rarely fully off, and I'd rather take a Tuesday afternoon with
+            the family than punch in for a 9-to-5. Most useful things I've
+            built started as a conversation. So I keep the calendar light
+            enough to have those conversations, and the phone off enough to
+            actually finish what they generate.
+          </p>
+
+          <h3>What I'm Building</h3>
+          <p>
+            Right now: <a href="/projects/bitcoin-bay">Bitcoin Bay</a>, the
+            Florida-Bitcoin community I helped build.
+            <a href="/projects/fbba">FBBA</a>, shaping the state-level policy
+            edge. <a href="/projects/cross-the-bridge">Cross The Bridge</a>,
+            the brand for the consulting work — AI implementation, agent
+            integration, and the sovereign-AI stack this thesis points at —
+            paid work for Tampa Bay teams putting AI to actual use, which
+            funds the rest. The bridge isn't a hypothetical; it's the thing
+            being built.
+          </p>
+        </section>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .about {
+    max-width: var(--measure-wide);
+    margin: 0 auto;
+    padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-4xl);
+  }
+  @media (min-width: 768px) {
+    .about { padding: var(--spacing-3xl) var(--spacing-2xl) var(--spacing-4xl); }
+  }
+
+  .about__header { margin-bottom: var(--spacing-2xl); }
+  .about__h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: 700;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .about__role {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--color-charcoal-mid);
+    margin: 0 0 var(--spacing-lg) 0;
+  }
+  .about__role .u-url {
+    color: var(--color-green);
+    text-decoration: none;
+  }
+  .about__role .u-url:hover { text-decoration: underline; }
+  .about__role .u-url:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+  .about__rule {
+    border: 0;
+    height: 2px;
+    background: var(--color-gold);
+    width: 80px;
+    margin: var(--spacing-lg) 0 0;
+  }
+
+  .about__layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+  }
+  @media (min-width: 768px) {
+    .about__layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: var(--spacing-2xl);
+      align-items: start;
+    }
+    .about__headshot { order: 2; }
+    .about__content { order: 1; }
+  }
+
+  .about__h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-heading);
+    font-weight: 700;
+    line-height: var(--leading-heading);
+    color: var(--color-charcoal);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .about__thesis,
+  .about__bio { margin-bottom: var(--spacing-2xl); }
+  .about__thesis p,
+  .about__bio p {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-charcoal);
+    max-width: var(--measure);
+    margin: 0 0 var(--spacing-md) 0;
+  }
+  .about__thesis strong { color: var(--color-charcoal); font-weight: 700; }
+  .about__thesis em {
+    color: var(--color-charcoal);
+    font-style: italic;
+  }
+  .about__bio h3 {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--color-charcoal);
+    margin: var(--spacing-lg) 0 var(--spacing-sm) 0;
+  }
+  .about__bio a,
+  .about__thesis a {
+    color: var(--color-green);
+    text-decoration: none;
+  }
+  .about__bio a:hover,
+  .about__thesis a:hover { text-decoration: underline; }
+  .about__bio a:focus-visible,
+  .about__thesis a:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+</style>
