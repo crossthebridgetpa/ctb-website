@@ -35,6 +35,29 @@
 <decisions>
 ## Implementation Decisions
 
+### D-21 — Canonical name: Wesley Schlemmer (NEW, locked 2026-04-27)
+
+**Context:** During /gsd-plan-phase 01 mid-execution, the planner flagged a surname inconsistency between built code ("Wesley Pyburn" hardcoded in BaseSEO/JsonLd/Headshot/Footer/index.astro/llms.txt + baked into public/og/default.png) and project context ("Wesley Schlemmer" in CLAUDE.md and the new domain). Wesley confirmed: **the name is Wesley Schlemmer. "Pyburn" was hallucinated by the 2026-04-25 research agent and propagated unchecked through UI-SPEC, PATTERNS, plans, and built code.**
+
+**Decision:**
+- All public-facing copy, structured data, and image text use **"Wesley Schlemmer"** as the canonical name.
+- All "Wesley Pyburn" references in built code, the OG image PNG, and the 01-08 About page drafts must be swapped to "Wesley Schlemmer".
+- 01-11 absorbs this swap in addition to its domain-constants scope (same shape: replace wrong constant in already-built files).
+- Upstream historical artifacts (01-RESEARCH.md, 01-UI-SPEC.md, 01-PATTERNS.md, completed plans 01-03..07, completed SUMMARY.md files) are NOT retroactively edited — they're historical. Downstream agents read CONTEXT.md (this file) for canonical truth, not those artifacts. The grep-verifiable acceptance is in built code only.
+
+**Files affected (built code + image, all swapped in 01-11):**
+- `src/components/seo/BaseSEO.astro` — homepage title literal
+- `src/components/seo/JsonLd.astro` — Person `name` field, Person `description` field
+- `src/components/Headshot.astro` — alt-text literal
+- `src/components/Footer.astro` — copyright literal
+- `src/pages/index.astro` — homepage title literal, description literal
+- `public/llms.txt` — H1 + body prose
+- `public/og/default.png` — re-render with corrected "by Wesley Schlemmer" text
+
+**Files affected (drafts):**
+- `.planning/phases/01-foundation-personal-surface/01-08-DRAFT.md` — thesis + bio drafts (will be authored into about.astro by 01-08 once Wesley approves)
+- `~/.hermes/vault/projects/ctb/01-08-about-page-draft.md` — Obsidian-readable copy
+
 ### D-20 — Project pivot to wesleyschlemmer.com (NEW, decided 2026-04-27)
 
 **Context:** Mid-Phase-1 execution (7/10 plans complete), Wesley wrote handwritten redesign notes (`~/.hermes/vault/website redesign notes.pdf`, transcribed to `~/.hermes/vault/projects/ctb/website-redesign-notes-2026-04-26.md`) describing a richer CTB consulting hub with Choose-Your-Adventure Bitcoin/Privacy/AI sub-pages. During /gsd-discuss-phase 01 to integrate that scope, Wesley raised: "Maybe the hub should be wesleyschlemmer.com instead?" — surfacing the recursion concern (a "Cross The Bridge" project tile inside a site already named Cross The Bridge) and proposing a domain split.
