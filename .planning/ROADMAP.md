@@ -67,9 +67,9 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. Pre-launch internal-link audit confirms every essay/note/project page has ≥2 outbound internal links (no content silos); h-card on About, h-entry on essays/notes, h-feed on indexes are present and validate at indiewebify.me
 
 **Plans**: 9 plans
-- [ ] 02-01-PLAN.md — Wave 1: content collections schema (essays + notes Zod schemas) + @astrojs/rss install
-- [ ] 02-02-PLAN.md — Wave 1: lib/relations.ts (cross-collection slug resolver) + lib/tags.ts (tag aggregator)
-- [ ] 02-03-PLAN.md — Wave 1: EssayLayout + NoteLayout + JsonLd.astro blog-posting/article extensions
+- [x] 02-01-PLAN.md — Wave 1: content collections schema (essays + notes Zod schemas) + @astrojs/rss install
+- [x] 02-02-PLAN.md — Wave 1: lib/relations.ts (cross-collection slug resolver) + lib/tags.ts (tag aggregator)
+- [x] 02-03-PLAN.md — Wave 1: EssayLayout + NoteLayout + JsonLd.astro blog-posting/article extensions
 - [ ] 02-04-PLAN.md — Wave 2: /writing hub + /essays + /notes indexes + /essays/[slug] + /notes/[slug] + /topics/[tag]
 - [ ] 02-05-PLAN.md — Wave 2: RSS feed endpoints (/rss.xml, /essays/rss.xml, /notes/rss.xml) + BaseSEO rel=alternate injection
 - [ ] 02-06-PLAN.md — Wave 3: Homepage recent-writing module + Nav "Writing" link + Footer RSS links
