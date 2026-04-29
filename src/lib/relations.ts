@@ -29,9 +29,14 @@ export async function resolveRelated(slugs: string[]): Promise<AnyEntry[]> {
   const collections = ['essays', 'notes'] as const;
   const candidates = await Promise.all(
     slugs.flatMap((slug) =>
-      collections.map(
-        (c) => getEntry(c, slug).catch(() => null) as Promise<AnyEntry | null>
-      )
+      collections.map(async (c): Promise<AnyEntry | null> => {
+        try {
+          const entry = await getEntry(c, slug);
+          return (entry ?? null) as AnyEntry | null;
+        } catch {
+          return null;
+        }
+      })
     )
   );
   return candidates.filter(
