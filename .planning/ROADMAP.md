@@ -70,8 +70,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 02-01-PLAN.md — Wave 1: content collections schema (essays + notes Zod schemas) + @astrojs/rss install
 - [x] 02-02-PLAN.md — Wave 1: lib/relations.ts (cross-collection slug resolver) + lib/tags.ts (tag aggregator)
 - [x] 02-03-PLAN.md — Wave 1: EssayLayout + NoteLayout + JsonLd.astro blog-posting/article extensions
-- [ ] 02-04-PLAN.md — Wave 2: /writing hub + /essays + /notes indexes + /essays/[slug] + /notes/[slug] + /topics/[tag]
-- [ ] 02-05-PLAN.md — Wave 2: RSS feed endpoints (/rss.xml, /essays/rss.xml, /notes/rss.xml) + BaseSEO rel=alternate injection
+- [x] 02-04-PLAN.md — Wave 2: /writing hub + /essays + /notes indexes + /essays/[slug] + /notes/[slug] + /topics/[tag]
+- [x] 02-05-PLAN.md — Wave 2: RSS feed endpoints (/rss.xml, /essays/rss.xml, /notes/rss.xml) + BaseSEO rel=alternate injection
 - [ ] 02-06-PLAN.md — Wave 3: Homepage recent-writing module + Nav "Writing" link + Footer RSS links
 - [ ] 02-07-PLAN.md — Wave 3: Seed essays (thesis + sovereignty-as-a-service) — vault draft → Wesley review → publish (checkpoint)
 - [ ] 02-08-PLAN.md — Wave 3: Seed notes (5-8 notes from vault pool) — vault draft → Wesley review → publish (checkpoint)
