@@ -1,0 +1,59 @@
+---
+/**
+ * /notes — single-collection notes index.
+ *
+ * D-28 draft filter applied at getCollection. Empty collection renders an
+ * empty list (no error, no placeholder).
+ *
+ * SEO-06: root article carries h-feed; each list item carries h-entry; H1
+ * carries p-name. Status badge carries p-category (CD-02 status taxonomy:
+ * seedling / budding / evergreen).
+ *
+ * CD-02 status badge surfaces digital-garden status next to each title.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const title = 'Notes';
+const description = 'Short notes by Wesley Schlemmer — observations, decisions, annotated bookmarks.';
+const canonical = '/notes';
+
+const notes = (await getCollection('notes', ({ data }) => !data.draft))
+  .sort((a, b) => (b.data.updated ?? b.data.published).valueOf() - (a.data.updated ?? a.data.published).valueOf());
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLdSchema="webpage"
+  jsonLdData={{ name: 'Notes — Wesley Schlemmer', url: new URL('/notes', Astro.site).toString(), description }}
+>
+  <article class="notes-index h-feed">
+    <header><h1 class="p-name">Notes</h1></header>
+    <ul class="notes-index__list">
+      {notes.map((e) => {
+        const slug = e.id.replace(/\.md$/, '');
+        return (
+          <li class="h-entry">
+            <a href={`/notes/${slug}`} class="notes-index__link">
+              <span class="notes-index__status p-category" data-status={e.data.status}>{e.data.status}</span>
+              <span class="notes-index__title p-name">{e.data.title}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </article>
+</BaseLayout>
+
+<style>
+  .notes-index { max-width: 60ch; margin: 0 auto; padding: var(--spacing-2xl) var(--spacing-lg); }
+  .notes-index :global(h1) { font-family: var(--font-display); font-size: 2.25rem; margin: 0 0 var(--spacing-2xl) 0; }
+  .notes-index__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--spacing-sm); }
+  .notes-index__link { display: flex; align-items: baseline; gap: var(--spacing-sm); color: var(--color-charcoal); text-decoration: none; }
+  .notes-index__link:hover .notes-index__title { text-decoration: underline; }
+  .notes-index__status { display: inline-block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: var(--tracking-label); padding: 0.15em 0.45em; border-radius: 3px; border: 1px solid var(--color-cream-border); color: var(--color-muted); }
+  .notes-index__status[data-status="budding"]   { color: var(--color-green); border-color: var(--color-green); }
+  .notes-index__status[data-status="evergreen"] { color: var(--color-gold); border-color: var(--color-gold); }
+  .notes-index__title { font-family: var(--font-body); font-size: 1.0625rem; flex: 1; }
+</style>

@@ -1,0 +1,57 @@
+---
+/**
+ * /essays — single-collection essays index.
+ *
+ * D-28 draft filter applied at getCollection. Empty collection renders an
+ * empty list (no error, no placeholder).
+ *
+ * SEO-06: root article carries h-feed; each list item carries h-entry; H1
+ * carries p-name. Subtitle (when present) carries p-summary.
+ *
+ * CD-01 library mode: title is "Essays" — no "Latest essays" or
+ * "Recent posts" framing.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const title = 'Essays';
+const description = 'Long-form essays by Wesley Schlemmer.';
+const canonical = '/essays';
+
+const essays = (await getCollection('essays', ({ data }) => !data.draft))
+  .sort((a, b) => (b.data.updated ?? b.data.published).valueOf() - (a.data.updated ?? a.data.published).valueOf());
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLdSchema="webpage"
+  jsonLdData={{ name: 'Essays — Wesley Schlemmer', url: new URL('/essays', Astro.site).toString(), description }}
+>
+  <article class="essays-index h-feed">
+    <header><h1 class="p-name">Essays</h1></header>
+    <ul class="essays-index__list">
+      {essays.map((e) => {
+        const slug = e.id.replace(/\.md$/, '');
+        return (
+          <li class="h-entry">
+            <a href={`/essays/${slug}`} class="essays-index__link">
+              <span class="essays-index__title p-name">{e.data.title}</span>
+              {e.data.subtitle && <span class="essays-index__subtitle p-summary">{e.data.subtitle}</span>}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </article>
+</BaseLayout>
+
+<style>
+  .essays-index { max-width: 65ch; margin: 0 auto; padding: var(--spacing-2xl) var(--spacing-lg); }
+  .essays-index :global(h1) { font-family: var(--font-display); font-size: 2.25rem; margin: 0 0 var(--spacing-2xl) 0; }
+  .essays-index__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--spacing-md); }
+  .essays-index__link { display: flex; flex-direction: column; gap: 0.15rem; color: var(--color-charcoal); text-decoration: none; }
+  .essays-index__link:hover .essays-index__title { text-decoration: underline; }
+  .essays-index__title { font-family: var(--font-display); font-size: 1.25rem; }
+  .essays-index__subtitle { font-size: var(--text-meta); color: var(--color-charcoal-mid); }
+</style>
