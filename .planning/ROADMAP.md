@@ -66,7 +66,16 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. Homepage shows a "Recent writing" module pulling latest items from essays + notes (NOT a "Latest blog" widget — library mode, curated, no staleness signal)
   5. Pre-launch internal-link audit confirms every essay/note/project page has ≥2 outbound internal links (no content silos); h-card on About, h-entry on essays/notes, h-feed on indexes are present and validate at indiewebify.me
 
-**Plans**: TBD
+**Plans**: 9 plans
+- [ ] 02-01-PLAN.md — Wave 1: content collections schema (essays + notes Zod schemas) + @astrojs/rss install
+- [ ] 02-02-PLAN.md — Wave 1: lib/relations.ts (cross-collection slug resolver) + lib/tags.ts (tag aggregator)
+- [ ] 02-03-PLAN.md — Wave 1: EssayLayout + NoteLayout + JsonLd.astro blog-posting/article extensions
+- [ ] 02-04-PLAN.md — Wave 2: /writing hub + /essays + /notes indexes + /essays/[slug] + /notes/[slug] + /topics/[tag]
+- [ ] 02-05-PLAN.md — Wave 2: RSS feed endpoints (/rss.xml, /essays/rss.xml, /notes/rss.xml) + BaseSEO rel=alternate injection
+- [ ] 02-06-PLAN.md — Wave 3: Homepage recent-writing module + Nav "Writing" link + Footer RSS links
+- [ ] 02-07-PLAN.md — Wave 3: Seed essays (thesis + sovereignty-as-a-service) — vault draft → Wesley review → publish (checkpoint)
+- [ ] 02-08-PLAN.md — Wave 3: Seed notes (5-8 notes from vault pool) — vault draft → Wesley review → publish (checkpoint)
+- [ ] 02-09-PLAN.md — Wave 4: Pre-launch audit (microformats, RSS items, PRIV-01/02, draft filter, internal links) + 02-VALIDATION-REPORT.md
 
 **UI hint**: yes
 
@@ -92,7 +101,7 @@ Phases execute in numeric order: 1 → 2
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation + Personal Surface | 11/11 | ✓ Code complete (UAT pending launch ops) | 2026-04-28 |
-| 2. Writing Surface | 0/TBD | Not started | - |
+| 2. Writing Surface | 0/9 | Not started | - |
 
 ---
 *Roadmap originally created: 2026-04-25 (then titled "crossthebridge.io Personal Site Overhaul" with 3 phases including Consulting Subsection)*
