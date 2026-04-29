@@ -1,0 +1,25 @@
+---
+/**
+ * /notes/[slug] — dynamic note route.
+ *
+ * D-28 draft filter applied INSIDE getStaticPaths — same chokepoint
+ * pattern as essays. CD-09: reading-time NEVER computed for notes.
+ */
+import NoteLayout from '../../layouts/NoteLayout.astro';
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths = (async () => {
+  const notes = await getCollection('notes', ({ data }) => !data.draft);
+  return notes.map((entry) => ({
+    params: { slug: entry.id.replace(/\.md$/, '') },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<NoteLayout entry={entry}>
+  <Content />
+</NoteLayout>

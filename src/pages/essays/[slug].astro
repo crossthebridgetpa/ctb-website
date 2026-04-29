@@ -1,0 +1,37 @@
+---
+/**
+ * /essays/[slug] — dynamic essay route.
+ *
+ * D-28 draft filter applied INSIDE getStaticPaths — drafts cannot reach
+ * the build output, the sitemap, or RSS (RSS is implemented in 02-05).
+ *
+ * Reading-time computed inline from entry.body word count (CD-09):
+ *   - Skipped if word count < 500 (CD-09 lower bound).
+ *   - 250 wpm baseline, ceiling.
+ * Inline computation chosen over a remark plugin to keep the dependency
+ * surface small for Phase 2.
+ */
+import EssayLayout from '../../layouts/EssayLayout.astro';
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths = (async () => {
+  const essays = await getCollection('essays', ({ data }) => !data.draft);
+  return essays.map((entry) => ({
+    params: { slug: entry.id.replace(/\.md$/, '') },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// CD-09: inline reading-time. Body word count from entry.body; ceiling at
+// 250 wpm; hide if < 500 words. EssayLayout treats `undefined` or values
+// < 1 as "do not display."
+const wordCount = (entry.body ?? '').trim().split(/\s+/).filter(Boolean).length;
+const readingMinutes = wordCount >= 500 ? Math.max(1, Math.ceil(wordCount / 250)) : undefined;
+---
+<EssayLayout entry={entry} readingMinutes={readingMinutes}>
+  <Content />
+</EssayLayout>
