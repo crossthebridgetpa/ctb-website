@@ -12,8 +12,9 @@
  *     Acceptance greps (see plan) enforce zero case-insensitive matches of
  *     forbidden words in this file — keep warnings paraphrased to satisfy
  *     them while preserving intent.
- *   - D-07: <section id="recent-writing" hidden> is the Phase-2 wire-in anchor.
- *     Phase 2 populates it — do not delete and do not pre-fill with mock copy.
+ *   - D-07: the recent-writing section is the Phase-2 wire-in anchor (now
+ *     populated by 02-06 in library mode — featured-first, no date chrome,
+ *     no reverse-chrono blog feed framing per CD-01 / PITFALLS section 1).
  *   - UI-SPEC §Components #7 line 242: title is "Cross The Bridge — Wesley
  *     Schlemmer" (homepage exception per D-21). BaseSEO's isHome heuristic
  *     detects canonical === '/' and emits this exact form regardless of the
@@ -23,11 +24,35 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import Tile from '../components/Tile.astro';
+import { getCollection } from 'astro:content';
 
 const title = 'Cross The Bridge — Wesley Schlemmer';
 const description =
   "Wesley Schlemmer's site — Freedom Tech, Bitcoin, sovereign AI, and the work of opting out of legacy systems without going off-grid. Inbound welcome.";
 const canonical = '/';
+
+// CD-01 library-mode: featured-first, fall back to most-recently-updated by
+// the updated/published sort key. D-28 chokepoint: !data.draft applied at the
+// loader callback so drafts can never enter the homepage module. Heading is
+// "Writing" — NOT a reverse-chrono blog feed framing (CD-01 / PITFALLS §1).
+const [essays, notes] = await Promise.all([
+  getCollection('essays', ({ data }) => !data.draft),
+  getCollection('notes', ({ data }) => !data.draft),
+]);
+const allWriting = [...essays, ...notes];
+const featuredWriting = allWriting.filter((e) => e.data.featured);
+const recentWriting = featuredWriting.length >= 3
+  ? featuredWriting.slice(0, 3)
+  : [
+      ...featuredWriting,
+      ...allWriting
+        .filter((e) => !e.data.featured)
+        .sort((a, b) =>
+          (b.data.updated ?? b.data.published).valueOf() -
+          (a.data.updated ?? a.data.published).valueOf()
+        )
+        .slice(0, 3 - featuredWriting.length),
+    ];
 ---
 <BaseLayout
   title={title}
@@ -71,8 +96,37 @@ const canonical = '/';
     />
   </section>
 
-  {/* Phase 2 placeholder per D-07 (CONTEXT.md). Hidden until Phase 2 wires "Recent writing". */}
-  <section id="recent-writing" hidden></section>
+  {/* D-07 wire-in (Phase 2 / 02-06): library-mode "Writing" module — featured-first,
+      with most-recently-updated fallback. CD-01: no date chrome, no reverse-chrono
+      blog framing on this surface. */}
+  <section id="recent-writing" aria-label="Writing">
+    <div class="recent-writing__inner">
+      <div class="recent-writing__header">
+        <h2 class="recent-writing__h2">Writing</h2>
+        <p class="recent-writing__sub">Featured pieces — by topic, not date.</p>
+      </div>
+      {recentWriting.length > 0 && (
+        <ul class="recent-writing__list">
+          {recentWriting.map((entry) => {
+            const slug = entry.id.replace(/\.md$/, '');
+            const href = entry.collection === 'essays' ? `/essays/${slug}` : `/notes/${slug}`;
+            return (
+              <li class="recent-writing__item">
+                <a href={href} class="recent-writing__link">
+                  <span class="recent-writing__collection">{entry.collection === 'essays' ? 'Essay' : 'Note'}</span>
+                  <span class="recent-writing__title">{entry.data.title}</span>
+                  {entry.data.description && (
+                    <span class="recent-writing__desc">{entry.data.description}</span>
+                  )}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      <a href="/writing" class="recent-writing__all">All writing &rarr;</a>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -88,6 +142,77 @@ const canonical = '/';
     .tile-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: var(--spacing-xl);
+      padding: var(--spacing-4xl) var(--spacing-2xl);
+    }
+  }
+
+  /* 02-06 Recent Writing module — CD-01 library mode (no date chrome). */
+  .recent-writing__inner {
+    max-width: var(--measure-wide);
+    margin: 0 auto;
+    padding: var(--spacing-4xl) var(--spacing-lg);
+    border-top: 1px solid var(--color-cream-border);
+  }
+  .recent-writing__header {
+    margin-bottom: var(--spacing-2xl);
+  }
+  .recent-writing__h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    margin: 0 0 var(--spacing-xs) 0;
+    color: var(--color-charcoal);
+  }
+  .recent-writing__sub {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    color: var(--color-charcoal-mid);
+    margin: 0;
+  }
+  .recent-writing__list {
+    list-style: none;
+    margin: 0 0 var(--spacing-2xl) 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  .recent-writing__link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    color: var(--color-charcoal);
+    text-decoration: none;
+  }
+  .recent-writing__link:hover .recent-writing__title {
+    text-decoration: underline;
+  }
+  .recent-writing__collection {
+    font-size: var(--text-meta);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    color: var(--color-muted);
+  }
+  .recent-writing__title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    color: var(--color-charcoal);
+  }
+  .recent-writing__desc {
+    font-size: var(--text-meta);
+    color: var(--color-charcoal-mid);
+  }
+  .recent-writing__all {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    color: var(--color-green);
+    text-decoration: none;
+  }
+  .recent-writing__all:hover {
+    text-decoration: underline;
+  }
+  @media (min-width: 768px) {
+    .recent-writing__inner {
       padding: var(--spacing-4xl) var(--spacing-2xl);
     }
   }
