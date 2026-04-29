@@ -72,9 +72,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 02-03-PLAN.md — Wave 1: EssayLayout + NoteLayout + JsonLd.astro blog-posting/article extensions
 - [x] 02-04-PLAN.md — Wave 2: /writing hub + /essays + /notes indexes + /essays/[slug] + /notes/[slug] + /topics/[tag]
 - [x] 02-05-PLAN.md — Wave 2: RSS feed endpoints (/rss.xml, /essays/rss.xml, /notes/rss.xml) + BaseSEO rel=alternate injection
-- [ ] 02-06-PLAN.md — Wave 3: Homepage recent-writing module + Nav "Writing" link + Footer RSS links
-- [ ] 02-07-PLAN.md — Wave 3: Seed essays (thesis + sovereignty-as-a-service) — vault draft → Wesley review → publish (checkpoint)
-- [ ] 02-08-PLAN.md — Wave 3: Seed notes (5-8 notes from vault pool) — vault draft → Wesley review → publish (checkpoint)
+- [x] 02-06-PLAN.md — Wave 3: Homepage recent-writing module + Nav "Writing" link + Footer RSS links
+- [x] 02-07-PLAN.md — Wave 3: Seed essays (thesis + sovereignty-as-a-service) — vault draft → Wesley review → publish (checkpoint)
+- [x] 02-08-PLAN.md — Wave 3: Seed notes (5-8 notes from vault pool) — vault draft → Wesley review → publish (checkpoint)
 - [ ] 02-09-PLAN.md — Wave 4: Pre-launch audit (microformats, RSS items, PRIV-01/02, draft filter, internal links) + 02-VALIDATION-REPORT.md
 
 **UI hint**: yes
