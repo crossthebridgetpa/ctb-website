@@ -57,6 +57,9 @@ const fullTitle = isHome
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalAbs} />
+<link rel="alternate" type="application/rss+xml" title="Wesley Schlemmer — Writing (combined)" href={new URL('/rss.xml', Astro.site).toString()} />
+<link rel="alternate" type="application/rss+xml" title="Wesley Schlemmer — Essays" href={new URL('/essays/rss.xml', Astro.site).toString()} />
+<link rel="alternate" type="application/rss+xml" title="Wesley Schlemmer — Notes" href={new URL('/notes/rss.xml', Astro.site).toString()} />
 {noIndex && <meta name="robots" content="noindex,nofollow" />}
 
 <meta property="og:title" content={title} />

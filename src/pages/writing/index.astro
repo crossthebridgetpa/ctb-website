@@ -1,0 +1,112 @@
+---
+/**
+ * /writing — combined writing hub.
+ *
+ * CD-01 library-mode discipline: featured-first, then "All writing, by year"
+ * archive. Heading is "Writing" — NOT a reverse-chrono blog feed framing
+ * (PITFALLS section 1). No big "POSTED OCT 2025" chrome — date appears
+ * only as a year section break in the archive.
+ *
+ * D-28 draft filter applied at getCollection. Empty collections render an
+ * empty body section (no error, no "no content yet" placeholder — just
+ * the heading and structural sections).
+ *
+ * SEO-06: root article carries h-feed; each list item carries h-entry.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const title = 'Writing';
+const description = 'Essays and notes by Wesley Schlemmer — Freedom Tech, Bitcoin, sovereign AI.';
+const canonical = '/writing';
+
+const [essays, notes] = await Promise.all([
+  getCollection('essays', ({ data }) => !data.draft),
+  getCollection('notes', ({ data }) => !data.draft),
+]);
+const all = [...essays, ...notes];
+const featured = all.filter((e) => e.data.featured);
+const archive = all
+  .filter((e) => !e.data.featured)
+  .sort((a, b) => (b.data.updated ?? b.data.published).valueOf() - (a.data.updated ?? a.data.published).valueOf());
+
+const hrefFor = (entry: typeof all[number]) => {
+  const slug = entry.id.replace(/\.md$/, '');
+  return entry.collection === 'essays' ? `/essays/${slug}` : `/notes/${slug}`;
+};
+
+// Group archive by year (year derived from updated ?? published)
+const archiveByYear = archive.reduce<Record<string, typeof archive>>((acc, entry) => {
+  const yearKey = String((entry.data.updated ?? entry.data.published).getFullYear());
+  (acc[yearKey] ??= []).push(entry);
+  return acc;
+}, {});
+const archiveYears = Object.keys(archiveByYear).sort((a, b) => Number(b) - Number(a));
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLdSchema="webpage"
+  jsonLdData={{ name: 'Writing — Wesley Schlemmer', url: new URL('/writing', Astro.site).toString(), description }}
+>
+  <article class="writing-hub h-feed">
+    <header class="writing-hub__header">
+      <h1 class="writing-hub__h1 p-name">Writing</h1>
+      <p class="writing-hub__sub">Featured pieces — by topic, not date.</p>
+    </header>
+
+    {featured.length > 0 && (
+      <section class="writing-hub__section" aria-label="Featured">
+        <h2 class="writing-hub__h2">Featured</h2>
+        <ul class="writing-hub__list">
+          {featured.map((e) => (
+            <li class="h-entry">
+              <a class="writing-hub__link" href={hrefFor(e)}>
+                <span class="writing-hub__collection">{e.collection === 'essays' ? 'Essay' : 'Note'}</span>
+                <span class="writing-hub__title p-name">{e.data.title}</span>
+                {e.data.subtitle && <span class="writing-hub__subtitle p-summary">{e.data.subtitle}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {archive.length > 0 && (
+      <section class="writing-hub__section" aria-label="All writing by year">
+        <h2 class="writing-hub__h2">All writing</h2>
+        {archiveYears.map((year) => (
+          <div class="writing-hub__year">
+            <h3 class="writing-hub__year-h3">{year}</h3>
+            <ul class="writing-hub__list">
+              {archiveByYear[year].map((e) => (
+                <li class="h-entry">
+                  <a class="writing-hub__link" href={hrefFor(e)}>
+                    <span class="writing-hub__collection">{e.collection === 'essays' ? 'Essay' : 'Note'}</span>
+                    <span class="writing-hub__title p-name">{e.data.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .writing-hub { max-width: 65ch; margin: 0 auto; padding: var(--spacing-2xl) var(--spacing-lg); }
+  .writing-hub__h1 { font-family: var(--font-display); font-size: 2.5rem; margin: 0 0 var(--spacing-sm) 0; }
+  .writing-hub__sub { color: var(--color-charcoal-mid); font-family: var(--font-body); margin: 0 0 var(--spacing-2xl) 0; }
+  .writing-hub__section { margin-bottom: var(--spacing-3xl); }
+  .writing-hub__h2 { font-family: var(--font-body); font-size: var(--text-meta); text-transform: uppercase; letter-spacing: var(--tracking-label); margin: 0 0 var(--spacing-md) 0; color: var(--color-charcoal); }
+  .writing-hub__year-h3 { font-family: var(--font-body); font-size: 0.875rem; color: var(--color-muted); margin: var(--spacing-md) 0 var(--spacing-sm) 0; }
+  .writing-hub__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--spacing-sm); }
+  .writing-hub__link { display: flex; flex-direction: column; gap: 0.15rem; padding: var(--spacing-sm) 0; color: var(--color-charcoal); text-decoration: none; }
+  .writing-hub__link:hover .writing-hub__title { text-decoration: underline; }
+  .writing-hub__collection { font-size: var(--text-meta); color: var(--color-muted); text-transform: uppercase; letter-spacing: var(--tracking-label); }
+  .writing-hub__title { font-family: var(--font-display); font-size: 1.125rem; }
+  .writing-hub__subtitle { font-size: var(--text-meta); color: var(--color-charcoal-mid); }
+</style>
