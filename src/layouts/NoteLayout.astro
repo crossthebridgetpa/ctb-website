@@ -1,0 +1,162 @@
+---
+/**
+ * NoteLayout.astro — terser reading layout for notes (CD-02 / CD-07 / CD-10).
+ *
+ * Composes BaseLayout (CD-07 — no second top-level layout). BaseLayout owns
+ * the document head, Font preload (PRIV-01), conditional Umami (PRIV-02),
+ * Nav, Footer, and the skip-link. This layout adds:
+ *   - h-entry microformat container with p-category status badge (SEO-06)
+ *   - status badge styled three-way per CD-02 (seedling / budding / evergreen)
+ *   - "Related" block at the footer (WRITE-06; resolved via lib/relations.ts)
+ *   - per-note Article JSON-LD (CD-10 — lighter than the essay variant)
+ *
+ * D-30 date display for notes (different from essays):
+ *   - Show updated if present, otherwise published. Notes are the
+ *     recency-aware surface; the most-relevant date wins.
+ *   - Single date field (essays show both). Single source of truth = entry.data.
+ *
+ * Pitfall B (PRIV-01) and Pitfall C (PRIV-02) firewall: never re-implement
+ * the document head; never bypass BaseLayout. If a future maintainer adds
+ * head-level markup here, they break the no-Google-Fonts-CDN guarantee and
+ * the Umami three-way guard.
+ *
+ * CD-09: notes never display reading-time (essays only).
+ */
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+import { resolveRelated } from '../lib/relations';
+
+interface Props {
+  entry: CollectionEntry<'notes'>;
+}
+
+const { entry } = Astro.props;
+const { title, description, published, updated, status, related } = entry.data;
+const slug = entry.id.replace(/\.md$/, '');
+const canonical = `/notes/${slug}`;
+const relatedEntries = await resolveRelated(related);
+const displayDate = updated ?? published;
+
+const dateFmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogType="article"
+  jsonLdSchema="article"
+  jsonLdData={{
+    headline: title,
+    datePublished: published.toISOString(),
+    description,
+  }}
+>
+  <article class="note h-entry">
+    <header class="note__header">
+      <span class="note__status p-category" data-status={status}>{status}</span>
+      <h1 class="note__h1 p-name">{title}</h1>
+      <time class="dt-published" datetime={displayDate.toISOString()}>{dateFmt(displayDate)}</time>
+    </header>
+    <div class="note__body e-content">
+      <slot />
+    </div>
+    {relatedEntries.length > 0 && (
+      <aside class="note__related" aria-label="Related writing">
+        <h2 class="note__related-h2">Related</h2>
+        <ul class="note__related-list">
+          {relatedEntries.map((r) => {
+            const rSlug = r.id.replace(/\.md$/, '');
+            const href = r.collection === 'essays' ? `/essays/${rSlug}` : `/notes/${rSlug}`;
+            return (
+              <li>
+                <a href={href} class="note__related-link">
+                  <span class="note__related-collection">{r.collection === 'essays' ? 'Essay' : 'Note'}</span>
+                  <span class="note__related-title">{r.data.title}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </aside>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .note {
+    max-width: 60ch;
+    margin: 0 auto;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    font-family: var(--font-body);
+    color: var(--color-charcoal);
+  }
+  .note__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+  }
+  .note__h1 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin: 0;
+    flex: 1 1 100%;
+  }
+  .note__status {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    padding: 0.2em 0.55em;
+    border-radius: 3px;
+    background: var(--color-cream-card);
+    color: var(--color-charcoal-mid);
+    border: 1px solid var(--color-cream-border);
+  }
+  .note__status[data-status="seedling"] { color: var(--color-muted); }
+  .note__status[data-status="budding"]  { color: var(--color-green); border-color: var(--color-green); }
+  .note__status[data-status="evergreen"]{ color: var(--color-gold); border-color: var(--color-gold); }
+  .note__body {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .note__body :global(p) { margin: 0 0 var(--spacing-md) 0; }
+  .note__related {
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-cream-border);
+  }
+  .note__related-h2 {
+    font-family: var(--font-body);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    margin: 0 0 var(--spacing-sm) 0;
+  }
+  .note__related-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  .note__related-link {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-sm);
+    color: var(--color-charcoal);
+    text-decoration: none;
+  }
+  .note__related-link:hover { text-decoration: underline; }
+  .note__related-collection {
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+  }
+</style>
