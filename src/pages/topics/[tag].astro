@@ -1,0 +1,74 @@
+---
+/**
+ * /topics/[tag] — cross-collection tag page.
+ *
+ * CD-04: open taxonomy. getAllTags() returns only tags that have at least
+ * one non-draft entry, so empty pages cannot exist (a tag with only draft
+ * entries is excluded automatically).
+ *
+ * D-28: drafts excluded inside lib/tags.ts (the chokepoint). DO NOT
+ * re-filter at the page level — single source of truth.
+ *
+ * SEO-06: h-feed on the article root, h-entry on each list item.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllTags, getEntriesByTag } from '../../lib/tags';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths = (async () => {
+  const tags = await getAllTags();
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { tag },
+  }));
+}) satisfies GetStaticPaths;
+
+const { tag } = Astro.props;
+const entries = await getEntriesByTag(tag);
+
+const title = `Topic: ${tag}`;
+const description = `All essays and notes tagged ${tag}.`;
+const canonical = `/topics/${tag}`;
+
+const hrefFor = (entry: typeof entries[number]) => {
+  const slug = entry.id.replace(/\.md$/, '');
+  return entry.collection === 'essays' ? `/essays/${slug}` : `/notes/${slug}`;
+};
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLdSchema="webpage"
+  jsonLdData={{ name: title, url: new URL(canonical, Astro.site).toString(), description }}
+>
+  <article class="topic h-feed">
+    <header class="topic__header">
+      <p class="topic__label">Topic</p>
+      <h1 class="topic__h1 p-name">{tag}</h1>
+    </header>
+    <ul class="topic__list">
+      {entries.map((e) => (
+        <li class="h-entry">
+          <a href={hrefFor(e)} class="topic__link">
+            <span class="topic__collection">{e.collection === 'essays' ? 'Essay' : 'Note'}</span>
+            <span class="topic__title p-name">{e.data.title}</span>
+            {e.data.subtitle && <span class="topic__subtitle p-summary">{e.data.subtitle}</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </article>
+</BaseLayout>
+
+<style>
+  .topic { max-width: 65ch; margin: 0 auto; padding: var(--spacing-2xl) var(--spacing-lg); }
+  .topic__label { font-family: var(--font-body); font-size: var(--text-meta); text-transform: uppercase; letter-spacing: var(--tracking-label); color: var(--color-muted); margin: 0 0 var(--spacing-xs) 0; }
+  .topic__h1 { font-family: var(--font-display); font-size: 2rem; margin: 0 0 var(--spacing-2xl) 0; color: var(--color-charcoal); }
+  .topic__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--spacing-md); }
+  .topic__link { display: flex; flex-direction: column; gap: 0.15rem; padding: var(--spacing-sm) 0; color: var(--color-charcoal); text-decoration: none; }
+  .topic__link:hover .topic__title { text-decoration: underline; }
+  .topic__collection { font-size: var(--text-meta); color: var(--color-muted); text-transform: uppercase; letter-spacing: var(--tracking-label); }
+  .topic__title { font-family: var(--font-display); font-size: 1.125rem; }
+  .topic__subtitle { font-size: var(--text-meta); color: var(--color-charcoal-mid); }
+</style>
