@@ -48,7 +48,12 @@ const currentYear = new Date().getFullYear();
     <div class="footer__col">
       <h2 class="footer__heading">Inbound</h2>
       <ObfuscatedMailto ctaLabel="Email Wesley" />
-      <p class="footer__rss-placeholder">RSS — coming with Phase 2</p>
+      <p class="footer__rss-label">RSS</p>
+      <ul class="footer__rss-list">
+        <li><a class="footer__link" href="/rss.xml">All writing</a></li>
+        <li><a class="footer__link" href="/essays/rss.xml">Essays only</a></li>
+        <li><a class="footer__link" href="/notes/rss.xml">Notes only</a></li>
+      </ul>
       {/* Phase 3: cross-link to /consulting goes here. Commented out in Phase 1 per CONTEXT.md/D-18 layout firewall. */}
     </div>
   </div>
@@ -131,11 +136,22 @@ const currentYear = new Date().getFullYear();
     outline-offset: 2px;
   }
 
-  .footer__rss-placeholder {
+  .footer__rss-label {
     font-family: var(--font-body);
     font-size: var(--text-meta);
-    color: var(--color-muted);
-    margin: var(--spacing-md) 0 0 0;
+    font-weight: 600;
+    color: var(--color-charcoal);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    margin: var(--spacing-md) 0 var(--spacing-sm) 0;
+  }
+  .footer__rss-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs, 0.25rem);
   }
 
   .footer__bottom {
