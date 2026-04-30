@@ -75,7 +75,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 02-06-PLAN.md — Wave 3: Homepage recent-writing module + Nav "Writing" link + Footer RSS links
 - [x] 02-07-PLAN.md — Wave 3: Seed essays (thesis + sovereignty-as-a-service) — vault draft → Wesley review → publish (checkpoint)
 - [x] 02-08-PLAN.md — Wave 3: Seed notes (5-8 notes from vault pool) — vault draft → Wesley review → publish (checkpoint)
-- [ ] 02-09-PLAN.md — Wave 4: Pre-launch audit (microformats, RSS items, PRIV-01/02, draft filter, internal links) + 02-VALIDATION-REPORT.md
+- [x] 02-09-PLAN.md — Wave 4: Pre-launch audit (microformats, RSS items, PRIV-01/02, draft filter, internal links) + 02-VALIDATION-REPORT.md
 
 **UI hint**: yes
 
