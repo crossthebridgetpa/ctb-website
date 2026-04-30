@@ -6,7 +6,9 @@ tags:
   - indieweb
   - writing
   - design
-related: []
+related:
+  - why-astro-over-next
+  - thesis
 draft: false
 featured: false
 status: budding

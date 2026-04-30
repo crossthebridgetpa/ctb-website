@@ -6,7 +6,9 @@ tags:
   - astro
   - freedom-tech
   - tooling
-related: []
+related:
+  - why-self-host-umami
+  - thesis
 draft: false
 featured: false
 status: budding
