@@ -6,7 +6,9 @@ tags:
   - ai
   - open-source
   - freedom-tech
-related: []
+related:
+  - thesis
+  - why-astro-over-next
 draft: false
 featured: false
 status: seedling

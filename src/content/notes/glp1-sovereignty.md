@@ -5,7 +5,9 @@ published: "2026-04-28"
 tags:
   - health
   - sovereignty
-related: []
+related:
+  - sovereignty-as-a-service
+  - thesis
 draft: false
 featured: false
 status: seedling

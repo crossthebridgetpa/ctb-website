@@ -6,7 +6,9 @@ tags:
   - privacy
   - analytics
   - self-hosting
-related: []
+related:
+  - thesis
+  - why-astro-over-next
 draft: false
 featured: false
 status: budding

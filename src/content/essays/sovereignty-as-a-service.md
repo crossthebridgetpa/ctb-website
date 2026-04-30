@@ -8,7 +8,9 @@ tags:
   - sovereignty
   - consulting
   - bitcoin
-related: []
+related:
+  - thesis
+  - glp1-sovereignty
 draft: false
 featured: true
 ---

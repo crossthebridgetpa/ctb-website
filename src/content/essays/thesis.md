@@ -8,7 +8,9 @@ tags:
   - bitcoin
   - privacy
   - sovereignty
-related: []
+related:
+  - sovereignty-as-a-service
+  - why-self-host-umami
 draft: false
 featured: true
 ---
