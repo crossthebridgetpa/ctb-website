@@ -60,7 +60,23 @@ const {
 // Per 01-04-UMAMI-DECISION.md option B, the website ID is currently blank, so
 // the script tag is inert until Wesley populates PUBLIC_UMAMI_WEBSITE_ID in
 // Vercel. Wiring the block now makes the activation a pure env-var change.
-const umamiHost = import.meta.env.PUBLIC_UMAMI_HOST;
+// WR-03: validate PUBLIC_UMAMI_HOST at build time.
+//   - Unset (undefined or '') -> skip Umami silently (analytics is optional).
+//   - Set + malformed -> throw at build (per locked decision: "no silent failures").
+//   - Set + valid -> strip trailing slashes so `${host}/script.js` is well-formed.
+const rawUmamiHost = import.meta.env.PUBLIC_UMAMI_HOST;
+let umamiHost: string | undefined;
+if (rawUmamiHost && rawUmamiHost.length > 0) {
+  try {
+    new URL(rawUmamiHost);
+  } catch {
+    throw new Error(
+      `BaseLayout: PUBLIC_UMAMI_HOST is set but not a valid URL: "${rawUmamiHost}". ` +
+        `Set to an https URL like https://umami.example.com, or unset to disable analytics.`
+    );
+  }
+  umamiHost = rawUmamiHost.replace(/\/+$/, '');
+}
 const umamiId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 ---
 <!doctype html>
