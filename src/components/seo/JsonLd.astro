@@ -30,6 +30,29 @@ if (!Astro.site) {
 }
 const siteUrl = Astro.site.toString().replace(/\/$/, '');
 
+/**
+ * CR-03: fail loud at build time when required Schema.org fields are missing
+ * or empty. Per Wesley's locked decision in 02.1-CONTEXT.md: "I don't want
+ * things to fail silently." Bad frontmatter fails astro build / Vercel deploy
+ * instead of shipping corrupt JSON-LD.
+ */
+function requireFields(
+  schemaName: string,
+  data: Record<string, unknown>,
+  fields: readonly string[]
+): void {
+  for (const f of fields) {
+    const v = data[f];
+    if (v === undefined || v === null || v === '') {
+      throw new Error(
+        `JsonLd: required ${schemaName} field "${f}" is missing or empty. ` +
+          `Caller must supply this in the data prop. ` +
+          `Page: ${Astro.url?.pathname ?? '(unknown)'}.`
+      );
+    }
+  }
+}
+
 // Person @id is pinned to the canonical apex (intentional graph-stable identity
 // per RESEARCH §JSON-LD line 433). Repointed to wesleyschlemmer.com 2026-04-27
 // per D-20 (was crossthebridge.io pre-pivot). This is the ONLY hardcoded
@@ -77,12 +100,14 @@ if (schema === 'website') {
 } else if (schema === 'blog-posting') {
   // CD-10: per-essay BlogPosting with author @id ref to the Person graph node.
   // mainEntityOfPage points back at the WebSite for graph-stable identity.
+  // CR-03: required fields validated up front — silent '' defaults removed.
+  requireFields('BlogPosting', data, ['headline', 'datePublished', 'description']);
   const blogPosting: BlogPosting = {
     '@type': 'BlogPosting',
-    headline: (data.headline as string) ?? '',
-    datePublished: (data.datePublished as string) ?? '',
+    headline: data.headline as string,
+    datePublished: data.datePublished as string,
     dateModified: data.dateModified as string | undefined,
-    description: (data.description as string) ?? '',
+    description: data.description as string,
     author: { '@id': PERSON_ID } as any,
     publisher: { '@id': PERSON_ID } as any,
     mainEntityOfPage: { '@id': `${siteUrl}/#website` } as any,
@@ -92,11 +117,13 @@ if (schema === 'website') {
 } else if (schema === 'article') {
   // CD-10: notes use lighter Article schema (no headline-vs-name disambiguation,
   // no publisher requirement). Author still points at PERSON_ID for consistency.
+  // CR-03: required fields validated up front — silent '' defaults removed.
+  requireFields('Article', data, ['headline', 'datePublished', 'description']);
   const article: Article = {
     '@type': 'Article',
-    headline: (data.headline as string) ?? '',
-    datePublished: (data.datePublished as string) ?? '',
-    description: (data.description as string) ?? '',
+    headline: data.headline as string,
+    datePublished: data.datePublished as string,
+    description: data.description as string,
     author: { '@id': PERSON_ID } as any,
     ...data,
   };
