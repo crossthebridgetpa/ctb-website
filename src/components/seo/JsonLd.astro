@@ -113,4 +113,5 @@ if (schema === 'website') {
   json = { '@context': 'https://schema.org', ...fallback, ...data };
 }
 ---
-<script is:inline type="application/ld+json" set:html={JSON.stringify(json)} />
+<!-- CR-01: escape </script> sequences against latent script-injection vector -->
+<script is:inline type="application/ld+json" set:html={JSON.stringify(json).replace(/<\/script>/gi, '<\\/script>')} />
