@@ -107,3 +107,13 @@ Phases execute in numeric order: 1 → 2
 *Roadmap originally created: 2026-04-25 (then titled "crossthebridge.io Personal Site Overhaul" with 3 phases including Consulting Subsection)*
 *Repointed 2026-04-27: pivoted to wesleyschlemmer.com personal hub; Phase 3 Consulting Subsection moved out as separate future project (CTB Brand Site)*
 *Granularity: coarse (2 v1 phases; CTB Brand Site as future project; v1.x Discovery Surface deferred)*
+
+### Phase 02.1: Verification debt cleanup — 8 code-review nits from 02-VERIFICATION.md (INSERTED)
+
+**Goal:** [Urgent work - to be planned]
+**Requirements**: TBD
+**Depends on:** Phase 02
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd-plan-phase 02.1 to break down)
