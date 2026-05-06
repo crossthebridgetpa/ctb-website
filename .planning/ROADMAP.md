@@ -110,10 +110,16 @@ Phases execute in numeric order: 1 → 2
 
 ### Phase 02.1: Verification debt cleanup — 8 code-review nits from 02-VERIFICATION.md (INSERTED)
 
-**Goal:** [Urgent work - to be planned]
-**Requirements**: TBD
+**Goal:** Apply the 8 code-review nits tracked in 02-VERIFICATION.md (CR-01/02/03, WR-01/02/03/07, IN-02) as atomic commits. Phase succeeds when all 8 fixes land, `astro check` passes 0/0/0, and existing Playwright tests still pass.
+**Requirements**: CR-01, CR-02, CR-03, WR-01, WR-02, WR-03, WR-07, IN-02 (verification-debt IDs from 02-VERIFICATION.md, not REQUIREMENTS.md)
 **Depends on:** Phase 02
-**Plans:** 0 plans
+**Plans:** 7 plans
 
 Plans:
-- [ ] TBD (run /gsd-plan-phase 02.1 to break down)
+- [ ] 02.1-01-PLAN.md — CR-01 — JsonLd.astro </script> escape (wave 1)
+- [ ] 02.1-02-PLAN.md — CR-02 — NoteLayout.astro dt-published vs dt-updated separation (wave 2; depends on 02.1-07 — same file as IN-02)
+- [ ] 02.1-03-PLAN.md — CR-03 — JsonLd.astro fail-loud on missing BlogPosting/Article fields (wave 2; depends on 02.1-01 — same file)
+- [ ] 02.1-04-PLAN.md — WR-01 + WR-02 (combined) — relations.ts slug warnings + stop-at-first-hit (wave 1)
+- [ ] 02.1-05-PLAN.md — WR-03 — BaseLayout.astro Umami env URL validation + trailing-slash normalization (wave 1)
+- [ ] 02.1-06-PLAN.md — WR-07 — content.config.ts kebab-case Zod refinement for tags (wave 1)
+- [ ] 02.1-07-PLAN.md — IN-02 — Date formatting UTC pin (NoteLayout.astro + EssayLayout.astro) (wave 1)
