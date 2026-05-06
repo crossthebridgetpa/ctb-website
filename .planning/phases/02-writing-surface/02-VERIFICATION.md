@@ -107,13 +107,13 @@ Step 7b: SKIPPED — server required for `astro dev` / `astro build` output veri
 
 ### Anti-Patterns Found
 
-| File | Line | Pattern | Severity | Impact |
-|------|------|---------|----------|--------|
-| `src/components/seo/JsonLd.astro` | 116 | `set:html={JSON.stringify(json)}` — raw JSON without `</script>` escaping | Warning | Not a current exploit (trusted authorship), but a latent script-injection vector if any frontmatter field ever contains `</script>`. See CR-01 in 02-REVIEW.md. |
-| `src/layouts/NoteLayout.astro` | 59 | `dt-published` class applied to `displayDate = updated ?? published` — mislabels updated date as published date | Warning | Breaks h-entry microformat correctness when a note has both `published` and `updated` dates. No current notes have `updated` set, so latent today. See CR-02 in 02-REVIEW.md. |
-| `src/components/seo/JsonLd.astro` | 80-103 | Required Schema.org fields default to empty string (`?? ''`) if caller omits them | Warning | Current callers (EssayLayout, NoteLayout) pass them correctly; latent bug for future callers. See CR-03 in 02-REVIEW.md. |
-| `src/lib/relations.ts` | 27-45 | Silently emits duplicate entries if slug exists in both collections; silently drops missing slugs | Warning | Current content has no slug collisions; missing slugs produce no build warning. See WR-01 / WR-02 in 02-REVIEW.md. |
-| `src/layouts/BaseLayout.astro` | 88-95 | Umami `src` template literal fragile to env-var format (no URL validation, no trailing-slash normalization) | Warning | Analytics silent failure on bad env var; does not affect any goal-critical behavior. See WR-03 in 02-REVIEW.md. |
+| File | Line | Pattern | Severity | Impact | Status |
+|------|------|---------|----------|--------|--------|
+| `src/components/seo/JsonLd.astro` | 116 | `set:html={JSON.stringify(json)}` — raw JSON without `</script>` escaping | Warning | Not a current exploit (trusted authorship), but a latent script-injection vector if any frontmatter field ever contains `</script>`. See CR-01 in 02-REVIEW.md. | RESOLVED in 02.1-01 — `JSON.stringify(json).replace(/<\/script>/gi, '<\\/script>')` |
+| `src/layouts/NoteLayout.astro` | 59 | `dt-published` class applied to `displayDate = updated ?? published` — mislabels updated date as published date | Warning | Breaks h-entry microformat correctness when a note has both `published` and `updated` dates. No current notes have `updated` set, so latent today. See CR-02 in 02-REVIEW.md. | RESOLVED in 02.1-02 — separate `<time class="dt-published">` and `<time class="dt-updated">` elements |
+| `src/components/seo/JsonLd.astro` | 80-103 | Required Schema.org fields default to empty string (`?? ''`) if caller omits them | Warning | Current callers (EssayLayout, NoteLayout) pass them correctly; latent bug for future callers. See CR-03 in 02-REVIEW.md. | RESOLVED in 02.1-03 — `requireFields()` throws at build for missing BlogPosting/Article required fields |
+| `src/lib/relations.ts` | 27-45 | Silently emits duplicate entries if slug exists in both collections; silently drops missing slugs | Warning | Current content has no slug collisions; missing slugs produce no build warning. See WR-01 / WR-02 in 02-REVIEW.md. | RESOLVED in 02.1-04 — `console.warn` for missing + duplicate slugs; sequential stop-at-first-hit loop |
+| `src/layouts/BaseLayout.astro` | 88-95 | Umami `src` template literal fragile to env-var format (no URL validation, no trailing-slash normalization) | Warning | Analytics silent failure on bad env var; does not affect any goal-critical behavior. See WR-03 in 02-REVIEW.md. | RESOLVED in 02.1-05 — `new URL()` validation + `replace(/\/+$/, '')` trailing-slash normalize; throws at build on malformed |
 
 **Stub classification note:** None of the above constitute render-blocking stubs. All anti-patterns are latent code-quality issues or edge-case bugs. No file returns `null`, `{}`, `[]`, or placeholder text as its primary output. All anti-patterns are pre-launch advisory items documented in 02-REVIEW.md.
 
@@ -151,18 +151,18 @@ Step 7b: SKIPPED — server required for `astro dev` / `astro build` output veri
 
 ### Known Concerns (Advisory — Pre-Launch Cleanup)
 
-The following issues from 02-REVIEW.md are code quality concerns to address before the site is announced publicly. They do not block phase goal achievement (writing surface is live, RSS works, cross-linking works), but should be fixed before attracting sustained peer traffic:
+**All 8 code-review nits below were closed by Phase 02.1 (verification-debt-cleanup) on 2026-05-06.** See `.planning/phases/02.1-verification-debt-cleanup/02.1-VERIFICATION.md` for the full audit trail and per-nit grep evidence.
 
 **Critical priority (fix before public launch announcement):**
-- **CR-01** — JsonLd.astro: escape `</script>` sequences in JSON.stringify output (security hygiene)
-- **CR-02** — NoteLayout.astro: correct `dt-published` mislabel when `updated` date is set (microformat correctness)
-- **CR-03** — JsonLd.astro: fail loud at build time when required BlogPosting fields are missing
+- ~~**CR-01**~~ — JsonLd.astro: escape `</script>` sequences in JSON.stringify output (security hygiene) — **RESOLVED in 02.1-01**
+- ~~**CR-02**~~ — NoteLayout.astro: correct `dt-published` mislabel when `updated` date is set (microformat correctness) — **RESOLVED in 02.1-02**
+- ~~**CR-03**~~ — JsonLd.astro: fail loud at build time when required BlogPosting fields are missing — **RESOLVED in 02.1-03**
 
 **Warning priority (fix before content volume grows):**
-- **WR-01/WR-02** — relations.ts: add console.warn for missing/duplicated slugs; stop-at-first-hit per slug
-- **WR-03** — BaseLayout.astro: validate Umami env var URL format before emitting
-- **WR-07** — tags.ts: add Zod regex refinement for kebab-case-only tags
-- **IN-02** — Date formatting: pin `timeZone: 'UTC'` in `toLocaleDateString` for deterministic build output
+- ~~**WR-01/WR-02**~~ — relations.ts: add console.warn for missing/duplicated slugs; stop-at-first-hit per slug — **RESOLVED in 02.1-04**
+- ~~**WR-03**~~ — BaseLayout.astro: validate Umami env var URL format before emitting — **RESOLVED in 02.1-05**
+- ~~**WR-07**~~ — tags.ts / content.config.ts: Zod regex refinement for kebab-case-only tags — **RESOLVED in 02.1-06** (applied at content.config.ts schema chokepoint)
+- ~~**IN-02**~~ — Date formatting: pin `timeZone: 'UTC'` in `toLocaleDateString` for deterministic build output — **RESOLVED in 02.1-07**
 
 ### Gaps Summary
 
