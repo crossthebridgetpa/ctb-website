@@ -36,8 +36,9 @@ const slug = entry.id.replace(/\.md$/, '');
 const canonical = `/essays/${slug}`;
 const relatedEntries = await resolveRelated(related);
 
+// IN-02: pin UTC so build output is identical across laptop / CI / Vercel.
 const dateFmt = (d: Date) =>
-  d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
 ---
 <BaseLayout
   title={title}

@@ -37,8 +37,9 @@ const canonical = `/notes/${slug}`;
 const relatedEntries = await resolveRelated(related);
 const displayDate = updated ?? published;
 
+// IN-02: pin UTC so build output is identical across laptop / CI / Vercel.
 const dateFmt = (d: Date) =>
-  d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
 ---
 <BaseLayout
   title={title}
