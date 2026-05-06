@@ -26,13 +26,26 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+/**
+ * WR-07: tags must be strict kebab-case — lowercase letters + single hyphens.
+ * No digits, no underscores, no leading/trailing hyphens, no double hyphens.
+ * Catches authoring typos at build time (Bitcoin vs bitcoin; self_host vs self-host).
+ * Verified against the existing corpus 2026-05-06 — every published tag matches.
+ */
+const kebabCaseTag = z
+  .string()
+  .regex(
+    /^[a-z]+(-[a-z]+)*$/,
+    'Tag must be strict kebab-case: lowercase letters with single hyphens (e.g. "freedom-tech"). No digits, no underscores, no leading/trailing hyphens.'
+  );
+
 const baseSchema = z.object({
   title: z.string(),
   description: z.string(),
   published: z.coerce.date(),
   updated: z.coerce.date().optional(),
   subtitle: z.string().optional(),
-  tags: z.array(z.string()).default([]),
+  tags: z.array(kebabCaseTag).default([]),
   related: z.array(z.string()).default([]),
   draft: z.boolean().default(false),
   featured: z.boolean().default(false),
