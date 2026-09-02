@@ -416,6 +416,46 @@
       font-weight: 500;
     }
 
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--cream); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .testimonial-card {
+      background: var(--cream-card);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 2px 8px rgba(28, 26, 22, 0.06), 0 0 0 1px rgba(28, 26, 22, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .testimonial-card:last-child { grid-column: 1 / -1; max-width: 620px; margin: 0 auto; }
+    .testimonial-quote {
+      font-size: 0.95rem;
+      color: var(--charcoal-mid);
+      line-height: 1.75;
+      font-style: italic;
+    }
+    .testimonial-quote p + p { margin-top: 14px; }
+    .testimonial-author {
+      border-top: 1px solid var(--cream-border);
+      padding-top: 16px;
+    }
+    .testimonial-name {
+      font-weight: 700;
+      color: var(--charcoal);
+      font-size: 0.9rem;
+    }
+    .testimonial-role {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+
     /* ── OFFER / PRICING ── */
     .offer { background: var(--cream); }
     .pricing-grid {
@@ -620,7 +660,9 @@
       .problem-layout,
       .who-grid,
       .pricing-grid,
+      .testimonials-grid,
       .founder-layout { grid-template-columns: 1fr; gap: 32px; }
+      .testimonial-card:last-child { max-width: none; }
       .steps { grid-template-columns: 1fr; gap: 32px; }
       .results-grid { grid-template-columns: 1fr; gap: 40px; }
       .step-connector { display: none; }
@@ -760,6 +802,49 @@
       <div class="result-stat">
         <div class="result-number">14</div>
         <div class="result-label">Days to fully operational<br>from first discovery call</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner">
+    <span class="section-label">In Their Words</span>
+    <h2>Hear it from the people who hired us.</h2>
+    <p class="lead" style="margin: 0 auto;">Verified feedback from Cross The Bridge clients.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">
+          <p>"We hired Wesley to implement locally run agents in our appraisal process after our own attempt to navigate it was a bust. Not only did it free us to focus on what we do best, the automation he built has cut significant time out of data collection, reporting, editing, and review.</p>
+          <p>He built custom agent skills around our actual workflow and gave us a dedicated bot we can reach from the field. The workflow now kicks off while we're en route to an inspection. We dictate inspection notes, flag questions for research, and upload photos on site, then get back to the office with several hours of work already finished.</p>
+          <p>We've also implemented a review process that checks our valuation methodology, tests our analysis, and verifies USPAP compliance before anything goes out. Everything runs on our own hardware, so we keep all our own documents. The result is a better report to our clients in far less time with fewer follow-up inquiries."</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Kevin M.</div>
+          <div class="testimonial-role">Sound Valuation · Tampa, Florida</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">
+          <p>"Wes doesn't just open the door. He also hands you the key, the map and the gas money. Wes helped me connect the dots on the platform I was building, which is what actually got my films to market faster and won awards. His concierge AI service cuts through the noise and gives you the leverage you need to ship."</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Esteban V.</div>
+          <div class="testimonial-role">Nomus Productions · St. Petersburg, Florida</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">
+          <p>"A trusted partner that delivered time and money saving solutions for my business.</p>
+          <p>Commercial roof project estimating used to eat my week. Every bid meant hours of blueprint review, hand-counting penetrations, and material math where a single miss could cost real money. Wesley designed the AI system that changed that.</p>
+          <p>He didn't hand me a generic chatbot. He learned my industry fast. My documents, workflow, even the edge cases that trip up everyone else and built a working architecture around it. The data schema, the pipeline, the whole backbone. Now bids that took days come together in hours, with the math checked instead of trusted.</p>
+          <p>Working with him is super easy! Fast answers, clear technical decisions, zero fluff, and a smile along the way. He builds real systems, not demos."</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Jason J.</div>
+          <div class="testimonial-role">America's Best Commercial Roofing and Maintenance Consultants, LLC</div>
+        </div>
       </div>
     </div>
   </div>
