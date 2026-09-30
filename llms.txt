@@ -6,9 +6,8 @@ Founded and run by Wesley Schlemmer (Founder, Cross The Bridge — Tampa Bay, FL
 
 ## Services and pricing
 
-- Discovery & AI Audit — $499, credited toward future setup costs. Maps your top time sinks and workflows, 3-5 specific tool recommendations with pricing, prioritized implementation roadmap, estimated time savings per recommendation.
-- Starter AI — $1,500 setup + $150/mo retainer. One core AI workflow automated, custom training on your business, 30-day implementation window, monthly optimization calls, email support, weekly AI update newsletter.
-- Full Implementation — $3,000 setup + $250/mo retainer. 3-5 automated workflows, full business knowledge training, priority 30-day implementation, bi-weekly strategy calls, 24/7 monitoring and support, quarterly growth reviews.
+- Discovery & AI Audit: $499, one time. Maps your top time sinks and workflows, 3-5 specific tool recommendations with pricing, prioritized implementation roadmap, estimated time savings per recommendation.
+- AI Concierge: $1,500-2,000/month, no long-term contract. Two 45-minute done-with-you Zoom sessions a month, side by side with the owner, turning manual processes into Claude skills. The client owns everything; nothing runs on Cross The Bridge servers.
 
 No long-term contracts.
 

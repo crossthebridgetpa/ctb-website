@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cross The Bridge — AI That Actually Works For Your Business</title>
-  <meta name="description" content="Tampa Bay AI implementation agency. We build, train, and maintain AI agents for owner-operated businesses — from a $499 AI audit to full implementation." />
+  <meta name="description" content="Tampa Bay AI implementation agency. We build, train, and maintain AI agents for owner-operated businesses — from a $499 AI audit to a monthly AI concierge." />
   <link rel="canonical" href="https://www.crossthebridge.io/" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Cross The Bridge" />
   <meta property="og:title" content="Cross The Bridge — AI That Actually Works For Your Business" />
-  <meta property="og:description" content="Tampa Bay AI implementation agency. We build, train, and maintain AI agents for owner-operated businesses — from a $499 AI audit to full implementation." />
+  <meta property="og:description" content="Tampa Bay AI implementation agency. We build, train, and maintain AI agents for owner-operated businesses — from a $499 AI audit to a monthly AI concierge." />
   <meta property="og:url" content="https://www.crossthebridge.io/" />
   <meta property="og:image" content="https://www.crossthebridge.io/wesley-headshot.jpg" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Cross The Bridge — AI That Actually Works For Your Business" />
-  <meta name="twitter:description" content="Tampa Bay AI implementation agency. We build, train, and maintain AI agents for owner-operated businesses — from a $499 AI audit to full implementation." />
+  <meta name="twitter:description" content="Tampa Bay AI implementation agency. We build, train, and maintain AI agents for owner-operated businesses — from a $499 AI audit to a monthly AI concierge." />
   <meta name="twitter:image" content="https://www.crossthebridge.io/wesley-headshot.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,7 +32,7 @@
         "url": "https://www.crossthebridge.io/",
         "description": "AI implementation agency that builds, trains, and maintains AI agents for Tampa Bay businesses.",
         "areaServed": "Tampa Bay, FL",
-        "priceRange": "$499-$3,000 setup",
+        "priceRange": "$499 audit, $1,500-$2,000/mo concierge",
         "email": "wesley@crossthebridge.io",
         "image": "https://www.crossthebridge.io/wesley-headshot.jpg",
         "founder": { "@id": "https://www.crossthebridge.io/#wesley" },
@@ -64,6 +64,7 @@
     ]
   }
   </script>
+  <script defer src="https://umami.crossthebridge.io/script.js" data-website-id="e3ac4078-defa-46e1-bca2-667982b5a24e" data-domains="crossthebridge.io,www.crossthebridge.io"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -460,9 +461,9 @@
     .offer { background: var(--cream); }
     .pricing-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 28px;
-      max-width: 1020px;
+      max-width: 760px;
       margin: 56px auto 0;
     }
     .pricing-card {
@@ -653,7 +654,8 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .nav-links { display: none; }
+      .nav-links { gap: 0; }
+      .nav-links a:not(.btn-nav) { display: none; }
       section { padding: 72px 24px; }
       .proof-strip { padding: 20px 24px; gap: 24px; }
       .proof-divider { display: none; }
@@ -679,7 +681,7 @@
     <a href="#how">How It Works</a>
     <a href="#pricing">Pricing</a>
     <a href="#founder">About</a>
-    <a href="#contact" class="btn-nav">Book a Call</a>
+    <a href="#contact" class="btn-nav" data-umami-event="nav-book-call">Book a Call</a>
   </div>
 </nav>
 
@@ -690,7 +692,7 @@
     <h1>AI That <em>Finally</em> Works<br>For Your Business</h1>
     <p class="hero-sub">We build, train, and maintain AI agents for Tampa Bay businesses and beyond. You get more time, more revenue, and zero tech headaches. We handle everything else.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Book a Free Discovery Call</a>
+      <a href="#contact" class="btn-primary" data-umami-event="hero-book-call">Book a Free Discovery Call</a>
       <a href="#how" class="btn-secondary">See How It Works</a>
     </div>
     <p class="hero-trust">Trusted by Tampa Bay businesses · No long-term contracts</p>
@@ -855,51 +857,33 @@
   <div class="section-inner" style="text-align:center;">
     <span class="section-label">Investment</span>
     <h2>Transparent pricing.<br>No surprises.</h2>
-    <p class="lead" style="margin: 0 auto;">Three ways to work together. From audit through full implementation, training, and ongoing support.</p>
+    <p class="lead" style="margin: 0 auto;">Two ways to work together. Start with the audit. Stay for the concierge.</p>
     <div class="pricing-grid">
-    <div class="pricing-card featured">
-        <span class="pricing-tag">First Steps</span>
-        <h3>Discovery & AI Audit</h3>
+      <div class="pricing-card">
+        <span class="pricing-tag">Start Here</span>
+        <h3>Discovery &amp; AI Audit</h3>
         <div class="pricing-price">$499</div>
-        <div class="pricing-period">Applies to future setup costs</div>
+        <div class="pricing-period">one time</div>
         <ul class="pricing-features">
           <li>Map your top time sinks and workflows</li>
           <li>3-5 specific tool recommendations with pricing</li>
           <li>Prioritized implementation roadmap</li>
           <li>Estimated time savings per recommendation</li>
         </ul>
-        <a href="#contact" class="btn-pricing btn-pricing-solid">Start Here</a>
-      </div>      
-    <div class="pricing-card">
-        <span class="pricing-tag">Foundation</span>
-        <h3>Starter AI</h3>
-        <div class="pricing-price">$1,500</div>
-        <div class="pricing-period">setup + $150/mo retainer</div>
-        <ul class="pricing-features">
-          <li>1 core AI workflow automated</li>
-          <li>Custom training on your business</li>
-          <li>30-day implementation window</li>
-          <li>Monthly optimization calls</li>
-          <li>Email support</li>
-          <li>Weekly AI update newsletter</li>
-        </ul>
-        
-        <a href="#contact" class="btn-pricing btn-pricing-outline">Start Here</a>
+        <a href="#contact" class="btn-pricing btn-pricing-outline" data-umami-event="pricing-audit">Start With the Audit</a>
       </div>
       <div class="pricing-card featured">
-        <span class="pricing-tag">Most Popular</span>
-        <h3>Full Implementation</h3>
-        <div class="pricing-price">$3,000</div>
-        <div class="pricing-period">setup + $250/mo retainer</div>
+        <span class="pricing-tag">Ongoing</span>
+        <h3>AI Concierge</h3>
+        <div class="pricing-price">$1,500&ndash;2,000</div>
+        <div class="pricing-period">per month &middot; no long-term contract</div>
         <ul class="pricing-features">
-          <li>3–5 automated workflows</li>
-          <li>Full business knowledge training</li>
-          <li>Priority 30-day implementation</li>
-          <li>Bi-Weekly strategy calls</li>
-          <li>24/7 monitoring & support</li>
-          <li>Quarterly growth reviews</li>
+          <li>Two 45-minute working sessions a month</li>
+          <li>Side by side with you on Zoom, not behind a curtain</li>
+          <li>Your manual processes turned into Claude skills</li>
+          <li>You own everything we build. Nothing runs on our servers.</li>
         </ul>
-        <a href="#contact" class="btn-pricing btn-pricing-solid">Book a Discovery Call</a>
+        <a href="#contact" class="btn-pricing btn-pricing-solid" data-umami-event="pricing-concierge">Book a Discovery Call</a>
       </div>
     </div>
   </div>
@@ -937,7 +921,8 @@
     <span class="section-label">Ready to Cross?</span>
     <h2>Let's talk about your business</h2>
     <p class="lead">Free 15-minute discovery call. We'll map your highest-leverage AI opportunities and tell you exactly what's possible - no pitch, no pressure.</p>
-    <a href="https://app.usemotion.com/meet/crossthebridge/intro?d=15" class="btn-primary" style="font-size:1.05rem; padding: 18px 44px;" target="_blank" rel="noopener">Book Your Free Discovery Call</a>
+    <a href="https://app.usemotion.com/meet/crossthebridge/intro?d=15" class="btn-primary" style="font-size:1.05rem; padding: 18px 44px;" target="_blank" rel="noopener" data-umami-event="motion-booking">Book Your Free Discovery Call</a>
+    <p style="margin-top: 22px; color: rgba(247,243,236,0.6); font-size: 0.95rem;">Rather write first? Email <a href="mailto:wesley@crossthebridge.io" style="color: var(--gold-light);" data-umami-event="final-cta-email">wesley@crossthebridge.io</a>.</p>
 
 
   </div>
@@ -950,7 +935,7 @@
     <a href="#how">How It Works</a>
     <a href="#pricing">Pricing</a>
     <a href="#founder">About Wesley</a>
-    <a href="mailto:wesley@crossthebridge.io">wesley@crossthebridge.io</a>
+    <a href="mailto:wesley@crossthebridge.io" data-umami-event="footer-email">wesley@crossthebridge.io</a>
     <a href="/sms-terms">SMS Terms &amp; Privacy</a>
   </div>
   <span style="font-size:0.8rem;">© 2026 Cross The Bridge · Tampa Bay, FL</span>
