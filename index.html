@@ -543,6 +543,16 @@
       color: var(--charcoal);
     }
     .btn-pricing-solid:hover { background: var(--gold-light); }
+    .pricing-more {
+      display: block; text-align: center;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--green);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .pricing-more:hover { color: var(--green-light); }
 
     /* ── FOUNDER ── */
     .founder { background: var(--cream); }
@@ -871,6 +881,7 @@
           <li>Estimated time savings per recommendation</li>
         </ul>
         <a href="#contact" class="btn-pricing btn-pricing-outline" data-umami-event="pricing-audit">Start With the Audit</a>
+        <a href="/audit" class="pricing-more" data-umami-event="pricing-audit-details">See what goes into the audit</a>
       </div>
       <div class="pricing-card featured">
         <span class="pricing-tag">Ongoing</span>
