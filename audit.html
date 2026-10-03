@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Goes Into an AI Audit | Cross The Bridge</title>
+  <meta name="description" content="What the $499 Cross The Bridge AI audit includes: the two calls, the questions we ask, the written report you keep, and how we decide what to fix first." />
+  <link rel="canonical" href="https://www.crossthebridge.io/audit" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Cross The Bridge" />
+  <meta property="og:title" content="What Goes Into an AI Audit | Cross The Bridge" />
+  <meta property="og:description" content="Two calls, one written report, a ranked list of what to fix first. Here is exactly what the $499 AI audit includes." />
+  <meta property="og:url" content="https://www.crossthebridge.io/audit" />
+  <meta property="og:image" content="https://www.crossthebridge.io/wesley-headshot.jpg" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="What Goes Into an AI Audit | Cross The Bridge" />
+  <meta name="twitter:description" content="Two calls, one written report, a ranked list of what to fix first. Here is exactly what the $499 AI audit includes." />
+  <meta name="twitter:image" content="https://www.crossthebridge.io/wesley-headshot.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": "https://www.crossthebridge.io/audit#service",
+        "name": "Discovery & AI Audit",
+        "serviceType": "AI audit for owner-operated businesses",
+        "description": "A two-call audit of how a business runs today, ending in a written report with ranked findings, tool recommendations with pricing, estimated time savings, and a prioritized roadmap.",
+        "provider": { "@id": "https://www.crossthebridge.io/#org" },
+        "areaServed": "Tampa Bay, FL",
+        "offers": {
+          "@type": "Offer",
+          "price": "499",
+          "priceCurrency": "USD",
+          "url": "https://www.crossthebridge.io/audit"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Cross The Bridge", "item": "https://www.crossthebridge.io/" },
+          { "@type": "ListItem", "position": 2, "name": "AI Audit", "item": "https://www.crossthebridge.io/audit" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do I need to be technical to get an AI audit?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. The audit is a conversation about how your business runs. You describe your work and show it on a screen share. We handle the technical side and write the report in plain language." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you need access to my systems or customer data?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. The audit runs on conversation and a screen share of your own workflow. We do not need logins, and you can choose what to show. For regulated industries we stay on back-office work and never touch client data." }
+          },
+          {
+            "@type": "Question",
+            "name": "What if the audit finds nothing worth automating?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Then the report says so. Sometimes the best advice is to protect the part that already works, fix a broken process first, or simplify what is around it. The report is a diagnosis, not a sales pitch." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I have to hire you after the audit?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. The report is yours and every first step in it can be done without us. If you want help doing the work, the AI Concierge is two 45-minute working sessions a month, side by side with you, with no long-term contract." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the audit build anything?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. The audit diagnoses and prescribes. Building starts only after you have the report and choose to go further." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <script defer src="https://umami.crossthebridge.io/script.js" data-website-id="e3ac4078-defa-46e1-bca2-667982b5a24e" data-domains="crossthebridge.io,www.crossthebridge.io"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:        #F7F3EC;
+      --cream-card:   #EDE8DE;
+      --cream-border: #DDD5C4;
+      --charcoal:     #1C1A16;
+      --charcoal-mid: #3A3730;
+      --muted:        #6A6050;
+      --green:        #2D4A3E;
+      --green-dark:   #1A2E28;
+      --green-light:  #3D6254;
+      --gold:         #C8A96E;
+      --gold-light:   #E2C98A;
+      --white:        #FDFAF5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(247, 243, 236, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--cream-border);
+      padding: 0 48px;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--charcoal);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--green); }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--charcoal); }
+    .btn-nav {
+      background: var(--green);
+      color: var(--cream) !important;
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-size: 0.875rem !important;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .btn-nav:hover { background: var(--green-light) !important; color: var(--cream) !important; }
+
+    /* HERO */
+    .hero {
+      padding: 168px 48px 96px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 120% 80% at 50% 110%, rgba(45, 74, 62, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(200, 169, 110, 0.12) 0%, transparent 50%),
+        linear-gradient(180deg, #F2EDE3 0%, #F7F3EC 55%, #EEE8DA 100%);
+    }
+    .hero-inner { max-width: 780px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 24px;
+      padding: 6px 14px;
+      background: rgba(45, 74, 62, 0.08);
+      border-radius: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5.5vw, 3.9rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .hero h1 em { font-style: italic; color: var(--green); }
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--green);
+      color: var(--cream);
+      padding: 16px 36px;
+      border-radius: 7px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--charcoal);
+      padding: 16px 36px;
+      border-radius: 7px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1.5px solid var(--cream-border);
+      transition: border-color 0.2s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--charcoal-mid); }
+
+    /* FACT STRIP */
+    .proof-strip {
+      background: var(--green-dark);
+      padding: 22px 48px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 48px; flex-wrap: wrap;
+    }
+    .proof-item {
+      display: flex; align-items: center; gap: 12px;
+      color: rgba(247, 243, 236, 0.7);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .proof-item strong {
+      color: var(--gold-light);
+      font-size: 1.2rem;
+      font-family: 'Playfair Display', serif;
+      font-variant-numeric: lining-nums;
+    }
+    .proof-divider { width: 1px; height: 28px; background: rgba(247, 243, 236, 0.15); }
+
+    /* SECTIONS */
+    section { padding: 96px 48px; }
+    .section-inner { max-width: 1080px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 16px;
+      display: block;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+    }
+    .lead {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 640px;
+      line-height: 1.75;
+    }
+    .lead + .lead { margin-top: 20px; }
+    .center { text-align: center; }
+    .center .lead { margin-left: auto; margin-right: auto; }
+
+    /* WHAT IT IS */
+    .what { background: var(--cream); }
+    .what-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .answer-list { display: flex; flex-direction: column; gap: 14px; }
+    .answer-card {
+      background: var(--cream-card);
+      border-radius: 10px;
+      padding: 18px 24px 18px 44px;
+      box-shadow: 0 1px 3px rgba(28, 26, 22, 0.06);
+      font-size: 0.92rem;
+      color: var(--charcoal-mid);
+      position: relative;
+    }
+    .answer-card::before {
+      content: '\2192';
+      position: absolute; left: 18px; top: 17px;
+      color: var(--green);
+      font-weight: 700;
+    }
+    .answer-card strong { color: var(--charcoal); }
+
+    /* PROCESS (dark) */
+    .process { background: var(--green-dark); color: var(--cream); }
+    .process .section-label { color: var(--gold); }
+    .process h2 { color: var(--white); }
+    .process .lead { color: rgba(247, 243, 236, 0.65); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 36px;
+      margin-top: 64px;
+    }
+    .step-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: rgba(200, 169, 110, 0.25);
+      font-variant-numeric: lining-nums;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .step-title { font-size: 1.05rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .step-meta {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .step-desc { font-size: 0.9rem; color: rgba(247, 243, 236, 0.62); line-height: 1.65; }
+
+    /* QUESTIONS */
+    .questions { background: var(--cream); }
+    .q-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .q-card {
+      background: var(--cream-card);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 2px 8px rgba(28, 26, 22, 0.06), 0 0 0 1px rgba(28, 26, 22, 0.04);
+    }
+    .q-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+    .q-card .q-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
+    .q-list { list-style: none; counter-reset: q; }
+    .q-list li {
+      counter-increment: q;
+      font-size: 0.92rem;
+      color: var(--charcoal-mid);
+      padding: 10px 0 10px 34px;
+      border-bottom: 1px solid var(--cream-border);
+      position: relative;
+    }
+    .q-list li:last-child { border-bottom: none; }
+    .q-list li::before {
+      content: counter(q);
+      position: absolute; left: 0; top: 10px;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(45, 74, 62, 0.1);
+      color: var(--green);
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .q-note {
+      margin-top: 28px;
+      font-size: 0.95rem;
+      color: var(--charcoal-mid);
+      max-width: 760px;
+    }
+
+    /* REPORT */
+    .report { background: var(--cream-card); }
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .report-card {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 2px 8px rgba(28, 26, 22, 0.06), 0 0 0 1px rgba(28, 26, 22, 0.04);
+    }
+    .report-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      font-variant-numeric: lining-nums;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .report-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .report-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+
+    /* TRIAGE */
+    .triage { background: var(--cream); }
+    .triage-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .fix-list { display: flex; flex-direction: column; gap: 14px; }
+    .fix-item {
+      background: var(--cream-card);
+      border-radius: 10px;
+      padding: 18px 22px;
+      box-shadow: 0 1px 3px rgba(28, 26, 22, 0.06);
+    }
+    .fix-item h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+    .fix-item p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+
+    /* BOUNDARIES */
+    .bounds { background: var(--cream-card); }
+    .bounds-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .bound-card {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 28px 32px;
+      box-shadow: 0 2px 8px rgba(28, 26, 22, 0.06), 0 0 0 1px rgba(28, 26, 22, 0.04);
+    }
+    .bound-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .bound-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+    /* NEXT */
+    .next { background: var(--cream); }
+    .next-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      max-width: 860px;
+      margin: 56px auto 0;
+      text-align: left;
+    }
+    .next-card {
+      background: var(--cream-card);
+      border-radius: 14px;
+      padding: 36px 34px;
+      box-shadow: 0 2px 8px rgba(28, 26, 22, 0.06), 0 0 0 1px rgba(28, 26, 22, 0.04);
+    }
+    .next-card.featured {
+      background: var(--green);
+      color: var(--cream);
+      box-shadow: 0 12px 40px rgba(45, 74, 62, 0.3);
+    }
+    .next-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .next-card.featured .next-tag { color: var(--gold); }
+    .next-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 8px; }
+    .next-card.featured h3 { color: var(--white); }
+    .next-price { font-size: 1.5rem; font-weight: 700; margin: 14px 0 4px; letter-spacing: -0.02em; }
+    .next-card.featured .next-price { color: var(--gold-light); }
+    .next-card p { font-size: 0.9rem; color: var(--charcoal-mid); line-height: 1.65; }
+    .next-card.featured p { color: rgba(247, 243, 236, 0.8); }
+
+    /* FAQ */
+    .faq { background: var(--cream-card); }
+    .faq-list { max-width: 760px; margin-top: 48px; }
+    .faq-item { border-bottom: 1px solid var(--cream-border); padding: 22px 0; }
+    .faq-item:first-child { border-top: 1px solid var(--cream-border); }
+    .faq-item h3 { font-size: 1.02rem; font-weight: 600; margin-bottom: 8px; }
+    .faq-item p { font-size: 0.95rem; color: var(--charcoal-mid); line-height: 1.7; }
+
+    /* FINAL CTA */
+    .final-cta { background: var(--green-dark); text-align: center; padding: 112px 48px; }
+    .final-cta h2 { color: var(--white); margin-bottom: 16px; }
+    .final-cta .lead { color: rgba(247,243,236,0.6); margin: 0 auto 44px; }
+    .final-cta .section-label { color: var(--gold); }
+
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-actions a { display: inline-flex; align-items: center; justify-content: center; }
+    .btn-outline-light {
+      background: transparent;
+      color: var(--cream);
+      padding: 18px 44px;
+      border-radius: 7px;
+      font-size: 1.05rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1.5px solid rgba(247, 243, 236, 0.35);
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-block;
+    }
+    .btn-outline-light:hover { border-color: var(--gold-light); background: rgba(247, 243, 236, 0.06); }
+    .step-desc a { color: var(--gold-light); }
+
+    /* FOOTER */
+    footer {
+      background: var(--charcoal);
+      color: rgba(247, 243, 236, 0.5);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      color: rgba(247, 243, 236, 0.8);
+      font-size: 1rem;
+      text-decoration: none;
+    }
+    footer a { color: rgba(247, 243, 236, 0.5); text-decoration: none; font-size: 0.85rem; }
+    footer a:hover { color: rgba(247, 243, 236, 0.9); }
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .report-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { gap: 0; }
+      .nav-links a:not(.btn-nav) { display: none; }
+      .hero { padding: 132px 24px 72px; }
+      section { padding: 72px 24px; }
+      .proof-strip { padding: 20px 24px; gap: 24px; }
+      .proof-divider { display: none; }
+      .what-layout, .q-layout, .triage-layout, .bounds-grid, .next-grid { grid-template-columns: 1fr; gap: 32px; }
+      .steps, .report-grid { grid-template-columns: 1fr; gap: 32px; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Cross <span>The Bridge</span></a>
+  <div class="nav-links">
+    <a href="#process">The Process</a>
+    <a href="#report">The Report</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://app.usemotion.com/meet/crossthebridge/intro?d=15" class="btn-nav" target="_blank" rel="noopener" data-umami-event="audit-nav-book-call">Book a Call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">The $499 Discovery &amp; AI Audit</span>
+    <h1>What goes into an <em>AI audit</em></h1>
+    <p class="hero-sub">A diagnosis before any prescription. Two calls and one written report show where your business loses time, what to do about it, and in what order. That includes what to leave alone.</p>
+    <div class="hero-actions">
+      <a href="https://app.usemotion.com/meet/crossthebridge/intro?d=15" class="btn-primary" target="_blank" rel="noopener" data-umami-event="audit-hero-book-call">Book a Free 15-Minute Call</a>
+      <a href="#report" class="btn-secondary">See What's in the Report</a>
+    </div>
+  </div>
+</header>
+
+<!-- FACT STRIP -->
+<div class="proof-strip">
+  <div class="proof-item"><strong>$499</strong> one time</div>
+  <div class="proof-divider"></div>
+  <div class="proof-item"><strong>2</strong> calls plus a written report</div>
+  <div class="proof-divider"></div>
+  <div class="proof-item"><strong>3-5</strong> ranked recommendations</div>
+  <div class="proof-divider"></div>
+  <div class="proof-item"><strong>No</strong> long-term contract</div>
+</div>
+
+<!-- WHAT IT IS -->
+<section class="what">
+  <div class="section-inner">
+    <div class="what-layout">
+      <div>
+        <span class="section-label">What an Audit Is</span>
+        <h2>A diagnosis, not a demo</h2>
+        <p class="lead">An AI audit is a structured look at how your work actually moves today. It ends with a short list of changes worth making, ranked by payoff.</p>
+        <p class="lead">We build nothing during the audit. Building too early is how businesses end up with a clever tool aimed at the wrong problem.</p>
+      </div>
+      <div class="answer-list">
+        <div class="answer-card"><strong>Sometimes the answer is an off-the-shelf tool.</strong> We name it, price it, and give you the first step.</div>
+        <div class="answer-card"><strong>Sometimes it is a Claude skill</strong> built around a workflow that only your business has.</div>
+        <div class="answer-card"><strong>Sometimes the process is broken.</strong> Then we say to fix it first, because automating a bad process makes it fail faster.</div>
+        <div class="answer-card"><strong>Sometimes the answer is to leave it alone.</strong> The part that already works stays as it is.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="section-inner">
+    <span class="section-label">The Process</span>
+    <h2>Four steps, in this order</h2>
+    <p class="lead">Call one is for facts. Call two is for the recommendation. We keep them apart on purpose, so the advice comes after the work of understanding your business.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-title">Intro call</div>
+        <div class="step-meta">Free &middot; 15 min</div>
+        <p class="step-desc">You tell us what repeats, where it hurts, and what an hour of your time is worth. We tell you whether an audit fits. If it does not, we say so and you pay nothing. Want more room up front? <a href="https://app.usemotion.com/meet/crossthebridge/intro?d=30" target="_blank" rel="noopener" data-umami-event="audit-step-book-30">Book 30 minutes instead.</a></p>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-title">Call one</div>
+        <div class="step-meta">Working interview &middot; 45 min</div>
+        <p class="step-desc">We learn your goal, then map your current workflow. We ask you to show us what you do after a new job or lead lands, not what the system is supposed to do. We interrupt often. That is how we reach the slow, repetitive part.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-title">Review</div>
+        <div class="step-meta">Between the calls</div>
+        <p class="step-desc">We go through the call, pick out the problems that are both frequent and frustrating, and find the right fix for each. The written report is finished before call two.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">04</div>
+        <div class="step-title">Call two</div>
+        <div class="step-meta">Walkthrough &middot; report in hand</div>
+        <p class="step-desc">We go through the report with you. Each recommendation comes with a tool name, a cost, and the literal first step. You leave knowing what to do on Monday.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUESTIONS -->
+<section class="questions">
+  <div class="section-inner">
+    <span class="section-label">What We Ask You</span>
+    <h2>The questions behind the numbers</h2>
+    <p class="lead">Every recommendation in the report rests on your own numbers. These are the questions that produce them.</p>
+    <div class="q-layout">
+      <div class="q-card">
+        <h3>The workflow</h3>
+        <p class="q-sub">Where the time goes today</p>
+        <ol class="q-list">
+          <li>Walk me through how this works today, start to finish.</li>
+          <li>Where does it slow down or break most often?</li>
+          <li>If you could fix one thing in your business with a wave of a wand, what would it be?</li>
+          <li>What have you already tried, and what happened?</li>
+        </ol>
+      </div>
+      <div class="q-card">
+        <h3>The cost of the problem</h3>
+        <p class="q-sub">What it costs you to leave it alone</p>
+        <ol class="q-list">
+          <li>How many hours a week does your team spend on it?</li>
+          <li>Who does that work, and what do they cost per hour?</li>
+          <li>How often do things go wrong, and what does one mistake cost to fix?</li>
+          <li>What is this stopping you from doing that would grow the business?</li>
+        </ol>
+      </div>
+    </div>
+    <p class="q-note">We also take a quick inventory of the work in five areas: sales, operations, finance, marketing, and the information you rely on to make decisions. We look at the ten tools you use most and any AI you already pay for. And we ask what you would do with ten extra hours a week, because the plan points at that answer.</p>
+  </div>
+</section>
+
+<!-- REPORT -->
+<section class="report" id="report">
+  <div class="section-inner">
+    <span class="section-label">What You Get</span>
+    <h2>The written report</h2>
+    <p class="lead">A document you keep and can act on without us. Plain language, no jargon, and every number traces back to something you told us.</p>
+    <div class="report-grid">
+      <div class="report-card">
+        <div class="report-num">1</div>
+        <h3>Summary and goal</h3>
+        <p>What you are trying to achieve, where you stand today, and the main finding in one page.</p>
+      </div>
+      <div class="report-card">
+        <div class="report-num">2</div>
+        <h3>Workflow map</h3>
+        <p>How the work really moves through your business, with the points where it stalls marked.</p>
+      </div>
+      <div class="report-card">
+        <div class="report-num">3</div>
+        <h3>Ranked findings</h3>
+        <p>Three to five bottlenecks, each with how often it happens, how much friction it causes, and who it lands on.</p>
+      </div>
+      <div class="report-card">
+        <div class="report-num">4</div>
+        <h3>Recommendations with pricing</h3>
+        <p>For each finding: the tool or approach, what it costs, and the first step you can take this week.</p>
+      </div>
+      <div class="report-card">
+        <div class="report-num">5</div>
+        <h3>Estimated savings</h3>
+        <p>Hours saved per week and the dollar value, worked out from your hourly cost minus the cost of the tool. We keep the estimates conservative and show the math.</p>
+      </div>
+      <div class="report-card">
+        <div class="report-num">6</div>
+        <h3>Prioritized roadmap</h3>
+        <p>The order to do it in, quick wins first, with effort weighed against payoff.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRIAGE -->
+<section class="triage">
+  <div class="section-inner">
+    <div class="triage-layout">
+      <div>
+        <span class="section-label">How We Rank</span>
+        <h2>What goes first, and why</h2>
+        <p class="lead">We rank by two things. How often the problem happens, and how much friction it causes each time. A task that is both frequent and painful goes to the top. Then we weigh the effort of the fix against what it gives back.</p>
+        <p class="lead">Each finding then gets one of four answers.</p>
+      </div>
+      <div class="fix-list">
+        <div class="fix-item">
+          <h3>Use an off-the-shelf tool</h3>
+          <p>The problem is common and someone has already solved it well. Cheapest and fastest.</p>
+        </div>
+        <div class="fix-item">
+          <h3>Use Claude Cowork</h3>
+          <p>The problem takes judgment, and a general-purpose assistant can carry it with the right instructions.</p>
+        </div>
+        <div class="fix-item">
+          <h3>Build a Claude skill</h3>
+          <p>The workflow is specific to your business, so no product fits it. A skill captures how you do it.</p>
+        </div>
+        <div class="fix-item">
+          <h3>Fix the process first</h3>
+          <p>Steps that never needed to exist get cut before anything is automated.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOUNDARIES -->
+<section class="bounds">
+  <div class="section-inner">
+    <span class="section-label">What We Don't Do</span>
+    <h2>The limits, stated up front</h2>
+    <div class="bounds-grid">
+      <div class="bound-card">
+        <h3>We don't build during the audit</h3>
+        <p>You pay for the diagnosis and the plan. Any build is a separate decision you make with the report in hand.</p>
+      </div>
+      <div class="bound-card">
+        <h3>We don't pitch you more than you need</h3>
+        <p>If three small changes solve it, the report says three small changes. A short report is a fine outcome.</p>
+      </div>
+      <div class="bound-card">
+        <h3>We don't need your logins or customer data</h3>
+        <p>The audit runs on conversation and a screen share you control. In regulated industries we stay on back-office work and never touch client data.</p>
+      </div>
+      <div class="bound-card">
+        <h3>We don't lock you in</h3>
+        <p>No long-term contracts. The report is yours, and every first step in it can be done without us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<section class="next">
+  <div class="section-inner center">
+    <span class="section-label">After the Audit</span>
+    <h2>Two ways forward</h2>
+    <p class="lead">Most of the report can be done by you. If you want company while you do it, here is how that works.</p>
+    <div class="next-grid">
+      <div class="next-card">
+        <span class="next-tag">On your own</span>
+        <h3>Use the report</h3>
+        <p>Every recommendation names the tool, its cost, and the first step. Work through it at your own pace. Nothing further is owed.</p>
+      </div>
+      <div class="next-card featured">
+        <span class="next-tag">With us</span>
+        <h3>AI Concierge</h3>
+        <div class="next-price">$1,500&ndash;2,000 / month</div>
+        <p>Two 45-minute working sessions a month, side by side on Zoom, turning your manual processes into Claude skills. You own everything we build. No long-term contract.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-inner">
+    <span class="section-label">Questions</span>
+    <h2>Before you book</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3>Do I need to be technical?</h3>
+        <p>No. The audit is a conversation about how your business runs. You describe the work and show it on a screen share. We handle the technical side and write the report in plain language.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do you need access to my systems or customer data?</h3>
+        <p>No. The audit runs on conversation and a screen share of your own workflow. We do not need logins, and you choose what to show. For regulated industries we stay on back-office work and never touch client data.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What if the audit finds nothing worth automating?</h3>
+        <p>Then the report says so. Sometimes the best advice is to protect the part that already works, fix a broken process first, or simplify what surrounds it. The report is a diagnosis, not a sales pitch.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do I have to hire you after the audit?</h3>
+        <p>No. The report is yours and every first step in it can be done without us. If you want help doing the work, the AI Concierge is there, with no long-term contract.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Does the audit build anything?</h3>
+        <p>No. The audit diagnoses and prescribes. Building starts only after you have the report and choose to go further.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="section-inner">
+    <span class="section-label">Start Here</span>
+    <h2>Find out if an audit fits</h2>
+    <p class="lead">Book a free 15-minute call, or take 30 minutes for a full discovery call. Either way, we will tell you whether an audit makes sense for your business before you spend anything.</p>
+    <div class="cta-actions">
+      <a href="https://app.usemotion.com/meet/crossthebridge/intro?d=15" class="btn-primary" style="font-size:1.05rem; padding: 18px 44px;" target="_blank" rel="noopener" data-umami-event="audit-final-book-call">Book a Free 15-Minute Call</a>
+      <a href="https://app.usemotion.com/meet/crossthebridge/intro?d=30" class="btn-outline-light" target="_blank" rel="noopener" data-umami-event="audit-final-book-30">Book a 30-Minute Discovery Call</a>
+    </div>
+    <p style="margin-top: 22px; color: rgba(247,243,236,0.6); font-size: 0.95rem;">Rather write first? Email <a href="mailto:wesley@crossthebridge.io" style="color: var(--gold-light);" data-umami-event="audit-final-email">wesley@crossthebridge.io</a>.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo">Cross The Bridge</a>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="mailto:wesley@crossthebridge.io" data-umami-event="audit-footer-email">wesley@crossthebridge.io</a>
+    <a href="/sms-terms">SMS Terms &amp; Privacy</a>
+  </div>
+  <span style="font-size:0.8rem;">&copy; 2026 Cross The Bridge &middot; Tampa Bay, FL</span>
+</footer>
+
+</body>
+</html>
