@@ -719,6 +719,17 @@
       .step-connector { display: none; }
       footer { flex-direction: column; text-align: center; }
     }
+    /* Narrow phones: keep logo, Book a Call, and the menu toggle on one row. */
+    @media (max-width: 380px) {
+      nav { padding: 0 16px; }
+      .nav-logo { font-size: 1.05rem; white-space: nowrap; }
+      .nav-right { gap: 8px; }
+      .btn-nav { padding: 10px 14px; white-space: nowrap; }
+    }
+    @media (max-width: 340px) {
+      .nav-logo { font-size: 0.95rem; }
+      .btn-nav { padding: 10px 10px; font-size: 0.8rem !important; }
+    }
   </style>
 </head>
 <body>
