@@ -626,6 +626,31 @@
       background: rgba(45,74,62,0.05);
     }
 
+    /* ── NEWSLETTER ── */
+    .newsletter { background: var(--cream-card); text-align: center; padding: 80px 48px; scroll-margin-top: 68px; }
+    .newsletter h2 { margin-bottom: 14px; }
+    .newsletter .lead { margin: 0 auto 32px; }
+    .newsletter-form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 560px; margin: 0 auto; }
+    .newsletter-form input[type="email"] {
+      flex: 1 1 260px;
+      padding: 15px 18px;
+      border: 1px solid var(--cream-border);
+      border-radius: 7px;
+      background: var(--white);
+      color: var(--charcoal);
+      font: inherit;
+      font-size: 1rem;
+    }
+    .newsletter-form input[type="email"]:focus { outline: 2px solid var(--green); outline-offset: 1px; }
+    .newsletter-form button.btn-primary { border: 0; cursor: pointer; font-family: inherit; }
+    .newsletter-form button.btn-primary:disabled { opacity: 0.6; cursor: default; transform: none; }
+    .newsletter-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .newsletter-status { min-height: 1.5em; margin-top: 16px; font-size: 0.95rem; color: var(--muted); }
+    .newsletter-status.ok { color: var(--green); font-weight: 600; }
+    .newsletter-status.err { color: #9a3b2e; }
+    .newsletter-fine { margin-top: 6px; font-size: 0.85rem; color: var(--muted); }
+    .newsletter-fine a { color: var(--green); }
+
     /* ── FINAL CTA ── */
     .final-cta {
       background: var(--green-dark);
@@ -991,6 +1016,22 @@
   </div>
 </section>
 
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+  <div class="section-inner">
+    <span class="section-label">The Artificial Times</span>
+    <h2>One AI briefing, every Monday</h2>
+    <p class="lead">Four or five stories on what actually shipped in AI and automation that week. Each one has a verified quote and one hard detail. No hype, no affiliate links.</p>
+    <form class="newsletter-form" id="newsletterForm" novalidate>
+      <input type="email" name="email" placeholder="you@company.com" aria-label="Email address" autocomplete="email" required>
+      <div class="newsletter-hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+      <button type="submit" class="btn-primary">Subscribe</button>
+    </form>
+    <p class="newsletter-status" id="newsletterStatus" role="status" aria-live="polite"></p>
+    <p class="newsletter-fine">Free. Published by Cross The Bridge with Nashville Automation Co. Unsubscribe in one click. <a href="https://artificialtimes.ai" target="_blank" rel="noopener">See past issues</a>.</p>
+  </div>
+</section>
+
 <!-- FINAL CTA -->
 <section class="final-cta" id="contact">
   <div class="section-inner">
@@ -1011,6 +1052,7 @@
     <a href="#how">How It Works</a>
     <a href="#pricing">Pricing</a>
     <a href="#founder">About Wesley</a>
+    <a href="#newsletter">Newsletter</a>
     <a href="mailto:wesley@crossthebridge.io" data-umami-event="footer-email">wesley@crossthebridge.io</a>
     <a href="/sms-terms">SMS Terms &amp; Privacy</a>
   </div>
@@ -1044,5 +1086,44 @@
   })();
 </script>
 
+<script>
+(function () {
+  var form = document.getElementById('newsletterForm');
+  if (!form) return;
+  var status = document.getElementById('newsletterStatus');
+  var btn = form.querySelector('button');
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = form.elements.email.value.trim();
+    if (!EMAIL_RE.test(email)) {
+      status.className = 'newsletter-status err';
+      status.textContent = 'Enter a valid email address.';
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Subscribing...';
+    status.className = 'newsletter-status';
+    status.textContent = '';
+    // Form-encoded POST is a CORS-safelisted request type, so no preflight is needed.
+    fetch('https://artificialtimes.ai/api/subscribe', {
+      method: 'POST',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ email: email, website: form.elements.website.value }).toString()
+    }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      form.style.display = 'none';
+      status.className = 'newsletter-status ok';
+      status.textContent = "You're in. Check your inbox for a welcome note.";
+      if (window.umami) window.umami.track('newsletter-subscribed');
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+      status.className = 'newsletter-status err';
+      status.textContent = 'That did not go through. Try again, or email wesley@crossthebridge.io.';
+    });
+  });
+})();
+</script>
 </body>
 </html>
