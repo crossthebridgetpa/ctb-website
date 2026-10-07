@@ -146,9 +146,14 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--charcoal); }
+    .nav-right { display: flex; align-items: center; gap: 36px; }
+    .nav-toggle { display: none; }
     .btn-nav {
       background: var(--green);
       color: var(--cream) !important;
+      text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px;
       padding: 10px 22px;
       border-radius: 6px;
       font-size: 0.875rem !important;
@@ -535,8 +540,43 @@
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .nav-links { gap: 0; }
-      .nav-links a:not(.btn-nav) { display: none; }
+      .nav-right { gap: 12px; }
+      .nav-toggle {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 44px; height: 44px; padding: 0;
+        background: transparent;
+        border: 1px solid var(--cream-border);
+        border-radius: 8px;
+        color: var(--green);
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .nav-toggle:hover { background: var(--cream-card); }
+      .nav-toggle:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+      .nav-toggle svg { width: 22px; height: 22px; display: block; }
+      .nav-toggle .icon-close { display: none; }
+      .nav-toggle[aria-expanded="true"] .icon-open { display: none; }
+      .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute; top: 68px; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--cream);
+        border-bottom: 1px solid var(--cream-border);
+        box-shadow: 0 12px 24px rgba(28, 26, 22, 0.08);
+        padding: 8px 20px 16px;
+      }
+      nav.menu-open .nav-links { display: flex; }
+      .nav-links a {
+        display: flex; align-items: center;
+        min-height: 48px;
+        font-size: 1rem;
+        color: var(--charcoal-mid);
+        border-bottom: 1px solid var(--cream-border);
+      }
+      .nav-links a:last-child { border-bottom: 0; }
+      .nav-links a:focus-visible,
+      .btn-nav:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
       .hero { padding: 132px 24px 72px; }
       section { padding: 72px 24px; }
       .proof-strip { padding: 20px 24px; gap: 24px; }
@@ -545,6 +585,17 @@
       .steps, .report-grid { grid-template-columns: 1fr; gap: 32px; }
       footer { flex-direction: column; text-align: center; }
     }
+    /* Narrow phones: keep logo, Book a Call, and the menu toggle on one row. */
+    @media (max-width: 380px) {
+      nav { padding: 0 16px; }
+      .nav-logo { font-size: 1.05rem; white-space: nowrap; }
+      .nav-right { gap: 8px; }
+      .btn-nav { padding: 10px 14px; white-space: nowrap; }
+    }
+    @media (max-width: 340px) {
+      .nav-logo { font-size: 0.95rem; }
+      .btn-nav { padding: 10px 10px; font-size: 0.8rem !important; }
+    }
   </style>
 </head>
 <body>
@@ -552,11 +603,17 @@
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">Cross <span>The Bridge</span></a>
-  <div class="nav-links">
-    <a href="#process">The Process</a>
-    <a href="#report">The Report</a>
-    <a href="#faq">FAQ</a>
+  <div class="nav-right">
+    <div class="nav-links" id="site-menu">
+      <a href="#process">The Process</a>
+      <a href="#report">The Report</a>
+      <a href="#faq">FAQ</a>
+    </div>
     <a href="https://app.usemotion.com/meet/crossthebridge/intro?d=15" class="btn-nav" target="_blank" rel="noopener" data-umami-event="audit-nav-book-call">Book a Call</a>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Menu">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
   </div>
 </nav>
 
@@ -847,6 +904,33 @@
   </div>
   <span style="font-size:0.8rem;">&copy; 2026 Cross The Bridge &middot; Tampa Bay, FL</span>
 </footer>
+
+<script>
+  (function () {
+    var nav = document.querySelector('nav');
+    var toggle = document.getElementById('nav-toggle');
+    var menu = document.getElementById('site-menu');
+    if (!nav || !toggle || !menu) return;
+    function setOpen(open) {
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      nav.classList.toggle('menu-open', open);
+    }
+    function isOpen() { return toggle.getAttribute('aria-expanded') === 'true'; }
+    toggle.addEventListener('click', function () { setOpen(!isOpen()); });
+    menu.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) { setOpen(false); toggle.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (isOpen() && !nav.contains(e.target)) setOpen(false);
+    });
+    window.matchMedia('(min-width: 769px)').addEventListener('change', function (e) {
+      if (e.matches) setOpen(false);
+    });
+  })();
+</script>
 
 </body>
 </html>
