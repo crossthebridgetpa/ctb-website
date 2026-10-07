@@ -1109,12 +1109,12 @@
     fetch('https://artificialtimes.ai/api/subscribe', {
       method: 'POST',
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ email: email, website: form.elements.website.value }).toString()
+      body: new URLSearchParams({ email: email, website: form.elements.website.value, source: 'crossthebridge' }).toString()
     }).then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       form.style.display = 'none';
       status.className = 'newsletter-status ok';
-      status.textContent = "You're in. Check your inbox for a welcome note.";
+      status.textContent = "You're in. Watch your inbox for The Artificial Times on Monday.";
       if (window.umami) window.umami.track('newsletter-subscribed');
     }).catch(function () {
       btn.disabled = false;
