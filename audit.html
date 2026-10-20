@@ -39,7 +39,7 @@
         "@id": "https://www.crossthebridge.io/audit#service",
         "name": "Discovery & AI Audit",
         "serviceType": "AI audit for owner-operated businesses",
-        "description": "A two-call audit of how a business runs today, ending in a written report with ranked findings, tool recommendations with pricing, estimated time savings, and a prioritized roadmap.",
+        "description": "A two-call audit of how a business runs today, ending in a written report with ranked findings, tool recommendations with pricing, estimated time savings, a prioritized roadmap, and an AI search check of the business website.",
         "provider": { "@id": "https://www.crossthebridge.io/#org" },
         "areaServed": "Tampa Bay, FL",
         "offers": {
@@ -617,6 +617,7 @@
   </div>
 </nav>
 
+<main>
 <!-- HERO -->
 <header class="hero">
   <div class="hero-inner">
@@ -765,6 +766,11 @@
         <h3>Prioritized roadmap</h3>
         <p>The order to do it in, quick wins first, with effort weighed against payoff.</p>
       </div>
+      <div class="report-card" style="grid-column: 1 / -1;">
+        <div class="report-num">7</div>
+        <h3>AI search check</h3>
+        <p>Whether ChatGPT, Claude, Meta AI and Perplexity can read your website, and the fixes that matter most. Included for any business with a website. The <a href="/ai-search-check" style="color: var(--green); font-weight: 600;" data-umami-event="audit-report-ai-search-check">AI search check</a> is also available free, without the audit.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -889,9 +895,11 @@
       <a href="https://app.usemotion.com/meet/crossthebridge/intro?d=15" class="btn-primary" style="font-size:1.05rem; padding: 18px 44px;" target="_blank" rel="noopener" data-umami-event="audit-final-book-call">Book a Free 15-Minute Call</a>
       <a href="https://app.usemotion.com/meet/crossthebridge/intro?d=30" class="btn-outline-light" target="_blank" rel="noopener" data-umami-event="audit-final-book-30">Book a 30-Minute Discovery Call</a>
     </div>
-    <p style="margin-top: 22px; color: rgba(247,243,236,0.6); font-size: 0.95rem;">Rather write first? Email <a href="mailto:wesley@crossthebridge.io" style="color: var(--gold-light);" data-umami-event="audit-final-email">wesley@crossthebridge.io</a>.</p>
+    <p style="margin-top: 22px; color: rgba(247,243,236,0.6); font-size: 0.95rem;">Rather write first? Email <!--email_off--><a href="mailto:wesley@crossthebridge.io" style="color: var(--gold-light);" data-umami-event="audit-final-email">wesley@crossthebridge.io</a><!--/email_off-->.</p>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -899,7 +907,7 @@
   <div class="footer-links">
     <a href="/">Home</a>
     <a href="/#pricing">Pricing</a>
-    <a href="mailto:wesley@crossthebridge.io" data-umami-event="audit-footer-email">wesley@crossthebridge.io</a>
+    <!--email_off--><a href="mailto:wesley@crossthebridge.io" data-umami-event="audit-footer-email">wesley@crossthebridge.io</a><!--/email_off-->
     <a href="/sms-terms">SMS Terms &amp; Privacy</a>
   </div>
   <span style="font-size:0.8rem;">&copy; 2026 Cross The Bridge &middot; Tampa Bay, FL</span>

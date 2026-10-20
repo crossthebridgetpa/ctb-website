@@ -6,7 +6,8 @@ Founded and run by Wesley Schlemmer (Founder, Cross The Bridge — Tampa Bay, FL
 
 ## Services and pricing
 
-- Discovery & AI Audit: $499, one time. Maps your top time sinks and workflows, 3-5 specific tool recommendations with pricing, prioritized implementation roadmap, estimated time savings per recommendation. Full process, interview questions, and report contents: https://www.crossthebridge.io/audit
+- Discovery & AI Audit: $499, one time. Maps your top time sinks and workflows, 3-5 specific tool recommendations with pricing, prioritized implementation roadmap, estimated time savings per recommendation, and an AI search check of your website. Full process, interview questions, and report contents: https://www.crossthebridge.io/audit
+- AI Search Check: free for Tampa Bay businesses. A review of whether ChatGPT, Claude, Meta AI and Perplexity can read a business website, delivered as a one-page fix list. Request it by email with your website address. Details: https://www.crossthebridge.io/ai-search-check
 - AI Concierge: $1,500-2,000/month, no long-term contract. Two 45-minute done-with-you Zoom sessions a month, side by side with the owner, turning manual processes into Claude skills. The client owns everything; nothing runs on Cross The Bridge servers.
 
 No long-term contracts.
@@ -32,4 +33,5 @@ Owner-operated businesses in Tampa Bay and beyond:
 - Book a free 15-minute discovery call: https://app.usemotion.com/meet/crossthebridge/intro?d=15
 - Website: https://www.crossthebridge.io/
 - What goes into the AI audit: https://www.crossthebridge.io/audit
+- Free AI search check: https://www.crossthebridge.io/ai-search-check
 - SMS terms & privacy: https://www.crossthebridge.io/sms-terms
