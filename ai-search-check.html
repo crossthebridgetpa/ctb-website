@@ -87,7 +87,7 @@
           "name": "What do I get?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A one-page report: what passed, what is keeping AI assistants from reading your site, and the changes that matter most, each with an example written for your site."
+            "text": "A short report by email: what passed, what is keeping AI assistants from reading your site, and the changes that matter most, with examples written for your site where they apply."
           }
         },
         {
@@ -119,7 +119,7 @@
           "name": "How do I request one?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Email us your website address. We run the check and reply with your report."
+            "text": "Enter your email and website address in the form at the bottom of this page. The check runs automatically and the report arrives by email, usually within 15 minutes."
           }
         }
       ]
@@ -634,6 +634,24 @@
       .nav-logo { font-size: 0.95rem; }
       .btn-nav { padding: 10px 10px; font-size: 0.8rem !important; }
     }
+    .aisc-form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 640px; margin: 0 auto; }
+    .aisc-form input[type="email"], .aisc-form input[type="text"] {
+      flex: 1 1 240px;
+      padding: 15px 18px;
+      border: 1px solid rgba(247,243,236,0.25);
+      border-radius: 7px;
+      background: var(--white);
+      color: var(--charcoal);
+      font: inherit;
+      font-size: 1rem;
+    }
+    .aisc-form input:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+    .aisc-form button.btn-primary { border: 0; cursor: pointer; font-family: inherit; font-size: 1.05rem; padding: 18px 44px; }
+    .aisc-form button.btn-primary:disabled { opacity: 0.6; cursor: default; transform: none; }
+    .aisc-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .aisc-status { min-height: 1.5em; margin: 18px auto 0; max-width: 640px; font-size: 0.95rem; color: rgba(247,243,236,0.75); }
+    .aisc-status.ok { color: var(--gold-light); font-weight: 600; }
+    .aisc-status.err { color: #F2B8A8; }
   </style>
 </head>
 <body>
@@ -663,7 +681,7 @@
     <h1>Can AI assistants <em>recommend</em> your business?</h1>
     <p class="hero-sub">The AI search check is a free review of your website. It shows whether ChatGPT, Claude, Meta AI and Perplexity can read it, and gives you a one-page list of what to fix.</p>
     <div class="hero-actions">
-      <!--email_off--><a href="mailto:wesley@crossthebridge.io?subject=Free%20AI%20search%20check&amp;body=My%20website%20address%3A%20" class="btn-primary" data-umami-event="aisc-hero-request">Request Your Free Check</a><!--/email_off-->
+      <a href="#request" class="btn-primary" data-umami-event="aisc-hero-request">Request Your Free Check</a>
       <a href="#checks" class="btn-secondary">See What We Check</a>
     </div>
   </div>
@@ -749,7 +767,7 @@
     <div class="faq-list">
       <div class="faq-item">
         <h3>What do I get?</h3>
-        <p>A one-page report: what passed, what is keeping AI assistants from reading your site, and the changes that matter most, each with an example written for your site.</p>
+        <p>A short report by email: what passed, what is keeping AI assistants from reading your site, and the changes that matter most, with examples written for your site where they apply.</p>
       </div>
       <div class="faq-item">
         <h3>Is it really free?</h3>
@@ -765,20 +783,26 @@
       </div>
       <div class="faq-item">
         <h3>How do I request one?</h3>
-        <p>Email us your website address. We run the check and reply with your report.</p>
+        <p>Enter your email and website address in the form at the bottom of this page. The check runs automatically and the report arrives by email, usually within 15 minutes.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FINAL CTA -->
-<section class="final-cta">
+<section class="final-cta" id="request">
   <div class="section-inner">
     <span class="section-label">Start Here</span>
     <h2>Get your free AI search check</h2>
-    <p class="lead">Send us your website address. We run the check and email you the report. If you want help with the fixes after that, the $499 AI audit covers them and the rest of your operations.</p>
-    <div class="cta-actions">
-      <!--email_off--><a href="mailto:wesley@crossthebridge.io?subject=Free%20AI%20search%20check&amp;body=My%20website%20address%3A%20" class="btn-primary" style="font-size:1.05rem; padding: 18px 44px;" data-umami-event="aisc-final-request">Email Your Website Address</a><!--/email_off-->
+    <p class="lead">Enter your email and your website address. The check runs automatically and the report arrives by email, usually within 15 minutes. If you want help with the fixes after that, the $499 AI audit covers them and the rest of your operations.</p>
+    <form class="aisc-form" id="aiscForm" novalidate>
+      <input type="email" name="email" placeholder="you@yourbusiness.com" aria-label="Your email address" autocomplete="email" required>
+      <input type="text" name="site" inputmode="url" placeholder="yourbusiness.com" aria-label="Your website address" autocomplete="url" required>
+      <div class="aisc-hp" aria-hidden="true"><input type="text" name="aisc_hp" tabindex="-1" autocomplete="off"></div>
+      <button type="submit" class="btn-primary" data-umami-event="aisc-form-submit">Send My Report</button>
+    </form>
+    <p class="aisc-status" id="aiscStatus" role="status" aria-live="polite" tabindex="-1"></p>
+    <div class="cta-actions" style="margin-top: 28px;">
       <a href="/audit" class="btn-outline-light" data-umami-event="aisc-final-audit">See the $499 Audit</a>
     </div>
     <!--email_off--><p style="margin-top: 22px; color: rgba(247,243,236,0.6); font-size: 0.95rem;">Or write to <a href="mailto:wesley@crossthebridge.io" style="color: var(--gold-light);" data-umami-event="aisc-final-email">wesley@crossthebridge.io</a> with your website address.</p><!--/email_off-->
@@ -822,6 +846,64 @@
     });
     window.matchMedia('(min-width: 769px)').addEventListener('change', function (e) {
       if (e.matches) setOpen(false);
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    var form = document.getElementById('aiscForm');
+    if (!form) return;
+    var status = document.getElementById('aiscStatus');
+    var btn = form.querySelector('button');
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var FALLBACK = ' Or write to wesley@crossthebridge.io with your website address.';
+    var LIMITED = {
+      email: 'A report already went to this email address in the last 30 days. Check your inbox and spam folder.',
+      site: 'This website was checked in the last 7 days, so a report for it is already out.',
+      ip: 'Too many requests from this connection today. Try again tomorrow.',
+      global: 'Too many requests today. Try again tomorrow.'
+    };
+    function say(cls, text) {
+      status.className = 'aisc-status' + (cls ? ' ' + cls : '');
+      status.textContent = text;
+    }
+    function reset() {
+      btn.disabled = false;
+      btn.textContent = 'Send My Report';
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = form.elements.email.value.trim();
+      var site = form.elements.site.value.trim();
+      if (!EMAIL_RE.test(email)) { say('err', 'Enter a valid email address.'); return; }
+      if (!/[a-z0-9-]\.[a-z]{2,}/i.test(site)) { say('err', 'Enter your website address, for example yourbusiness.com.'); return; }
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      say('', '');
+      // Form-encoded POST is a CORS-safelisted request type, so no preflight is needed.
+      fetch('https://artificialtimes.ai/api/ai-search-check', {
+        method: 'POST',
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ email: email, site: site, aisc_hp: form.elements.aisc_hp.value }).toString()
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (d) { return { r: r, d: d }; });
+      }).then(function (x) {
+        if (x.r.ok) {
+          form.style.display = 'none';
+          say('ok', 'Got it. Your report goes to ' + email + ', usually within 15 minutes. If it does not arrive, check your spam folder.');
+          status.focus();
+          if (window.umami) window.umami.track('aisc-requested');
+          return;
+        }
+        reset();
+        if (x.r.status === 429) { say('err', (LIMITED[x.d.limited] || LIMITED.global) + FALLBACK); return; }
+        if (x.r.status === 400 && x.d.error) { say('err', x.d.error); return; }
+        throw new Error('HTTP ' + x.r.status);
+      }).catch(function () {
+        reset();
+        say('err', 'That did not go through. Try again.' + FALLBACK);
+      });
     });
   })();
 </script>
