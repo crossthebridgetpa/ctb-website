@@ -342,7 +342,7 @@
     .process .lead { color: rgba(247, 243, 236, 0.65); }
     .steps {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 36px;
       margin-top: 64px;
     }
@@ -566,6 +566,26 @@
     .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
 
     /* RESPONSIVE */
+    /* Testimonial card, copied from index.html so the quote matches the homepage. */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .testimonial-card {
+      background: var(--cream-card);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 2px 8px rgba(28, 26, 22, 0.06), 0 0 0 1px rgba(28, 26, 22, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .testimonial-card:last-child { grid-column: 1 / -1; max-width: 620px; margin: 0 auto; }
+    .testimonial-quote { font-size: 0.95rem; color: var(--charcoal-mid); line-height: 1.75; font-style: italic; }
+    .testimonial-author { border-top: 1px solid var(--cream-border); padding-top: 16px; }
+    .testimonial-name { font-weight: 700; color: var(--charcoal); font-size: 0.9rem; }
+    .testimonial-role { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+    /* Links inside body copy, styled like .pricing-more on the homepage instead of browser blue. */
+    .inline-link { color: var(--green); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+    .inline-link:hover { color: var(--green-light); }
+
     @media (max-width: 960px) {
       .steps { grid-template-columns: repeat(2, 1fr); }
       .report-grid { grid-template-columns: repeat(2, 1fr); }
