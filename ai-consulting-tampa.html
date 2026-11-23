@@ -579,6 +579,9 @@
       transition: opacity 0.3s ease, visibility 0.3s ease;
     }
     .carousel-slide.is-active { opacity: 1; visibility: visible; }
+    /* Every card fills the tallest slide, so a short quote does not leave a gap above the controls. */
+    .carousel-slide { display: flex; }
+    .carousel-slide .testimonial-card { flex: 1; justify-content: center; }
     .carousel-controls {
       display: flex;
       align-items: center;
