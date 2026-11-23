@@ -96,7 +96,7 @@
           "name": "Will I own what you build?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Clients own everything that is built for them. Nothing runs on Cross The Bridge servers."
+            "text": "Yes. Clients own everything that is built for them."
           }
         },
         {
@@ -460,20 +460,6 @@
 
     /* BOUNDARIES */
     .bounds { background: var(--cream-card); }
-    .bounds-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 56px;
-    }
-    .bound-card {
-      background: var(--cream);
-      border-radius: 12px;
-      padding: 28px 32px;
-      box-shadow: 0 2px 8px rgba(28, 26, 22, 0.06), 0 0 0 1px rgba(28, 26, 22, 0.04);
-    }
-    .bound-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
-    .bound-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
 
     /* NEXT */
     .next { background: var(--cream); }
@@ -567,7 +553,6 @@
 
     /* RESPONSIVE */
     /* Testimonial card, copied from index.html so the quote matches the homepage. */
-    .testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
     .testimonial-card {
       background: var(--cream-card);
       border-radius: 12px;
@@ -576,15 +561,130 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      text-align: left;
     }
-    .testimonial-card:last-child { grid-column: 1 / -1; max-width: 620px; margin: 0 auto; }
     .testimonial-quote { font-size: 0.95rem; color: var(--charcoal-mid); line-height: 1.75; font-style: italic; }
+    .testimonial-quote p + p { margin-top: 14px; }
     .testimonial-author { border-top: 1px solid var(--cream-border); padding-top: 16px; }
     .testimonial-name { font-weight: 700; color: var(--charcoal); font-size: 0.9rem; }
     .testimonial-role { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+
+    /* CAROUSEL. Slides share one grid cell, so the box is as tall as the longest quote and the page never jumps. */
+    .carousel { max-width: 720px; margin: 40px auto 0; text-align: left; }
+    .carousel-track { display: grid; }
+    .carousel-slide {
+      grid-area: 1 / 1;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .carousel-slide.is-active { opacity: 1; visibility: visible; }
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .carousel-prev,
+    .carousel-next,
+    .carousel-dot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0;
+      background: transparent;
+      border: 1.5px solid var(--cream-border);
+      border-radius: 8px;
+      color: var(--green);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+    .carousel-prev:hover,
+    .carousel-next:hover { border-color: var(--green); background: var(--cream-card); }
+    .carousel-prev:focus-visible,
+    .carousel-next:focus-visible,
+    .carousel-dot:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+    .carousel-dot { border-radius: 50%; width: 44px; height: 44px; border-color: transparent; }
+    .carousel-dot::before {
+      content: '';
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--cream-border);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .carousel-dot:hover::before { background: var(--green-light); }
+    .carousel-dot[aria-current="true"]::before { background: var(--green); transform: scale(1.3); }
+
+    /* FOUNDER, copied from index.html. */
+    .testimonials { background: var(--cream); }
+    .founder-layout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-top: 40px;
+    }
+    .founder-avatar {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0;
+      border: 3px solid var(--gold);
+    }
+    .founder-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+    .founder-title {
+      font-size: 0.875rem;
+      color: var(--green);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+    .founder-bio {
+      font-size: 1rem;
+      color: var(--charcoal-mid);
+      line-height: 1.8;
+      max-width: 620px;
+    }
+    .founder-bio p + p { margin-top: 16px; }
+    .founder-social {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .founder-social a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid var(--cream-border);
+      color: var(--charcoal-mid);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .founder-social a:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: rgba(45,74,62,0.05);
+    }
+
     /* Links inside body copy, styled like .pricing-more on the homepage instead of browser blue. */
     .inline-link { color: var(--green); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
     .inline-link:hover { color: var(--green-light); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-slide { transition: none; }
+    }
 
     @media (max-width: 960px) {
       .steps { grid-template-columns: repeat(2, 1fr); }
@@ -633,8 +733,11 @@
       section { padding: 72px 24px; }
       .proof-strip { padding: 20px 24px; gap: 24px; }
       .proof-divider { display: none; }
-      .what-layout, .q-layout, .triage-layout, .bounds-grid, .next-grid { grid-template-columns: 1fr; gap: 32px; }
+      .what-layout, .q-layout, .triage-layout, .next-grid { grid-template-columns: 1fr; gap: 32px; }
       .steps, .report-grid { grid-template-columns: 1fr; gap: 32px; }
+      .founder-layout { grid-template-columns: 1fr; gap: 32px; }
+      .testimonial-card { padding: 26px 22px; }
+      .carousel { margin-top: 32px; }
       footer { flex-direction: column; text-align: center; }
     }
     /* Narrow phones: keep logo, Book a Call, and the menu toggle on one row. */
@@ -736,7 +839,7 @@
         <div class="step-number">03</div>
         <div class="step-title">AI Concierge</div>
         <div class="step-meta">$1,500&ndash;2,000 &middot; per month</div>
-        <p class="step-desc">Two 45-minute working sessions a month, on Zoom, side by side with the owner. Every session turns one manual process into a Claude skill. You own everything we build, and nothing runs on Cross The Bridge servers.</p>
+        <p class="step-desc">Two 45-minute working sessions a month, on Zoom, side by side with the owner. Every session turns one manual process into a Claude skill. You own everything we build.</p>
       </div>
     </div>
   </div>
@@ -756,33 +859,85 @@
   <div class="section-inner">
     <span class="section-label">Who You Work With</span>
     <h2>Meet the founder</h2>
-    <div class="bounds-grid">
-      <div class="bound-card">
-        <h3>Wesley Schlemmer, Founder</h3>
-        <p>Wesley runs Cross The Bridge from Tampa Bay. His background is in building sovereign systems that actually work: 8 years in Bitcoin and open source, helping people take control of their money and hardware. He applies the same approach to AI.</p>
+    <div class="founder-layout">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+        <img class="founder-avatar" src="/wesley-headshot.jpg" alt="Wesley Schlemmer">
+        <div class="founder-social">
+          <a href="https://www.linkedin.com/in/twesleytpa/" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
       </div>
-      <div class="bound-card">
-        <h3>You own what gets built</h3>
-        <p>Everything built for you belongs to you. Nothing runs on Cross The Bridge servers, and there is no long-term contract.</p>
+      <div>
+        <div class="founder-name">Wesley Schlemmer</div>
+        <div class="founder-title">Founder, Cross The Bridge · Tampa Bay, FL</div>
+        <div class="founder-bio">
+          <p>I started Cross The Bridge because I watched too many good people get trapped in legacy systems. Increasing costs, lock in, degrading quality all piling up.</p>
+          <p>My background is in building sovereign systems that actually work. I've spent the past 8 years working in the Bitcoin and open source space helping people take control of their money and hardware. Now I'm doing the same with AI.</p>
+          <p>Every client gets my direct attention. We don't run 50 clients at once. We run a few, and we make sure every single one gets results.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIAL -->
-<section class="testimonials">
-  <div class="section-inner">
+<section class="testimonials" id="testimonials">
+  <div class="section-inner center">
     <span class="section-label">In Their Words</span>
     <h2>What a client says</h2>
-    <div class="testimonials-grid" style="margin-top: 40px;">
-      <div class="testimonial-card">
-        <div class="testimonial-quote">
-          <p>"We've also implemented a review process that checks our valuation methodology, tests our analysis, and verifies USPAP compliance before anything goes out. Everything runs on our own hardware, so we keep all our own documents."</p>
+    <div class="carousel" id="testimonial-carousel" role="region" aria-roledescription="carousel" aria-label="Client testimonials">
+      <div class="carousel-track">
+        <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 3" data-carousel-slide>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">
+              <p>"We hired Wesley to implement locally run agents in our appraisal process after our own attempt to navigate it was a bust. Not only did it free us to focus on what we do best, the automation he built has cut significant time out of data collection, reporting, editing, and review.</p>
+              <p>He built custom agent skills around our actual workflow and gave us a dedicated bot we can reach from the field. The workflow now kicks off while we're en route to an inspection. We dictate inspection notes, flag questions for research, and upload photos on site, then get back to the office with several hours of work already finished.</p>
+              <p>We've also implemented a review process that checks our valuation methodology, tests our analysis, and verifies USPAP compliance before anything goes out. Everything runs on our own hardware, so we keep all our own documents. The result is a better report to our clients in far less time with fewer follow-up inquiries."</p>
+            </div>
+            <div class="testimonial-author">
+              <div class="testimonial-name">Kevin M.</div>
+              <div class="testimonial-role">Sound Valuation · Tampa, Florida</div>
+            </div>
+          </div>
         </div>
-        <div class="testimonial-author">
-          <div class="testimonial-name">Kevin M.</div>
-          <div class="testimonial-role">Sound Valuation &middot; Tampa, Florida</div>
+        <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 3" data-carousel-slide>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">
+              <p>"A trusted partner that delivered time and money saving solutions for my business.</p>
+              <p>Commercial roof project estimating used to eat my week. Every bid meant hours of blueprint review, hand-counting penetrations, and material math where a single miss could cost real money. Wesley designed the AI system that changed that.</p>
+              <p>He didn't hand me a generic chatbot. He learned my industry fast. My documents, workflow, even the edge cases that trip up everyone else and built a working architecture around it. The data schema, the pipeline, the whole backbone. Now bids that took days come together in hours, with the math checked instead of trusted.</p>
+              <p>Working with him is super easy! Fast answers, clear technical decisions, zero fluff, and a smile along the way. He builds real systems, not demos."</p>
+            </div>
+            <div class="testimonial-author">
+              <div class="testimonial-name">Jason J.</div>
+              <div class="testimonial-role">America's Best Commercial Roofing and Maintenance Consultants, LLC</div>
+            </div>
+          </div>
         </div>
+        <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 3" data-carousel-slide>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">
+              <p>"Wes doesn't just open the door. He also hands you the key, the map and the gas money. Wes helped me connect the dots on the platform I was building, which is what actually got my films to market faster and won awards. His concierge AI service cuts through the noise and gives you the leverage you need to ship."</p>
+            </div>
+            <div class="testimonial-author">
+              <div class="testimonial-name">Esteban V.</div>
+              <div class="testimonial-role">Nomus Productions · St. Petersburg, Florida</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button type="button" class="carousel-prev" aria-label="Previous testimonial">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="carousel-dot" aria-label="Show testimonial 1" aria-current="true"></button>
+        <button type="button" class="carousel-dot" aria-label="Show testimonial 2" aria-current="false"></button>
+        <button type="button" class="carousel-dot" aria-label="Show testimonial 3" aria-current="false"></button>
+        <button type="button" class="carousel-next" aria-label="Next testimonial">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
     </div>
   </div>
@@ -833,7 +988,7 @@
       </div>
       <div class="faq-item">
         <h3>Will I own what you build?</h3>
-        <p>Yes. Clients own everything that is built for them. Nothing runs on Cross The Bridge servers.</p>
+        <p>Yes. Clients own everything that is built for them.</p>
       </div>
       <div class="faq-item">
         <h3>How long until the AI is working in my business?</h3>
@@ -900,6 +1055,99 @@
     window.matchMedia('(min-width: 769px)').addEventListener('change', function (e) {
       if (e.matches) setOpen(false);
     });
+  })();
+
+  // Testimonial carousel: one visible slide, auto-rotate, pause on hover/focus, arrows, dots, swipe.
+  (function () {
+    var root = document.getElementById('testimonial-carousel');
+    if (!root) return;
+    var slides = Array.prototype.slice.call(root.querySelectorAll('[data-carousel-slide]'));
+    if (slides.length < 2) return;
+    var prevBtn = root.querySelector('.carousel-prev');
+    var nextBtn = root.querySelector('.carousel-next');
+    var dots = Array.prototype.slice.call(root.querySelectorAll('.carousel-dot'));
+    if (!prevBtn || !nextBtn || dots.length !== slides.length) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var current = 0;
+    var timer = null;
+    var paused = false;
+    var DELAY = 9000;
+
+    function show(index) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach(function (slide, i) {
+        var active = i === current;
+        slide.classList.toggle('is-active', active);
+        if (active) {
+          slide.removeAttribute('aria-hidden');
+        } else {
+          slide.setAttribute('aria-hidden', 'true');
+        }
+      });
+      dots.forEach(function (dot, i) {
+        dot.setAttribute('aria-current', i === current ? 'true' : 'false');
+      });
+    }
+
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    function start() {
+      stop();
+      if (reduced.matches || paused) return;
+      timer = setInterval(function () { show(current + 1); }, DELAY);
+    }
+
+    function go(index) { show(index); start(); }
+
+    prevBtn.addEventListener('click', function () { go(current - 1); });
+    nextBtn.addEventListener('click', function () { go(current + 1); });
+    dots.forEach(function (dot, i) {
+      dot.addEventListener('click', function () { go(i); });
+    });
+
+    root.querySelector('.carousel-track').addEventListener('mouseenter', function () {
+      paused = true; stop();
+    });
+    root.querySelector('.carousel-track').addEventListener('mouseleave', function () {
+      paused = false; start();
+    });
+    root.addEventListener('focusin', function () { paused = true; stop(); });
+    root.addEventListener('focusout', function (e) {
+      if (!root.contains(e.relatedTarget)) { paused = false; start(); }
+    });
+
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+    });
+
+    var touchX = null;
+    var touchY = null;
+    root.addEventListener('touchstart', function (e) {
+      touchX = e.changedTouches[0].clientX;
+      touchY = e.changedTouches[0].clientY;
+    }, { passive: true });
+    root.addEventListener('touchend', function (e) {
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      var dy = e.changedTouches[0].clientY - touchY;
+      touchX = null; touchY = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        go(dx < 0 ? current + 1 : current - 1);
+      }
+    }, { passive: true });
+
+    if (reduced.addEventListener) {
+      reduced.addEventListener('change', function (e) {
+        if (e.matches) stop(); else start();
+      });
+    }
+
+    show(0);
+    start();
   })();
 </script>
 
